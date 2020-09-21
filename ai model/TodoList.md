@@ -91,5 +91,5 @@
 # 2020.09.21
 
 - 김호한
-  - Speaking page 만들기
+  - Speaking page 만들기(캡셔닝 과정)
 
