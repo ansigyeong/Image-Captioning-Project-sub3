@@ -20,9 +20,7 @@
 </template>
 
 <script>
-import axios from "axios"
-
-const BACK_URL = 'http://127.0.0.1:8000'
+import http from '../util/http-common.js'
 
 export default {
     name: 'Attendance',
@@ -33,6 +31,7 @@ export default {
             daily: '',
             month: '',
             picker: new Date().toISOString().substr(0, 10),
+            day: '',
         }
     },
     created() {
@@ -47,12 +46,14 @@ export default {
     },
     methods: {
         getLists() {
+            this.day = { 'day' : this.picker }
             // 테스트용으로 '2번' 유저에 대해 요청을 보냄.
             // 연동 완료 시 요청보내는 유저로 보낼 것
-            axios.post(`${BACK_URL}/accounts/daily/2/`, this.picker)
+            http.post(`/accounts/daily/2/`, this.day)
             .then(res => {
                 this.daily = res.data.day
                 this.month = res.data.month
+                // console.log(res.data)
             })
         },
         functionEvents (date) {
