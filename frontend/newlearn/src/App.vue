@@ -63,7 +63,7 @@ export default {
           }
         }
 
-        http.post(`/rest-auth/logout/`, null, config)
+        http.get(`/rest-auth/logout/`, null, config)
           // .then(() => {})
           .catch(err => console.log(err.response))
           .finally(() => {
