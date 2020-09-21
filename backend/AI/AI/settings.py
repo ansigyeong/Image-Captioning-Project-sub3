@@ -152,8 +152,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # 이미지 파일 설정용 세팅 추가
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/captioning/test/images/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'captioning/test/images')
 
 ACCOUNT_EMAIL_REQUIRED = False
 
