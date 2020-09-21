@@ -49,16 +49,12 @@ def point_list(request, user_pk):
 @api_view(['POST'])
 def daily(request, user_pk):
     
-    # myDict에 Querydict를 dictionary로 저장
-    myDict = {}
-    for key in request.data:
-        myDict[key] = request.data.getlist(key)
-    
-    # myDict의 key값을 list로 저장
-    key = list(myDict.keys())
-    
-    # 해당 key 값을 date filter로 사용
-    time = key[0]
+    # json 으로 넘어온 날짜 데이터를 받아서 사용
+    time = request.data['day']
+
+    print(request)
+    print(request.data)
+    print(request.data['day'])
 
     user = get_object_or_404(User, pk=user_pk)
 
