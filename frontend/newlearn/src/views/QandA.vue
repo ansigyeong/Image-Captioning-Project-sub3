@@ -39,7 +39,7 @@
 </template>
 
 <script>
-  // const BACK_URL = 'http://127.0.0.1:8000'
+  // import http from '../util/http-common.js'
 
   export default {
     name: 'QandA',
@@ -52,7 +52,7 @@
     },
     // methods: {
     //   originInfo() {
-    //     axios.post(`${BACK_URL}`/)
+    //     http.post(``/)
     //   }
     // }
   }
