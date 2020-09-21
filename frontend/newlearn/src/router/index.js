@@ -4,7 +4,6 @@ import Home from '../views/Home.vue'
 
 import SignupView from '../views/accounts/SignupView.vue'
 import LoginView from '../views/accounts/LoginView.vue'
-import LogoutView from '../views/accounts/LogoutView.vue'
 import Myinfo from '../views/accounts/Myinfo.vue'
 
 import PointList from '../views/PointList.vue'
@@ -31,11 +30,6 @@ const routes = [
     path: '/accounts/login',
     name: 'Login',
     component: LoginView,
-  },
-  {
-    path: '/accounts/logout',
-    name: 'Logout',
-    component: LogoutView,
   },
   {
     path: '/mypage/myinfo',
