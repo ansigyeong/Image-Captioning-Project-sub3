@@ -3,13 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    // 배포용
-    "dev": "webpack-dev-server --inline --progress --host 0.0.0.0 --disableHostCheck true --config build/webpack.dev.conf.js",
-    "serve": "vue-cli-service serve --host client --port 81 --open",
+    "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
-    //로컬용
-    //"serve": "vue-cli-service serve",
   },
   "dependencies": {
     "axios": "^0.20.0",
