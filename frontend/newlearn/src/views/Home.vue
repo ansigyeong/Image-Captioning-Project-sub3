@@ -1,6 +1,8 @@
 <template>
   <div class="home">
-    <img src="@/assets/Newyork.jpg" alt="" style="width: 100%;">
+    <div style="text-align: center; vertical-align: middle;">
+      <a href="/"><h1 style="font-size: 100px; color: white;">New Learn</h1></a>
+    </div>
   </div>
 </template>
 
