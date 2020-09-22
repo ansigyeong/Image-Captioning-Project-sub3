@@ -15,27 +15,32 @@
   </div> -->
 
   <!-- 2 -->
-  <div class="login-box">
-    <h2>Login</h2>
-    <form>
-      <div class="user-box">
-        <input v-model="loginData.username" id="username" type="text">
-        <label for="username">ID</label>
-      </div>
-      <div class="user-box">
-        <input v-model="loginData.password" id="password" type="password">
-        <label for="password">Password</label>
-      </div>
-      <div style="text-align: center;">
-        <button @click="login">
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          Submit
-        </button>
-      </div>
-    </form>
+  <div>
+    <div style="text-align: center; vertical-align: middle;">
+      <a href="/"><h1 style="font-size: 100px; color: white;">New Learn</h1></a>
+    </div>
+    <div class="login-box">
+      <h2>Sign In</h2>
+      <form>
+        <div class="user-box">
+          <input v-model="loginData.username" id="username" type="text">
+          <label for="username"><p style="color: white;">ID</p></label>
+        </div>
+        <div class="user-box">
+          <input v-model="loginData.password" id="password" type="password">
+          <label for="password"><p style="color: white;">Password</p></label>
+        </div>
+        <div style="text-align: center;">
+          <button @click="login">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
   </div>
 </template>
 
