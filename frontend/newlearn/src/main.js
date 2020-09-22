@@ -7,6 +7,11 @@ import VueCookies from 'vue-cookies'
 
 import VueMoment from 'vue-moment'
 
+// 뷰 오디오 레코더 패키지
+import AudioRecorder from 'vue-audio-recorder'
+
+Vue.use(AudioRecorder)
+
 Vue.use(VueMoment);
 
 Vue.use(VueCookies)
