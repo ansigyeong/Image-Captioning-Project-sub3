@@ -29,90 +29,9 @@ class BaseModel(object):
     def build(self):
         raise NotImplementedError()
 
-    def train(self, sess, train_data):
-        """ Train the model using the COCO train2014 data. """
-        print("Training the model...!!!!!!!!")
-        print("!!제발!!!!!!")
-        config = self.config
-
-        print("!!제발!!!!!!")
-        if not os.path.exists(config.summary_dir):
-            os.mkdir(config.summary_dir)
-        train_writer = tf.summary.FileWriter(config.summary_dir,
-                                             sess.graph)
-
-        print("!!제발!!!!!!")
-        for _ in tqdm(list(range(config.num_epochs)), desc='epoch'):
-            for _ in tqdm(list(range(train_data.num_batches)), desc='batch'):
-                batch = train_data.next_batch()
-                image_files, sentences, masks = batch
-                images = self.image_loader.load_images(image_files)
-                feed_dict = {self.images: images,
-                             self.sentences: sentences,
-                             self.masks: masks}
-                _, summary, global_step = sess.run([self.opt_op,
-                                                    self.summary,
-                                                    self.global_step],
-                                                    feed_dict=feed_dict)
-                if (global_step + 1) % config.save_period == 0:
-                    self.save()
-                train_writer.add_summary(summary, global_step)
-            train_data.reset()
-
-        self.save()
-        train_writer.close()
-        print("Training complete.")
-
-    def eval(self, sess, eval_gt_coco, eval_data, vocabulary):
-        """ Evaluate the model using the COCO val2014 data. """
-        print("Evaluating the model ...")
-        config = self.config
-
-        results = []
-        if not os.path.exists(config.eval_result_dir):
-            os.mkdir(config.eval_result_dir)
-
-        # Generate the captions for the images
-        idx = 0
-        for k in tqdm(list(range(eval_data.num_batches)), desc='batch'):
-            batch = eval_data.next_batch()
-            caption_data = self.beam_search(sess, batch, vocabulary)
-
-            fake_cnt = 0 if k<eval_data.num_batches-1 \
-                         else eval_data.fake_count
-            for l in range(eval_data.batch_size-fake_cnt):
-                word_idxs = caption_data[l][0].sentence
-                score = caption_data[l][0].score
-                caption = vocabulary.get_sentence(word_idxs)
-                results.append({'image_id': eval_data.image_ids[idx],
-                                'caption': caption})
-                idx += 1
-
-                # Save the result in an image file, if requested
-                if config.save_eval_result_as_image:
-                    image_file = batch[l]
-                    image_name = image_file.split(os.sep)[-1]
-                    image_name = os.path.splitext(image_name)[0]
-                    img = plt.imread(image_file)
-                    plt.imshow(img)
-                    plt.axis('off')
-                    plt.title(caption)
-                    plt.savefig(os.path.join(config.eval_result_dir,
-                                             image_name+'_result.jpg'))
-
-        fp = open(config.eval_result_file, 'wb')
-        json.dump(results, fp)
-        fp.close()
-
-        # Evaluate these captions
-        eval_result_coco = eval_gt_coco.loadRes(config.eval_result_file)
-        scorer = COCOEvalCap(eval_gt_coco, eval_result_coco)
-        scorer.evaluate()
-        print("Evaluation complete.")
-
-    def test(self, sess, test_data, vocabulary):
+    def test(self, sess, test_data, vocabulary, filename):
         """ Test the model using any given images. """
-        print("Testing the model ...!!!!")
+        # print("Testing the model ...!!!!")
         config = self.config
         if not os.path.exists(config.test_result_dir):
             os.mkdir(config.test_result_dir)
@@ -123,38 +42,42 @@ class BaseModel(object):
         for k in tqdm(list(range(test_data.num_batches)), desc='path'):
             batch = test_data.next_batch()
             caption_data = self.beam_search(sess, batch, vocabulary)
-
             fake_cnt = 0 if k<test_data.num_batches-1 \
                          else test_data.fake_count
             for l in range(test_data.batch_size-fake_cnt):
+
+                # Save the result in an image file
+                image_file = batch[l]
+                image_name = image_file.split('/')[-1]
+                if image_name != filename:
+                    continue
+                image_name = image_name.split('.')[-2]
+                # print(image_name)
+
                 word_idxs = caption_data[l][0].sentence
                 score = caption_data[l][0].score
                 caption = vocabulary.get_sentence(word_idxs)
                 captions.append(caption)
                 scores.append(score)
 
-                # Save the result in an image file
-                image_file = batch[l]
-                image_name = image_file.split(os.sep)[-1]
-                image_name = os.path.splitext(image_name)[0]
-                img = plt.imread(image_file)
+                # img = plt.imread(image_file)
 
-                print(image_file)
+                # print(image_file)
 
-                plt.imshow(img)
-                plt.axis('off')
-                plt.title(caption)
-                plt.savefig(os.path.join(config.test_result_dir,
-                                         image_name+'_result.jpg'))
-
+                # plt.imshow(img)
+                # plt.axis('off')
+                # plt.title(caption)
+                # plt.savefig(os.path.join(config.test_result_dir,
+                #                          image_name+'_result.jpg'))
+                break
+        
         # Save the captions to a file
-        results = pd.DataFrame({'image_files':test_data.image_files,
-                                'caption':captions,
-                                'prob':scores})
-        print(captions)
-        results.to_csv(config.test_result_file)
-        print("Testing complete.")
-        # return captions
+        # results = pd.DataFrame({'image_files':test_data.image_files,
+        #                         'caption':captions,
+        #                         'prob':scores})
+        # results.to_csv(config.test_result_file)
+        # print("Testing complete.")
+        return captions[0]
 
     def beam_search(self, sess, image_files, vocabulary):
         """Use beam search to generate the captions for a batch of images."""
