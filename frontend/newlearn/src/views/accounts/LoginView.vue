@@ -16,15 +16,15 @@
 
   <!-- 2 -->
   <div class="login-box">
-    <h2>Login</h2>
+    <h2>Sign In</h2>
     <form>
       <div class="user-box">
         <input v-model="loginData.username" id="username" type="text">
-        <label for="username">ID</label>
+        <label for="username"><p style="color: white;">ID</p></label>
       </div>
       <div class="user-box">
         <input v-model="loginData.password" id="password" type="password">
-        <label for="password">Password</label>
+        <label for="password"><p style="color: white;">Password</p></label>
       </div>
       <div style="text-align: center;">
         <button @click="login">
