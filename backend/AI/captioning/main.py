@@ -42,7 +42,9 @@ def main(argv):
         model = CaptionGenerator(config)
         model.load(sess, FLAGS.model_file)
         tf.get_default_graph().finalize()
-        model.test(sess, data, vocabulary)
+        text = model.test(sess, data, vocabulary, argv)
+    # print(text)
+    return text
 
 if __name__ == '__main__':
     tf.app.run()
