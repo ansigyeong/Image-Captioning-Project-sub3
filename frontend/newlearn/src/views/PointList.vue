@@ -24,9 +24,7 @@
 </template>
 
 <script>
-import axios from "axios"
-
-const BACK_URL = 'http://127.0.0.1:8000'
+import http from '../util/http-common.js'
 
 export default {
     components: {
@@ -44,7 +42,7 @@ export default {
         getPoints() {
             // 테스트용으로 '2번' 유저에 대해 요청을 보냄.
             // 연동 완료 시 요청보내는 유저로 보낼 것
-            axios.get(`${BACK_URL}/accounts/point/2/`)
+            http.get(`/accounts/point/2/`)
             .then(res => {
                 this.totalPoint = res.data.total_points
                 this.pointList = res.data.point_list
