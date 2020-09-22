@@ -1,11 +1,12 @@
 from django.shortcuts import render
-from .serializers import VocabularySerializer
+from .serializers import VocabularySerializer, SpeakingSerializer
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from .models import Vocabulary
+from .models import Vocabulary, Speaking
 from datetime import datetime
 from django.utils.dateformat import DateFormat
+from captioning import main as caption
 
 @api_view(['POST'])
 def vocabulary(request):
@@ -30,3 +31,23 @@ def vocabulary(request):
     }
 
     return Response(data)
+
+@api_view(['POST'])
+def speaking(request):
+    speak = Speaking.objects.order_by('?')[0:1]
+    serializer = SpeakingSerializer(speak, many=True)
+    return Response(serializer.data)
+
+@api_view(['POST'])
+def do_captioning(request):
+    caption.main("")
+
+@api_view(['PUT'])
+def image_upload(request):
+    print('여기')
+    print(request.FILES['inputImage'])
+    speak = Speaking()
+    speak.image = request.FILES['inputImage']
+    speak.cap_text = 'test'
+    speak.save()
+    

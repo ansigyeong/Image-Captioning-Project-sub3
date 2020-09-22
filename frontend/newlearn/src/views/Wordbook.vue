@@ -26,9 +26,7 @@
 </template>
 
 <script>
-import axios from "axios"
-
-const BACK_URL = 'http://127.0.0.1:8000'
+import http from '../util/http-common.js'
 
 export default {
     data () {
@@ -44,7 +42,7 @@ export default {
     ,
     methods: {
         callVocabulary(choice) {
-            axios.post(`${BACK_URL}/english/vocabulary/`, choice)
+            http.post(`/english/vocabulary/`, choice)
             .then(res => {
                 this.words = res.data.vocabulary
                 localStorage.setItem("words", JSON.stringify(this.words))

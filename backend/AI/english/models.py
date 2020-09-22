@@ -8,3 +8,11 @@ class Vocabulary(models.Model):
     Toeic = models.BooleanField()
     Opic = models.BooleanField()
     korean_SAT = models.BooleanField()
+
+class Speaking(models.Model):
+    image = models.ImageField()
+    cap_text = models.TextField()
+
+class Listening(models.Model):
+    sound = models.FileField()
+    extraction_text = models.TextField()
