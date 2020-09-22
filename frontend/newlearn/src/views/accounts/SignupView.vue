@@ -1,29 +1,34 @@
 <template>
-  <div class="signup-box">
-    <h2>Signup</h2>
-    <form>
-      <div class="user-box">
-        <input v-model="signupData.username" id="username" type="text">
-        <label for="username"><p style="color: white;">ID</p></label>
-      </div>
-      <div class="user-box">
-        <input v-model="signupData.password1" id="password1" type="password">
-        <label for="password1"><p style="color: white;">Password</p></label>
-      </div>
-      <div class="user-box">
-        <input v-model="signupData.password2" id="password2" type="password">
-        <label for="password2"><p style="color: white;">Repeat Password</p></label>
-      </div>
-      <div style="text-align: center;">
-        <button @click="signup">
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          Submit
-        </button>
-      </div>
-    </form>
+  <div>
+    <div style="text-align: center; vertical-align: middle;">
+      <a href="/"><h1 style="font-size: 100px; color: white;">New Learn</h1></a>
+    </div>
+    <div class="signup-box">
+      <h2>Signup</h2>
+      <form>
+        <div class="user-box">
+          <input v-model="signupData.username" id="username" type="text">
+          <label for="username"><p style="color: white;">ID</p></label>
+        </div>
+        <div class="user-box">
+          <input v-model="signupData.password1" id="password1" type="password">
+          <label for="password1"><p style="color: white;">Password</p></label>
+        </div>
+        <div class="user-box">
+          <input v-model="signupData.password2" id="password2" type="password">
+          <label for="password2"><p style="color: white;">Repeat Password</p></label>
+        </div>
+        <div style="text-align: center;">
+          <button @click="signup">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
   </div>
     <!-- <div>
         <label for="username">username: </label>
