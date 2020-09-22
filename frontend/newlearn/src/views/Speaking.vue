@@ -14,7 +14,7 @@
         <div style="text-align:center;">
             <img v-if="previewImg.preview" :src="previewImg.preview" style="min-width:100px; max-width:600px;">
             <br>
-            <v-btn @click="pushImage">이미지 업로드하기</v-btn>
+            <v-btn v-if="previewImg.preview" @click="pushImage">이미지 업로드하기</v-btn>
             <v-btn v-if="capText != ''" @click="viewText" style="margin:1%;">
                 예시 답안 보기
             </v-btn>
@@ -83,8 +83,8 @@ export default {
             axios.post(`${BACK_URL}/english/speaking/`)
             .then(res => {
                 console.log(res.data)
-                this.image = BACK_URL + res.data[0].image
-                this.capText = res.data[0].cap_text
+                this.image = BACK_URL + res.data.serializer[0].image
+                this.capText = res.data.return_text
             })
         },
         checkCaption() {
