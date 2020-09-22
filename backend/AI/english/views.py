@@ -35,19 +35,32 @@ def vocabulary(request):
 @api_view(['POST'])
 def speaking(request):
     speak = Speaking.objects.order_by('?')[0:1]
+    text = speak[0].image
+    
+    return_text = caption.main(text)
+    print('텍스트 체크')
+    print(text)
     serializer = SpeakingSerializer(speak, many=True)
-    return Response(serializer.data)
+    data = {
+        'return_text': return_text,
+        'serializer': serializer.data
+    }
+    return Response(data)
 
 @api_view(['POST'])
 def do_captioning(request):
-    caption.main("")
+    text = caption.main("1.jpg")
+    return Response(text)
 
 @api_view(['PUT'])
 def image_upload(request):
-    print('여기')
-    print(request.FILES['inputImage'])
+    # print('여기')
+    # print(request.FILES['inputImage'])
     speak = Speaking()
     speak.image = request.FILES['inputImage']
     speak.cap_text = 'test'
     speak.save()
+    text = speak.image
+    return_text = caption.main(text)
+    return Response(return_text)
     
