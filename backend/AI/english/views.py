@@ -35,8 +35,17 @@ def vocabulary(request):
 @api_view(['POST'])
 def speaking(request):
     speak = Speaking.objects.order_by('?')[0:1]
+    text = speak[0].image
+    
+    return_text = caption.main(text)
+    print('텍스트 체크')
+    print(text)
     serializer = SpeakingSerializer(speak, many=True)
-    return Response(serializer.data)
+    data = {
+        'return_text': return_text,
+        'serializer': serializer.data
+    }
+    return Response(data)
 
 @api_view(['POST'])
 def do_captioning(request):
