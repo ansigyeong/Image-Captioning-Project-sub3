@@ -1,7 +1,5 @@
 <template>
   <v-app>
-
-    <Header />
     <div class="container">
       <!-- 1. 프로필 카드 -->
       <v-card
@@ -86,14 +84,12 @@
 </template>
 
 <script>
-  import Header from '../../components/Header.vue'
   import { validationMixin } from 'vuelidate'
   import { required, maxLength, sameAs, minLength } from 'vuelidate/lib/validators'
 
   export default {
     name: 'Myinfo',
     components: {
-      Header,
     },
     mixins: [validationMixin],
     validations: {

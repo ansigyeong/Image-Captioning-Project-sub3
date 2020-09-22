@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div style="background:gray; height:50px;">
+        <div style="background: #536976; -webkit-linear-gradient(to right, #292E49, #536976); linear-gradient(to right, #292E49, #536976); height:50px;">
             <!-- 헤더 표시용 백그라운드 컬러임. 수정 가능 -->
             <div style="float:left; margin-left:10px; margin-top:8px;">
                 <div @click.stop="drawer = !drawer" style="cursor:pointer;">
@@ -43,7 +43,7 @@
                             </v-list-item>
                         </v-list>
                         <v-divider></v-divider>
-                        <v-list-item>
+                        <v-list-item @click="goLogout" style="margin-left:20px;">
                             <v-list-item-content>
                                 <v-list-item-title>Logout</v-list-item-title>
                             </v-list-item-content>
@@ -119,6 +119,9 @@ export default {
         goWordbook() {
             this.$router.push('/english/wordbook')
         },
+        goLogout() {
+            this.$emit('click.native')
+        }
     }
 }
 </script>

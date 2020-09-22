@@ -1,5 +1,5 @@
 <template>
-    <div style="text-align:center;">
+    <div class="container" style="text-align:center;">
         <h1>활동내역</h1>
         <br>
         <br>
