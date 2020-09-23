@@ -54,12 +54,13 @@
 
 <script>
 import http from '../util/http-common.js'
+import kakao from '../util/kakao-api.js'
 
 import axios from "axios"
 
 const BACK_URL = 'http://127.0.0.1:8000'
-const kakao_speech_url = "https://kakaoi-newtone-openapi.kakao.com/v1/recognize"
-const rest_api_key = "4b1318b8f31e1675d1e5e72a4638636f"
+// const kakao_speech_url = "https://kakaoi-newtone-openapi.kakao.com/v1/recognize"
+// const rest_api_key = "4b1318b8f31e1675d1e5e72a4638636f"
 
 export default {
     data () {
@@ -114,15 +115,20 @@ export default {
             this.voice = data
         },
         checkVoice() {
-            var voiceHeader = {
-                "Content-Type": "application/octet-stream",
-                "Authorization": "KakaoAK " + rest_api_key,
-            }
-            axios.post(`${kakao_speech_url}`, voiceHeader, this.voice)
+            // var voiceHeader = {
+            //     headers: {
+            //         "Access-Control-Allow-Origin": "http://localhost:8080/",
+            //         "Content-Type": "application/octet-stream",
+            //         "Authorization": "KakaoAK " + rest_api_key,
+            //     }
+            // }
+            kakao.post(``, this.voice)
             .then(res => {
+                console.log('성공')
                 console.log(res.data)
             })
             .catch(res => {
+                console.log('실패')
                 console.log(res.data)
             })
         },
