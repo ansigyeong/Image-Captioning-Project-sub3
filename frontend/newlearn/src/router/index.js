@@ -11,6 +11,7 @@ import Attendance from '../views/Attendance.vue'
 import QandA from '../views/QandA.vue'
 
 import Wordbook from '../views/Wordbook.vue'
+import Speaking from '../views/Speaking.vue'
 
 Vue.use(VueRouter)
 
@@ -55,6 +56,11 @@ const routes = [
     name: 'Wordbook',
     component: Wordbook,
   },
+  {
+    path: '/english/speaking',
+    name: 'Speaking',
+    component: Speaking,
+  },
 ]
 
 const router = new VueRouter({
@@ -64,7 +70,7 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  const publicPages = ['Login', 'Signup', 'Home', 'List', 'Pointlist', 'Attendance', 'Wordbook']  // Login 안해도 됨
+  const publicPages = ['Login', 'Signup', 'Home', 'List', 'Pointlist', 'Attendance', 'Wordbook', 'Speaking']  // Login 안해도 됨
   const authPages = ['Login', 'Signup']  // Login 되어있으면 안됨
   
   const authRequired = !publicPages.includes(to.name)  // 로그인 해야 함
