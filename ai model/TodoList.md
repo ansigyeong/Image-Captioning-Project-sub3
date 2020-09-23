@@ -101,3 +101,10 @@
 - 김호한
   - Speaking page 캡셔닝 부분 완료!
   - 디테일 수정중!
+
+
+
+# 2020.09.23
+
+- 김호한
+  - Speaking page text to image 빼고 완성!
