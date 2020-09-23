@@ -1,29 +1,20 @@
 <template>
   <div class="home">
-    <LoginView v-if="!isLoggedIn" />
+    <div style="text-align: center; vertical-align: middle;">
+      <a href="/"><h1 style="font-size: 100px; color: white;">New Learn</h1></a>
+    </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-
-import LoginView from '../views/accounts/LoginView.vue'
-import { mapGetters } from 'vuex'
 
 export default {
   name: 'Home',
-  computed: {
-    ...mapGetters(['isLoggedIn'])
-  },
   components: {
-    LoginView,
   }
 }
 </script>
 
 <style socped>
-  body {
-    background-image: url('../assets/Newyork.jpg');
-    background-size: 100%;
-  }
+
 </style>
