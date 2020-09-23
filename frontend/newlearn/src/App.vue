@@ -80,7 +80,7 @@
                     <v-list-item-title>Listening</v-list-item-title>
                 </v-list-item-content>
             </v-list-item>
-            <v-list-item>
+            <v-list-item @click="goSpeaking">
                 <v-list-item-icon>
                     <i class="fas fa-volume-up"></i>
                 </v-list-item-icon>
@@ -200,6 +200,9 @@ export default {
       goWordbook() {
           this.$router.push('/english/wordbook')
       },
+      goSpeaking() {
+          this.$router.push('/english/speaking')
+      }
       
     },
     mounted() {
