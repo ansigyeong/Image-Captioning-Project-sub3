@@ -36,7 +36,7 @@
                                     <v-list-item-title>포인트 조회</v-list-item-title>
                                 </v-list-item-content>
                             </v-list-item>
-                            <v-list-item @click="goQandA" style="margin-left:20px;">
+                            <v-list-item @click="gocreate" style="margin-left:20px;">
                                 <v-list-item-content>
                                     <v-list-item-title>건의 & 불편 신고</v-list-item-title>
                                 </v-list-item-content>
@@ -113,8 +113,8 @@ export default {
         goMyinfo() {
             this.$router.push('/mypage/myinfo')
         },
-        goQandA() {
-            this.$router.push('/mypage/QandA')
+        gocreate() {
+            this.$router.push('/mypage/create')
         },
         goWordbook() {
             this.$router.push('/english/wordbook')
