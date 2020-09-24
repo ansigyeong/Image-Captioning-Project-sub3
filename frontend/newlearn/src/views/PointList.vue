@@ -1,6 +1,6 @@
 <template>
     <div class="container" style="text-align:center;">
-        <h1>활동내역</h1>
+        <h1>💻 Points 💻</h1>
         <br>
         <br>
         <h3>Total Points {{ totalPoint }}</h3>

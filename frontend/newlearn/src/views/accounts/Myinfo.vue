@@ -1,6 +1,9 @@
 <template>
   <v-app>
     <div class="container">
+      <div style="text-align:center;"><h1>🏡 My Information 🏡</h1></div>
+      <br>
+      <br>
       <!-- 1. 프로필 카드 -->
       <v-card
         class="mx-auto"
@@ -35,7 +38,7 @@
                 dark
               >
                 <v-list-item-content>
-                  <v-list-item-title class="title">Marcus Obrien</v-list-item-title>
+                  <v-list-item-title class="title">{{ password }}</v-list-item-title>
                   <v-list-item-subtitle>Network Engineer</v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>
@@ -84,12 +87,20 @@
 </template>
 
 <script>
+  import http from '../../util/http-common.js'
   import { validationMixin } from 'vuelidate'
   import { required, maxLength, sameAs, minLength } from 'vuelidate/lib/validators'
 
   export default {
     name: 'Myinfo',
     components: {
+    },
+    data() {
+      return {
+        name: '',
+        password: '',
+        repeatPassword: '',
+      }
     },
     mixins: [validationMixin],
     validations: {
@@ -102,13 +113,6 @@
         sameAsPassword: sameAs('password')
       },
     },
-
-    data: () => ({
-      name: '',
-      password: '',
-      repeatPassword: '',
-    }),
-
     computed: {
       nameErrors () {
         const errors = []
@@ -118,7 +122,9 @@
         return errors
       },
     },
-
+    created() {
+      this.getInfo()
+    },
     methods: {
       submit () {
         this.$v.$touch()
@@ -129,6 +135,17 @@
         this.password = ''
         this.select = null
         this.checkbox = false
+      },
+      getInfo() {
+        http.post(`/rest-auth/password/change/`)
+        .then(res => {
+          console.log('비밀번호를 변경하자!')
+          console.log(res.data)
+          this.password = res.data.password
+          this.repeatPassword = res.data.password
+          // this.username = res.User.username
+          // this.password = res.data.password
+        })
       },
     },
   }
@@ -143,8 +160,8 @@
     margin: auto;
   }
   .v-application .error {
-    background-color: white !important;
-    border-color: white !important;
+    background-color: rgb(0, 0, 0, 0) !important;
+    border-color: rgb(0, 0, 0, 0) !important;
   }
   .button {
     text-align: center !important;
