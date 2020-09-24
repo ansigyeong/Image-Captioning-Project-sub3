@@ -72,7 +72,7 @@
         <!-- 사이드바 항목은 목업 내용 그대로 넣었음 -->
         <!-- 간격, 크기 등 조절해야 함 -->
         <v-navigation-drawer v-model="drawer" absolute temporary>
-            <v-list-item style="margin-top:100px;">
+            <v-list-item @click="goListening" style="margin-top:100px;">
                 <v-list-item-icon>
                     <i class="fas fa-headphones-alt"></i>
                 </v-list-item-icon>
@@ -202,6 +202,9 @@ export default {
       },
       goSpeaking() {
           this.$router.push('/english/speaking')
+      },
+      goListening() {
+          this.$router.push('/english/listening')
       }
       
     },
