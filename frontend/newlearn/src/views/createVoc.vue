@@ -41,37 +41,21 @@
     <div style="text-align: center;"><h1>👩 Voice Of the Customer 👨</h1></div>
     <br>
     <br>
-    <v-form>
-      <v-text-field v-model="articleData.title"
-        id="title"
-        label="제목을 입력해주세요"
-        single-line
-        full-width
-        solo
-      ></v-text-field>
+   
+    <div>
+      <h1>New Article</h1>
       <div>
-        <editor api-key="vem3wnp12tvfllgyuf92uzd6e04f9ddz4ke9mzv8uh71ctgq" :init="{
-            height: 500,
-            menubar: ['file edit view insert format tools'],
-            plugins: [
-              'advlist autolink lists link image charmap print preview anchor',
-              'searchreplace visualblocks code fullscreen',
-              'insertdatetime media table paste code help wordcount codesample'
-            ],
-            toolbar:
-              'undo redo codesample | formatselect | bold italic backcolor | \
-              alignleft aligncenter alignright alignjustify | \
-              bullist numlist outdent indent | removeformat | help'
-          }" v-model="articleData.content" id="content"  />
-        <br>
-        <br>
-        <div style="text-align: right;">
-          <v-btn @click="createArticle">Submit</v-btn>
-        </div>
+        <label for="title">title:</label>
+        <input v-model="articleData.title" id="title" type="text" />
+      </div>
+      <div>
+        <label for="content">content:</label>
+        <textarea v-model="articleData.content" id="content" cols="30" rows="10"></textarea>
+      </div>
+      <div>
+        <button @click="createArticle">Submit!</button>
     </div>
-
-    </v-form>
-
+    </div>
     <!-- 3 -->
     <!-- <div>
       <label for="title">title:</label>
@@ -88,14 +72,16 @@
 </template>
 
 <script>
+// import axios from 'axios'
   import http from '../util/http-common.js'
-  import Editor from '@tinymce/tinymce-vue'
+  
+  // import Editor from '@tinymce/tinymce-vue'
 
   export default {
     name: 'createVoc',
-    components: {
-      'editor': Editor
-    },
+    // components: {
+    //   'editor': Editor
+    // },
     // data () {
     //   return {
     //     selected: [],
@@ -113,12 +99,12 @@
         articleData: {
           title: null,
           content: null,
-          editorText: 'This is initialValue.',
-          editorOptions: {
-            hideModeSwitch: true
-          },
 
-        }
+        },
+        // editorText: 'This is initialValue.',
+        // editorOptions: {
+        //   hideModeSwitch: true
+        // },
       };
     },
     methods: {

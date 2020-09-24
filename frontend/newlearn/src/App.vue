@@ -119,9 +119,8 @@
       </div>
     </div> -->
 
-    <main>
       <router-view @submit-login-data="login" @submit-signup-data="signup"/>
-    </main>
+ 
   </v-app>
 </template>
 
@@ -148,6 +147,7 @@ export default {
       signup(signupData) {
         http.post(`/rest-auth/signup/`, signupData)
           .then(res => {
+            alert(res.data.key)
             this.setCookie(res.data.key)
             this.$router.push({ name: 'Home' })
           })
@@ -155,12 +155,15 @@ export default {
       },
 
       login(loginData) {
+        alert(loginData.password)
         http.post(`/rest-auth/login/`, loginData)
           .then(res => {
             console.log(res.data.key)
             console.log(res.data)
+            setTimeout(
+              alert(res.data.key), 7000);
             this.setCookie(res.data.key)
-            // this.$router.push({ name: 'Home' })
+            this.$router.push({ name: 'Home' })
           })
           .catch(err => this.errorMessages = err.response.data)
       },
