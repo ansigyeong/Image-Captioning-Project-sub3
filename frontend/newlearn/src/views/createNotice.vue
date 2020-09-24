@@ -69,7 +69,7 @@ export default {
         http.post("/notice/create", this.noticeData, config)
           .then(res => { 
             console.log(res.data) 
-            this.$router.push({ name: 'vocList' })
+            this.$router.push({ name: 'noticeList' })
           })
           .catch(err => console.log(err.response.data))
       },
