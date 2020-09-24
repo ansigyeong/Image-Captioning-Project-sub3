@@ -8,7 +8,16 @@ import Myinfo from '../views/accounts/Myinfo.vue'
 
 import PointList from '../views/PointList.vue'
 import Attendance from '../views/Attendance.vue'
-import QandA from '../views/QandA.vue'
+
+import vocList from '../views/vocList.vue'
+import createVoc from '../views/createVoc.vue'
+import vocDetail from '../views/vocDetail.vue'
+import createVocAnswer from '../views/createVocAnswer.vue'
+import vocAnswerDetail from '../views/vocAnswerDetail.vue'
+
+import noticeList from '../views/noticeList.vue'
+import createNotice from '../views/createNotice.vue'
+import noticeDetail from '../views/noticeDetail.vue'
 
 import Wordbook from '../views/Wordbook.vue'
 import Speaking from '../views/Speaking.vue'
@@ -48,9 +57,44 @@ const routes = [
     component: Attendance,
   },
   {
-    path: '/mypage/qanda',
-    name: 'QandA',
-    component: QandA,
+    path: '/mypage/voclist',
+    name: 'vocList',
+    component: vocList,
+  },
+  {
+    path: '/mypage/createvoc',
+    name: 'createVoc',
+    component: createVoc,
+  },
+  {
+    path: '/mypage/vocdetail',
+    name: 'vocDetail',
+    component: vocDetail,
+  },
+  {
+    path: '/mypage/createvocanswer',
+    name: 'createVocAnswer',
+    component: createVocAnswer,
+  },
+  {
+    path: '/mypage/vocAnswerDetail',
+    name: 'vocAnswerDetail',
+    component: vocAnswerDetail,
+  },
+  {
+    path: '/notice/createnotice',
+    name: 'createNotice',
+    component: createNotice,
+  },
+  {
+    path: '/notice',
+    name: 'noticeList',
+    component: noticeList,
+  },
+  {
+    path: '/notice/noticedetail',
+    name: 'noticeDetail',
+    component: noticeDetail,
   },
   {
     path: '/english/wordbook',
