@@ -157,8 +157,10 @@ export default {
       login(loginData) {
         http.post(`/rest-auth/login/`, loginData)
           .then(res => {
+            console.log(res.data.key)
+            console.log(res.data)
             this.setCookie(res.data.key)
-            this.$router.push({ name: 'Home' })
+            // this.$router.push({ name: 'Home' })
           })
           .catch(err => this.errorMessages = err.response.data)
       },
