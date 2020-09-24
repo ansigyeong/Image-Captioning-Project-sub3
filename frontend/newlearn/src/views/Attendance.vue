@@ -1,5 +1,8 @@
 <template>
-    <div>
+    <div class="container">
+        <div style="text-align: center;"><h1>📅 Attendance 📅</h1></div>
+        <br>
+        <br>
         <v-row>
             <v-col cols="12" md="4" offset-md="2" style="text-align:center;">
                 <v-date-picker v-model="picker"
@@ -49,7 +52,7 @@ export default {
             this.day = { 'day' : this.picker }
             // 테스트용으로 '2번' 유저에 대해 요청을 보냄.
             // 연동 완료 시 요청보내는 유저로 보낼 것
-            http.post(`/accounts/daily/2/`, this.day)
+            http.post(`/accounts/daily/<int:user_pk>/`, this.day)
             .then(res => {
                 this.daily = res.data.day
                 this.month = res.data.month

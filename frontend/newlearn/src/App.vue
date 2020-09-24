@@ -39,22 +39,22 @@
                         <v-list v-if="dropDrawer">
                             <v-list-item @click="goAttendance" style="margin-left:20px;">
                                 <v-list-item-content>
-                                    <v-list-item-title>출석부</v-list-item-title>
+                                    <v-list-item-title>Attendance</v-list-item-title>
                                 </v-list-item-content>
                             </v-list-item>
                             <v-list-item @click="goMyinfo" style="margin-left:20px;">
                                 <v-list-item-content>
-                                    <v-list-item-title>내 정보 수정</v-list-item-title>
+                                    <v-list-item-title>My Information</v-list-item-title>
                                 </v-list-item-content>
                             </v-list-item>
                             <v-list-item @click="goPointList" style="margin-left:20px;">
                                 <v-list-item-content>
-                                    <v-list-item-title>포인트 조회</v-list-item-title>
+                                    <v-list-item-title>Points</v-list-item-title>
                                 </v-list-item-content>
                             </v-list-item>
-                            <v-list-item @click="goQandA" style="margin-left:20px;">
+                            <v-list-item @click="goVocList" style="margin-left:20px;">
                                 <v-list-item-content>
-                                    <v-list-item-title>건의 & 불편 신고</v-list-item-title>
+                                    <v-list-item-title>Voice of Customer</v-list-item-title>
                                 </v-list-item-content>
                             </v-list-item>
                         </v-list>
@@ -97,7 +97,7 @@
                 </v-list-item-content>
             </v-list-item>
             <v-divider></v-divider>
-            <v-list-item>
+            <v-list-item @click="goNotice">
                 <v-list-item-icon>
                     <i class="fas fa-bullhorn"></i>
                 </v-list-item-icon>
@@ -157,8 +157,10 @@ export default {
       login(loginData) {
         http.post(`/rest-auth/login/`, loginData)
           .then(res => {
+            console.log(res.data.key)
+            console.log(res.data)
             this.setCookie(res.data.key)
-            this.$router.push({ name: 'Home' })
+            // this.$router.push({ name: 'Home' })
           })
           .catch(err => this.errorMessages = err.response.data)
       },
@@ -194,8 +196,8 @@ export default {
       goMyinfo() {
           this.$router.push('/mypage/myinfo')
       },
-      goQandA() {
-          this.$router.push('/mypage/QandA')
+      goVocList() {
+          this.$router.push('/mypage/voclist')
       },
       goWordbook() {
           this.$router.push('/english/wordbook')
@@ -203,9 +205,12 @@ export default {
       goSpeaking() {
           this.$router.push('/english/speaking')
       },
+      goNotice() {
+          this.$router.push('/notice')
+      },
       goListening() {
           this.$router.push('/english/listening')
-      }
+      },
       
     },
     mounted() {
