@@ -1,6 +1,8 @@
 <template>
     <div style="text-align:center;">
         <h1 style="text-align:center;">스피킹</h1>
+         <a href="https://convertio.co/kr/png-jpg/">jpg convert site</a>
+        <p>jpg 파일만 사용가능</p>
         <div style="text-align:center;">
             <v-btn @click="callRandomImage" style="margin:1%;">
                 랜덤 이미지 가져오기
@@ -18,7 +20,7 @@
             <v-btn v-if="capText != ''" @click="viewText" style="margin:1%;">
                 예시 답안 보기
             </v-btn>
-            <p v-if="showText == true">
+            <p v-if="this.showText == true">
                 {{ this.capText }}
             </p>
         </div>
@@ -43,10 +45,6 @@
 <script>
 import http from '../util/http-common.js'
 
-import axios from "axios"
-
-const BACK_URL = 'http://127.0.0.1:8000'
-
 export default {
     data () {
       return {
@@ -67,15 +65,15 @@ export default {
     ,
     methods: {
         callRandomImage() {
-            axios.post(`${BACK_URL}/english/speaking/`)
+            http.post(`/english/speaking/`)
             .then(res => {
                 console.log(res.data)
-                this.image = BACK_URL + res.data.serializer[0].image
+                this.image = "http://localhost:8000" + res.data.serializer[0].image
                 this.capText = res.data.return_text
             })
         },
         checkCaption() {
-            axios.post(`${BACK_URL}/english/imagecaption/`)
+            http.post(`/english/imagecaption/`)
             .then(res => {
                 console.log(res.data)
             })

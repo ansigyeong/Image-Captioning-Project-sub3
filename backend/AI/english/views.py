@@ -8,6 +8,7 @@ from datetime import datetime
 from django.utils.dateformat import DateFormat
 from captioning import main as caption
 from sound import gspeech as speech
+from sound import testspeech2 as STT
 
 @api_view(['POST'])
 def vocabulary(request):
@@ -57,17 +58,40 @@ def do_captioning(request):
 
 @api_view(['PUT'])
 def image_upload(request):
-    # print('여기')
-    # print(request.FILES['inputImage'])
+    # 저장할 db 호출
     speak = Speaking()
+
+    # 전송받은 파일 저장
     speak.image = request.FILES['inputImage']
     speak.cap_text = 'test'
     speak.save()
+
+    # 이미지 캡셔닝 모델 실행
     text = speak.image
     return_text = caption.main(text)
+
+    # 결과물 전송
     return Response(return_text)
 
 @api_view(['POST'])
 def situation(request):
     text = speech.main()
     return Response(text)
+
+@api_view(['PUT'])
+def sound_upload(request):
+    # 저장할 db 호출
+    listen = Listening()
+
+    # 전송받은 파일 저장
+    listen.sound = request.FILES['inputFile']
+    listen.extraction_text = 'test'
+    listen.save()
+
+    # STT 모델 가동
+    text = listen.sound
+    return_text = STT.main(text)
+    print(return_text)
+
+    # 결과물 전송
+    return Response(return_text)
