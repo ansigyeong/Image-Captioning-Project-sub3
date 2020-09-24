@@ -199,7 +199,6 @@ def main():
         print(stt)
         time.sleep(0.01)
         return stt
-        break;
         # if ('끝내자' in stt):
         #     break
         # if ('exit' in stt):
