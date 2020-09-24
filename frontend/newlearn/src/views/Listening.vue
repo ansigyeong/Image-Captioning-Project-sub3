@@ -28,8 +28,6 @@
             <v-btn @click="checkText">예시 답안과 비교하기</v-btn>
         </div>
         <br>
-        <p>userText : {{ this.userText }}</p>
-        <p>wrongCheck : {{ this.wrongCheck }}</p>
         <div>
             <span v-for="(word, i) in userText" :class="{ wrong: userText[i] != wrongCheck[i] }" :key="{i}">
                 {{ word }}
