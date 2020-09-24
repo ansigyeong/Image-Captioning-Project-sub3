@@ -3,15 +3,17 @@ from .serializers import VocabularySerializer, SpeakingSerializer
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from .models import Vocabulary, Speaking
+from .models import Vocabulary, Speaking, Listening
 from datetime import datetime
 from django.utils.dateformat import DateFormat
 from captioning import main as caption
+from sound import gspeech as speech
+from sound import testspeech2 as STT
 
 @api_view(['POST'])
 def vocabulary(request):
 
-    # 선택한 필드가 'True'인 단어 중에서 랜덤으로 30개 선정
+    # 선택한 필드가 'True'인 단어 중에서 랜덤으로 20개 선정
     if 'Toeic' in request.data:
         vocas = Vocabulary.objects.filter(Toeic=True).order_by('?')[0:20]
     elif 'Opic' in request.data:
@@ -56,13 +58,40 @@ def do_captioning(request):
 
 @api_view(['PUT'])
 def image_upload(request):
-    # print('여기')
-    # print(request.FILES['inputImage'])
+    # 저장할 db 호출
     speak = Speaking()
+
+    # 전송받은 파일 저장
     speak.image = request.FILES['inputImage']
     speak.cap_text = 'test'
     speak.save()
+
+    # 이미지 캡셔닝 모델 실행
     text = speak.image
     return_text = caption.main(text)
+
+    # 결과물 전송
     return Response(return_text)
-    
+
+@api_view(['POST'])
+def situation(request):
+    text = speech.main()
+    return Response(text)
+
+@api_view(['PUT'])
+def sound_upload(request):
+    # 저장할 db 호출
+    listen = Listening()
+
+    # 전송받은 파일 저장
+    listen.sound = request.FILES['inputFile']
+    listen.extraction_text = 'test'
+    listen.save()
+
+    # STT 모델 가동
+    text = listen.sound
+    return_text = STT.main(text)
+    print(return_text)
+
+    # 결과물 전송
+    return Response(return_text)
