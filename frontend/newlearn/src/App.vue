@@ -39,22 +39,22 @@
                         <v-list v-if="dropDrawer">
                             <v-list-item @click="goAttendance" style="margin-left:20px;">
                                 <v-list-item-content>
-                                    <v-list-item-title>출석부</v-list-item-title>
+                                    <v-list-item-title>Attendance</v-list-item-title>
                                 </v-list-item-content>
                             </v-list-item>
                             <v-list-item @click="goMyinfo" style="margin-left:20px;">
                                 <v-list-item-content>
-                                    <v-list-item-title>내 정보 수정</v-list-item-title>
+                                    <v-list-item-title>My Information</v-list-item-title>
                                 </v-list-item-content>
                             </v-list-item>
                             <v-list-item @click="goPointList" style="margin-left:20px;">
                                 <v-list-item-content>
-                                    <v-list-item-title>포인트 조회</v-list-item-title>
+                                    <v-list-item-title>Points</v-list-item-title>
                                 </v-list-item-content>
                             </v-list-item>
-                            <v-list-item @click="goQandA" style="margin-left:20px;">
+                            <v-list-item @click="goVocList" style="margin-left:20px;">
                                 <v-list-item-content>
-                                    <v-list-item-title>건의 & 불편 신고</v-list-item-title>
+                                    <v-list-item-title>Voice of Customer</v-list-item-title>
                                 </v-list-item-content>
                             </v-list-item>
                         </v-list>
@@ -97,7 +97,7 @@
                 </v-list-item-content>
             </v-list-item>
             <v-divider></v-divider>
-            <v-list-item>
+            <v-list-item @click="goNotice">
                 <v-list-item-icon>
                     <i class="fas fa-bullhorn"></i>
                 </v-list-item-icon>
@@ -119,14 +119,15 @@
       </div>
     </div> -->
 
-    <main>
-      <router-view @submit-login-data="login" @submit-signup-data="signup"/>
-    </main>
-  </v-app>
+    <router-view @submit-login-data="login" @submit-signup-data="signup"/>
+
+    </v-app>
 </template>
 
 <script scoped>
-import http from '@/util/http-common.js'
+// import http from '@/util/http-common.js'
+import axios from 'axios'
+const SERVER_URL = 'http://localhost:8000'
 
 export default {
   name: 'App',
@@ -146,21 +147,31 @@ export default {
       },
 
       signup(signupData) {
-        http.post(`/rest-auth/signup/`, signupData)
+        axios.post(SERVER_URL + '/rest-auth/signup/', signupData)
           .then(res => {
             this.setCookie(res.data.key)
+            alert('회원가입 성공')
             this.$router.push({ name: 'Home' })
           })
-          .catch(err => this.errorMessages = err.response.data)
+          .catch(err => {
+          alert('회원가입 실패')
+          this.errorMessages = err.response.data})
       },
 
       login(loginData) {
-        http.post(`/rest-auth/login/`, loginData)
+        
+        axios.post(SERVER_URL + '/rest-auth/login/', loginData)
           .then(res => {
+            // console.log(res.data.key)
+            // console.log(res.data)
+
             this.setCookie(res.data.key)
+            alert('로그인 성공')
             this.$router.push({ name: 'Home' })
           })
-          .catch(err => this.errorMessages = err.response.data)
+          .catch(err => {
+            alert('로그인 실패')
+            this.errorMessages = err.response.data})
       },
 
       logout() {
@@ -170,12 +181,13 @@ export default {
           }
         }
 
-        http.get(`/rest-auth/logout/`, null, config)
+        axios.get(SERVER_URL + '/rest-auth/logout/', null, config)
           // .then(() => {})
           .catch(err => console.log(err.response))
           .finally(() => {
             this.$cookies.remove('auth-token')
             this.isLoggedIn = false
+            alert('로그아웃 성공')
             this.$router.push({ name: 'Home' })
           })
       },
@@ -194,8 +206,8 @@ export default {
       goMyinfo() {
           this.$router.push('/mypage/myinfo')
       },
-      goQandA() {
-          this.$router.push('/mypage/QandA')
+      goVocList() {
+          this.$router.push('/mypage/voclist')
       },
       goWordbook() {
           this.$router.push('/english/wordbook')
@@ -203,9 +215,12 @@ export default {
       goSpeaking() {
           this.$router.push('/english/speaking')
       },
+      goNotice() {
+          this.$router.push('/notice')
+      },
       goListening() {
           this.$router.push('/english/listening')
-      }
+      },
       
     },
     mounted() {
