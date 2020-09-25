@@ -95,3 +95,13 @@ def sound_upload(request):
 
     # 결과물 전송
     return Response(return_text)
+
+@api_view(['POST'])
+def checktext(request):
+    sttText = list(map(str, request.data['STTtext'].split()))
+    userText = list(map(str, request.data['usertext'].split()))
+    data = {
+        'usertext': userText,
+        'stttext': sttText
+    }
+    return Response(data)

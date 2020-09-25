@@ -10,4 +10,5 @@ urlpatterns = [
     path('imageupload/', views.image_upload),
     path('speakSituation/', views.situation),
     path('soundupload/', views.sound_upload),
+    path('checktext/', views.checktext),
 ]

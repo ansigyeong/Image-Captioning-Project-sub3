@@ -25,7 +25,13 @@
         </div>
         <div>
             <input v-model="message" placeholder="여기를 수정해보세요">
-            <p>메시지: {{ message }}</p>
+            <v-btn @click="checkText">예시 답안과 비교하기</v-btn>
+        </div>
+        <br>
+        <div>
+            <span v-for="(word, i) in userText" :class="{ wrong: userText[i] != wrongCheck[i] }" :key="{i}">
+                {{ word }}
+            </span>
         </div>
   </div>
 </template>
@@ -39,6 +45,9 @@ export default {
             uploadFile: '',
             capText: '',
             showText: false,
+            message: '',
+            wrongCheck: '',
+            userText: '',
         }
     },
     methods: {
@@ -71,10 +80,27 @@ export default {
         viewText() {
             this.showText = !this.showText
         },
+        checkText() {
+            var check = {
+                'STTtext': this.capText,
+                'usertext': this.message,
+            }
+            http.post(`/english/checktext/`, check)
+            .then((res) => {
+                console.log(res.data)
+                this.wrongCheck = res.data.stttext,
+                this.userText = res.data.usertext
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+        }
     }
 }
 </script>
 
-<style>
-
+<style scoped>
+    .wrong {
+        color: red;
+    }
 </style>
