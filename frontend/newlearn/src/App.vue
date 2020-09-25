@@ -119,13 +119,15 @@
       </div>
     </div> -->
 
-      <router-view @submit-login-data="login" @submit-signup-data="signup"/>
- 
-  </v-app>
+    <router-view @submit-login-data="login" @submit-signup-data="signup"/>
+
+    </v-app>
 </template>
 
 <script scoped>
-import http from '@/util/http-common.js'
+// import http from '@/util/http-common.js'
+import axios from 'axios'
+const SERVER_URL = 'http://localhost:8000'
 
 export default {
   name: 'App',
@@ -144,8 +146,8 @@ export default {
         this.isLoggedIn = true
       },
 
-      signup(signupData) {
-        http.post(`/rest-auth/signup/`, signupData)
+      signup(signupData) {alert(signupData.password1)
+        axios.post(SERVER_URL + '/rest-auth/signup/', signupData)
           .then(res => {
             alert(res.data.key)
             this.setCookie(res.data.key)
@@ -155,13 +157,12 @@ export default {
       },
 
       login(loginData) {
-        alert(loginData.password)
-        http.post(`/rest-auth/login/`, loginData)
+        
+        axios.post(SERVER_URL + '/rest-auth/login/', loginData)
           .then(res => {
             console.log(res.data.key)
             console.log(res.data)
-            setTimeout(
-              alert(res.data.key), 7000);
+          
             this.setCookie(res.data.key)
             this.$router.push({ name: 'Home' })
           })
@@ -175,7 +176,7 @@ export default {
           }
         }
 
-        http.get(`/rest-auth/logout/`, null, config)
+        axios.get(SERVER_URL + '/rest-auth/logout/', null, config)
           // .then(() => {})
           .catch(err => console.log(err.response))
           .finally(() => {
