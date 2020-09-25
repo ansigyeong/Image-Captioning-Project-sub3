@@ -146,27 +146,32 @@ export default {
         this.isLoggedIn = true
       },
 
-      signup(signupData) {alert(signupData.password1)
+      signup(signupData) {
         axios.post(SERVER_URL + '/rest-auth/signup/', signupData)
           .then(res => {
-            alert(res.data.key)
             this.setCookie(res.data.key)
+            alert('회원가입 성공')
             this.$router.push({ name: 'Home' })
           })
-          .catch(err => this.errorMessages = err.response.data)
+          .catch(err => {
+          alert('회원가입 실패')
+          this.errorMessages = err.response.data})
       },
 
       login(loginData) {
         
         axios.post(SERVER_URL + '/rest-auth/login/', loginData)
           .then(res => {
-            console.log(res.data.key)
-            console.log(res.data)
-          
+            // console.log(res.data.key)
+            // console.log(res.data)
+
             this.setCookie(res.data.key)
+            alert('로그인 성공')
             this.$router.push({ name: 'Home' })
           })
-          .catch(err => this.errorMessages = err.response.data)
+          .catch(err => {
+            alert('로그인 실패')
+            this.errorMessages = err.response.data})
       },
 
       logout() {
@@ -182,6 +187,7 @@ export default {
           .finally(() => {
             this.$cookies.remove('auth-token')
             this.isLoggedIn = false
+            alert('로그아웃 성공')
             this.$router.push({ name: 'Home' })
           })
       },
