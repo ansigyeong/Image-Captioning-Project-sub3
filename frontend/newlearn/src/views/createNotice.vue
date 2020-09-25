@@ -27,9 +27,9 @@
     </div>
       <v-divider></v-divider>
       <v-card-actions style="float:right">
-        <v-btn text @click="back">취소</v-btn>
-        <v-spacer></v-spacer>
-        <v-btn text @click="createNotice">Submit</v-btn>
+        <!-- <v-btn @click="back">취소</v-btn> -->
+        <!-- <v-spacer></v-spacer> -->
+        <v-btn @click="createNotice">Submit</v-btn>
       </v-card-actions>
     </v-form>
   </div>

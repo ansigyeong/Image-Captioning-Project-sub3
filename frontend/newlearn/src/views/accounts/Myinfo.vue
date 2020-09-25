@@ -1,44 +1,24 @@
 <template>
   <v-app>
     <div class="container">
+      <!-- 로고 -->
       <div style="text-align:center;"><h1>🏡 My Information 🏡</h1></div>
       <br>
       <br>
+
       <!-- 1. 프로필 카드 -->
-      <v-card
-        class="mx-auto"
-        max-width="434"
-        tile
-      >
-        <v-img
-          height="100%"
-          src="https://cdn.vuetifyjs.com/images/cards/server-room.jpg"
-        >
-          <v-row
-            align="end"
-            class="fill-height"
-          >
-            <v-col
-              align-self="start"
-              class="pa-0"
-              cols="12"
-            >
-              <v-avatar
-                class="profile"
-                color="grey"
-                size="164"
-                tile
-              >
-                <v-img src="https://cdn.vuetifyjs.com/images/profiles/marcus.jpg"></v-img>
+      <v-card class="mx-auto" max-width="434" tile>
+        <v-img height="100%" src="@/assets/profile.jpg">
+          <v-row align="end" class="fill-height">
+            <v-col align-self="start" class="pa-0" cols="12">
+              <v-avatar class="profile" color="grey" size="164" tile>
+                <v-img src="@/assets/profile.jpg"></v-img>
               </v-avatar>
             </v-col>
             <v-col class="py-0">
-              <v-list-item
-                color="rgba(0, 0, 0, .4)"
-                dark
-              >
+              <v-list-item color="rgba(0, 0, 0, .4)" dark>
                 <v-list-item-content>
-                  <v-list-item-title class="title">{{ password }}</v-list-item-title>
+                  <!-- <v-list-item-title class="title">{{ }}</v-list-item-title> -->
                   <v-list-item-subtitle>Network Engineer</v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>
@@ -61,6 +41,11 @@
           @input="$v.name.$touch()"
           @blur="$v.name.$touch()"
         ></v-text-field>
+        <v-text-field
+            v-model="email"
+            :rules="[rules.required, rules.email]"
+            label="E-mail"
+          ></v-text-field>
         <div>
           <div class="form-group" :class="{ 'form-group--error': $v.password.$error }">
             <!-- <label class="form__label">Password</label> -->
