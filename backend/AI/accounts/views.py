@@ -47,7 +47,7 @@ def point_list(request, user_pk):
     return Response(data)
 
 @api_view(['POST'])
-def daily(request, user_pk):
+def daily(request):
     
     # json 으로 넘어온 날짜 데이터를 받아서 사용
     time = request.data['day']
@@ -55,8 +55,9 @@ def daily(request, user_pk):
     print(request)
     print(request.data)
     print(request.data['day'])
+    print(request.user)
 
-    user = get_object_or_404(User, pk=user_pk)
+    user = request.user
 
     day = DateCount.objects.filter(user=user).filter(date=time)
 

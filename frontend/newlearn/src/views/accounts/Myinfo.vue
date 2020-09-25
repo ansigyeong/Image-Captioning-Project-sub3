@@ -34,15 +34,11 @@
 
       <!-- 이름 -->
       <form class="user_info">
-        <v-text-field
-          v-model="name"
-          :error-messages="nameErrors"
-          :counter="10"
-          label="ID"
-          required
-          @input="$v.name.$touch()"
-          @blur="$v.name.$touch()"
-        ></v-text-field>
+        <div>
+          <p>
+            {{ this.name }}
+          </p>
+        </div>
 
         <!-- 메일 -->
         <v-text-field
@@ -51,16 +47,31 @@
             label="E-mail"
           ></v-text-field>
 
-        <!-- 비밀번호 -->
+        <!-- 기존 비밀번호 입력 -->
         <!-- <v-col cols="12" sm="6"> -->
           <v-text-field
             :append-icon="show4 ? 'mdi-eye' : 'mdi-eye-off'"
-            :rules="[rules.required, rules.emailMatch]"
+            v-model="pastpassword"
+            :rules="[rules.required]"
+            :type="show4 ? 'text' : 'password'"
+            name="input-10-2"
+            label="기존 비밀번호를 입력해 주세요"
+            hint="At least 8 characters"
+            :value="this.pastpassword"
+            @click:append="show4 = !show4"
+          ></v-text-field>
+        <!-- </v-col> -->
+
+        <!-- <v-col cols="12" sm="6"> -->
+          <v-text-field
+            :append-icon="show4 ? 'mdi-eye' : 'mdi-eye-off'"
+            v-model="password"
+            :rules="[rules.required, rules.min]"
             :type="show4 ? 'text' : 'password'"
             name="input-10-2"
             label="Error"
             hint="At least 8 characters"
-            value="Pa"
+            :value="this.password"
             error
             @click:append="show4 = !show4"
           ></v-text-field>
@@ -70,12 +81,13 @@
         <!-- <v-col cols="12" sm="6"> -->
           <v-text-field
             :append-icon="show4 ? 'mdi-eye' : 'mdi-eye-off'"
-            :rules="[rules.required, rules.emailMatch]"
+            v-model="repeatPassword"
+            :rules="confirmPasswordRules.concat(passwordConfirmationRule)"
             :type="show4 ? 'text' : 'password'"
             name="input-10-2"
             label="Error"
             hint="At least 8 characters"
-            value="Pa"
+            :value="this.repeatPassword"
             error
             @click:append="show4 = !show4"
           ></v-text-field>
@@ -95,7 +107,7 @@
 <script>
   import http from '../../util/http-common.js'
   import { validationMixin } from 'vuelidate'
-  import { required, maxLength, sameAs, minLength } from 'vuelidate/lib/validators'
+  import { required, maxLength } from 'vuelidate/lib/validators'
 
   export default {
     name: 'Myinfo',
@@ -106,28 +118,23 @@
         name: '',
         email: '',
         show4: false,
-        password: 'Password',
+        pastpassword: '',
+        password: '',
+        repeatPassword: '',
         rules: {
           required: value => !!value || 'Required.',
           min: v => v.length >= 8 || 'Min 8 characters',
-          emailMatch: () => ('The email and password you entered don\'t match'),
           email: value => {
             const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
             return pattern.test(value) || 'Invalid e-mail.'
           },
         },
+        confirmPasswordRules: [v => !!v || "Required."],
       }
     },
     mixins: [validationMixin],
     validations: {
       name: { required, maxLength: maxLength(10) },
-      password: {
-        required,
-        minLength: minLength(6)
-      },
-      repeatPassword: {
-        sameAsPassword: sameAs('password')
-      },
     },
     computed: {
       nameErrors () {
@@ -137,13 +144,35 @@
         !this.$v.name.required && errors.push('Name is required.')
         return errors
       },
+      passwordConfirmationRule() {
+        return () =>
+          this.password === this.repeatPassword || "password you entered don't match";
+      }
     },
     created() {
       this.getInfo()
     },
     methods: {
       submit () {
-        this.$v.$touch()
+        const config = {
+            headers: {
+                Authorization: `Token ${this.$cookies.get('auth-token')}`
+            }
+        }
+        const passdata = {
+          'old_password': this.pastpassword,
+          'new_password1': this.password,
+          'new_password2': this.repeatPassword
+        }
+        http.post(`rest-auth/password/change/`, passdata, config)
+        .then(() => {
+          this.$router.push('/')
+          // console.log(res)
+          // console.log(res.data)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
       },
       clear () {
         this.$v.$reset()
@@ -153,14 +182,15 @@
         this.checkbox = false
       },
       getInfo() {
-        http.post(`/rest-auth/password/change/`)
+        const config = {
+            headers: {
+                Authorization: `Token ${this.$cookies.get('auth-token')}`
+            }
+        }
+        http.get(`/rest-auth/user/`, config)
         .then(res => {
-          console.log('비밀번호를 변경하자!')
-          console.log(res.data)
-          this.password = res.data.password
-          this.repeatPassword = res.data.password
-          // this.username = res.User.username
-          // this.password = res.data.password
+          this.name = res.data.username
+          this.email = res.data.email
         })
       },
     },
