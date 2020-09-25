@@ -57,6 +57,7 @@ export default {
             this.day = { 'day' : this.picker }
             // 테스트용으로 '2번' 유저에 대해 요청을 보냄.
             // 연동 완료 시 요청보내는 유저로 보낼 것
+            // 수정완료
             http.post(`/accounts/daily/`, this.day, config)
             .then(res => {
                 this.daily = res.data.day

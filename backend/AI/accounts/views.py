@@ -1,9 +1,12 @@
 from django.shortcuts import render, get_object_or_404
+from django.contrib.auth import get_user_model
 from .serializers import PointSerializer, PointListSerializer, DailySerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .models import Point, User, DateCount
 from django.forms.models import model_to_dict
+
+finduser = get_user_model()
 
 @api_view(['POST'])
 def point_reward(request):
@@ -18,8 +21,8 @@ def point_reward(request):
         return Response(serializer.data)
 
 @api_view(['GET'])
-def point_list(request, user_pk):
-    user = get_object_or_404(User, pk=user_pk)
+def point_list(request):
+    user = get_object_or_404(User, user=request.user)
 
     points = Point.objects.filter(user=user).order_by('-pk')
     
@@ -52,10 +55,10 @@ def daily(request):
     # json 으로 넘어온 날짜 데이터를 받아서 사용
     time = request.data['day']
 
-    print(request)
-    print(request.data)
-    print(request.data['day'])
-    print(request.user)
+    # print(request)
+    # print(request.data)
+    # print(request.data['day'])
+    # print(request.user)
 
     user = request.user
 
@@ -84,3 +87,13 @@ def daily(request):
     }
 
     return Response(data)
+
+@api_view(['POST'])
+def userdelete(request):
+    print(request.user)
+    user = get_object_or_404(User, username=request.user)
+    user = User.objects.get(username=request.user)
+    print(user)
+    print(type(user))
+    request.user.delete()
+    return Response('삭제됨')
