@@ -45,10 +45,13 @@ def suggestion_list(request):
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def suggestion_create(request):
-    serializer = SuggestionSerializer(date=request.data)
-    if serializer.is_valid(raise_exception=True):
-        serializer.save(user=request.user)
-        return Response(serializer.data)
+    suggestion = Suggestion()
+    suggestion.title = request.data['title']
+    suggestion.content = request.data['content']
+    suggestion.user = request.user
+    suggestion.finish = False
+    suggestion.save()
+    return Response('성공')
 
 
 @api_view(['GET'])
