@@ -15,10 +15,12 @@ def notice_list(request):
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def notice_create(request):
-    serializer = NoticeSerializer(date=request.data)
-    if serializer.is_valid(raise_exception=True):
-        serializer.save(user=request.user)
-        return Response(serializer.data)
+    notice = Notice()
+    notice.title = request.data['title']
+    notice.content = request.data['content']
+    notice.user = request.user
+    notice.save()
+    return Response('성공')
 
 
 @api_view(['GET'])
