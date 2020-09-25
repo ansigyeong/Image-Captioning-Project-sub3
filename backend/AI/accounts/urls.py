@@ -5,6 +5,7 @@ app_name = 'accounts'
 
 urlpatterns = [
     path('point/reward/', views.point_reward),
-    path('point/<int:user_pk>/', views.point_list),
+    path('point/list/', views.point_list),
     path('daily/', views.daily),
+    path('userwithdraw/', views.userdelete),
 ]

@@ -4,9 +4,9 @@
          <a href="https://convertio.co/kr/png-jpg/">jpg convert site</a>
         <p>jpg 파일만 사용가능</p>
         <div style="text-align:center;">
-            <v-btn @click="callRandomImage" style="margin:1%;">
+            <!-- <v-btn @click="callRandomImage" style="margin:1%;">
                 랜덤 이미지 가져오기
-            </v-btn>
+            </v-btn> -->
             <input
                 type="file"
                 ref="files"
