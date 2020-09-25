@@ -11,9 +11,9 @@
         <v-img height="100%" src="@/assets/profile.jpg">
           <v-row align="end" class="fill-height">
             <v-col align-self="start" class="pa-0" cols="12">
-              <v-avatar class="profile" color="grey" size="164" tile>
+              <!-- <v-avatar class="profile" color="grey" size="164" tile>
                 <v-img src="@/assets/profile.jpg"></v-img>
-              </v-avatar>
+              </v-avatar> -->
             </v-col>
             <v-col class="py-0">
               <v-list-item color="rgba(0, 0, 0, .4)" dark>
@@ -31,35 +31,56 @@
       <br>
 
       <!-- 2. 회원 정보 수정(닉네임, 비밀번호, 비밀번호 확인) & 회원탈퇴  -->
+
+      <!-- 이름 -->
       <form class="user_info">
         <v-text-field
           v-model="name"
           :error-messages="nameErrors"
           :counter="10"
-          label="Name"
+          label="ID"
           required
           @input="$v.name.$touch()"
           @blur="$v.name.$touch()"
         ></v-text-field>
+
+        <!-- 메일 -->
         <v-text-field
             v-model="email"
             :rules="[rules.required, rules.email]"
             label="E-mail"
           ></v-text-field>
-        <div>
-          <div class="form-group" :class="{ 'form-group--error': $v.password.$error }">
-            <!-- <label class="form__label">Password</label> -->
-            <v-text-field label="Password" class="form__input" v-model.trim="$v.password.$model"/>
-          </div>
-          <div class="error" v-if="!$v.password.required" style="font-style: italic; color: red;"><small>Password is required.</small></div>
-          <div class="error" v-if="!$v.password.minLength" style="font-style: italic; color: red;"><small>Password must have at least {{ $v.password.$params.minLength.min }} letters.</small></div>
-          <div class="form-group" :class="{ 'form-group--error': $v.repeatPassword.$error }">
-            <!-- <label class="form__label">Repeat password</label> -->
-            <v-text-field label="Repeat Password" class="form__input" v-model.trim="$v.repeatPassword.$model"/>
-          </div>
-          <div class="error" v-if="!$v.repeatPassword.sameAsPassword" style="font-style: italic; color: red;"><small>Passwords must be identical.</small></div>
-          <tree-view :data="$v" :options="{rootObjectKey: '$v', maxDepth: 2}"></tree-view>
-        </div>
+
+        <!-- 비밀번호 -->
+        <!-- <v-col cols="12" sm="6"> -->
+          <v-text-field
+            :append-icon="show4 ? 'mdi-eye' : 'mdi-eye-off'"
+            :rules="[rules.required, rules.emailMatch]"
+            :type="show4 ? 'text' : 'password'"
+            name="input-10-2"
+            label="Error"
+            hint="At least 8 characters"
+            value="Pa"
+            error
+            @click:append="show4 = !show4"
+          ></v-text-field>
+        <!-- </v-col> -->
+
+        <!-- 비밀번호 확인 -->
+        <!-- <v-col cols="12" sm="6"> -->
+          <v-text-field
+            :append-icon="show4 ? 'mdi-eye' : 'mdi-eye-off'"
+            :rules="[rules.required, rules.emailMatch]"
+            :type="show4 ? 'text' : 'password'"
+            name="input-10-2"
+            label="Error"
+            hint="At least 8 characters"
+            value="Pa"
+            error
+            @click:append="show4 = !show4"
+          ></v-text-field>
+        <!-- </v-col> -->
+
         <br>
         <br>
         <div class="button">
@@ -83,8 +104,18 @@
     data() {
       return {
         name: '',
-        password: '',
-        repeatPassword: '',
+        email: '',
+        show4: false,
+        password: 'Password',
+        rules: {
+          required: value => !!value || 'Required.',
+          min: v => v.length >= 8 || 'Min 8 characters',
+          emailMatch: () => ('The email and password you entered don\'t match'),
+          email: value => {
+            const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+            return pattern.test(value) || 'Invalid e-mail.'
+          },
+        },
       }
     },
     mixins: [validationMixin],
