@@ -13,6 +13,8 @@ urlpatterns = [
     # 로그인 & 로그아웃
     path('rest-auth/', include('rest_auth.urls')),
     # 회원가입
-    path('rest-auth/signup/', include('rest_auth.registration.urls'))
+    path('rest-auth/signup/', include('rest_auth.registration.urls')),
+    # 비밀번호 수정
+    path('rest-auth/password/change/', include('rest_auth.urls')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
