@@ -3,13 +3,22 @@
     <div style="text-align: center; vertical-align: middle;">
       <a href="/"><h1 style="font-size: 100px; color: white;">New Learn</h1></a>
     </div>
+    <br>
+    <br>
+    <br>
+    <v-divider></v-divider>
     <div class="signup-box">
       <h2>Signup</h2>
-      <form>
+      <form
+      onsubmit="return false;">
         <div class="user-box">
           <input v-model="signupData.username" id="username" type="text">
           <label for="username"><p style="color: white;">ID</p></label>
         </div>
+        <!-- <div class="user-box">
+          <input v-model="signupData.email" id="email" type="text">
+          <label for="email"><p style="color: white;">E-mail</p></label>
+        </div> -->
         <div class="user-box">
           <input v-model="signupData.password1" id="password1" type="password">
           <label for="password1"><p style="color: white;">Password</p></label>
@@ -55,6 +64,7 @@ export default {
         return {
             signupData: {
                 username: null,
+                // email: null,
                 password1: null,
                 password2: null,
             }
