@@ -6,7 +6,6 @@
     <br>
     <br>
     <br>
-    <v-divider></v-divider>
     <div class="signup-box">
       <h2>Signup</h2>
       <form
@@ -15,10 +14,10 @@
           <input v-model="signupData.username" id="username" type="text">
           <label for="username"><p style="color: white;">ID</p></label>
         </div>
-        <!-- <div class="user-box">
+        <div class="user-box">
           <input v-model="signupData.email" id="email" type="text">
           <label for="email"><p style="color: white;">E-mail</p></label>
-        </div> -->
+        </div>
         <div class="user-box">
           <input v-model="signupData.password1" id="password1" type="password">
           <label for="password1"><p style="color: white;">Password</p></label>
@@ -64,7 +63,7 @@ export default {
         return {
             signupData: {
                 username: null,
-                // email: null,
+                email: null,
                 password1: null,
                 password2: null,
             }
@@ -91,7 +90,7 @@ export default {
 
   .signup-box {
     position: absolute;
-    top: 50%;
+    top: 60%;
     left: 50%;
     width: 400px;
     padding: 40px;
