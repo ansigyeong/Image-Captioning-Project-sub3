@@ -40,20 +40,20 @@
     <br>
 
     <!-- section2 단어 카드-->
-    <div v-if="words">
+    <div v-if="words" style="text-align: center;">
       <!-- <h3 style="text-align:center;">
           {{ $moment(today).format('YYYY년 MM월 DD일') }}의 단어
       </h3>
       <br> -->
       
       <v-card
-        class="mx-auto"
-        max-width="344"
+        width="350"
+        height="230"
         v-for="(word) in words" 
         :key="word.pid"
-        style="margin-bottom: 20px;"
+        style="margin-bottom: 20px; margin-right: 20px; display: inline-block; vertical-align: middle;"
       >
-        <v-card-text>
+        <v-card-text style="vertical-align: middle;">
           <!-- <div>Word of the Day</div> -->
           <p class="display-1 text--primary">
             {{ word.word }}
@@ -64,15 +64,14 @@
             <!-- 예시 -->
           </div>
         </v-card-text>
-        <v-card-actions>
-          <v-btn
-            text
-            color="deep-purple accent-4"
-
-          >
-            내 단어장에 추가하기
-          </v-btn>
-        </v-card-actions>
+        
+        <v-btn
+          text
+          color="deep-purple accent-4"
+          style="text-align: center;"
+        >
+          + 내 단어장에 추가
+        </v-btn>
       </v-card>
 
       <!-- original -->
