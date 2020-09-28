@@ -4,9 +4,9 @@
          <a href="https://convertio.co/kr/png-jpg/">jpg convert site</a>
         <p>jpg 파일만 사용가능</p>
         <div style="text-align:center;">
-            <v-btn @click="callRandomImage" style="margin:1%;">
+            <!-- <v-btn @click="callRandomImage" style="margin:1%;">
                 랜덤 이미지 가져오기
-            </v-btn>
+            </v-btn> -->
             <input
                 type="file"
                 ref="files"
@@ -87,11 +87,16 @@ export default {
         pushImage() {
             var InputData = new FormData()
             InputData.append("inputImage", this.previewImg.file)
+            const config = {
+                headers: {
+                    'Authorization': `Token ${this.$cookies.get('auth-token')}`
+                }
+            }
             http
-            .put(`/english/imageupload/`, InputData)
+            .put(`/english/imageupload/`, InputData, config)
             .then((res) => {
                 this.capText = res.data
-                console.log(res.data)
+                // console.log(res.data)
             })
         },
         callback (data) {

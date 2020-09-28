@@ -125,7 +125,7 @@
 </template>
 
 <script scoped>
-// import http from '@/util/http-common.js'
+import http from '@/util/http-common.js'
 import axios from 'axios'
 const SERVER_URL = 'http://localhost:8000'
 
@@ -144,6 +144,19 @@ export default {
       setCookie(token) {
         this.$cookies.set('auth-token', token)
         this.isLoggedIn = true
+      },
+
+      createattendance() {
+          const config = {
+              headers: {
+                  'Authorization': `Token ${this.$cookies.get('auth-token')}`
+              }
+          }
+          http.post(SERVER_URL + '/accounts/attendance/', null, config)
+            .then()
+            .catch(err => {
+                console.log(err)
+            })
       },
 
       signup(signupData) {
@@ -166,6 +179,9 @@ export default {
             // console.log(res.data)
 
             this.setCookie(res.data.key)
+
+            this.createattendance()
+
             alert('로그인 성공')
             this.$router.push({ name: 'Home' })
           })
