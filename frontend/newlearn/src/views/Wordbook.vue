@@ -100,7 +100,12 @@ export default {
     ,
     methods: {
         callVocabulary(choice) {
-            http.post(`/english/vocabulary/`, choice)
+            const config = {
+                headers: {
+                    'Authorization': `Token ${this.$cookies.get('auth-token')}`
+                }
+            }
+            http.post(`/english/vocabulary/`, choice, config)
             .then(res => {
                 this.words = res.data.vocabulary
                 localStorage.setItem("words", JSON.stringify(this.words))

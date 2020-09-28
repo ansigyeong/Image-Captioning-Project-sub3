@@ -67,11 +67,16 @@ export default {
         pushFile() {
             var InputData = new FormData()
             InputData.append("inputFile", this.uploadFile)
+            const config = {
+                headers: {
+                    'Authorization': `Token ${this.$cookies.get('auth-token')}`
+                }
+            }
             http
-            .put(`/english/soundupload/`, InputData)
+            .put(`/english/soundupload/`, InputData, config)
             .then((res) => {
                 this.capText = res.data
-                console.log(res.data)
+                // console.log(res.data)
             })
             .catch((err) => {
                 console.log(err)

@@ -175,11 +175,20 @@
         })
       },
       clear () {
-        this.$v.$reset()
-        this.name = ''
-        this.password = ''
-        this.select = null
-        this.checkbox = false
+        const config = {
+            headers: {
+                Authorization: `Token ${this.$cookies.get('auth-token')}`
+            }
+        }
+        http.post(`accounts/userwithdraw/`, null, config)
+        .then(() => {
+          console.log('회원탈퇴')
+          this.$cookies.remove('auth-token')
+          this.$router.push({ name: 'Home' })
+        })
+        .catch((err) => {
+          console.log(err)
+        })
       },
       getInfo() {
         const config = {
