@@ -8,4 +8,5 @@ urlpatterns = [
     path('point/list/', views.point_list),
     path('daily/', views.daily),
     path('userwithdraw/', views.userdelete),
+    path('attendance/', views.createattendance),
 ]

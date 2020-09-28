@@ -6,6 +6,10 @@ from rest_framework.response import Response
 from .models import Point, User, DateCount
 from django.forms.models import model_to_dict
 
+# 오늘 날짜 가져오기 위함
+from datetime import datetime
+from django.utils.dateformat import DateFormat
+
 finduser = get_user_model()
 
 @api_view(['POST'])
@@ -97,3 +101,26 @@ def userdelete(request):
     print(type(user))
     request.user.delete()
     return Response('삭제됨')
+
+@api_view(['POST'])
+def createattendance(request):
+    user = request.user
+    
+    # 오늘(요청이 온 날) 체크
+    today = DateFormat(datetime.now()).format('Y-m-d')
+
+    # db에서 해당 날짜와 유저에 해당하는 테이블 체크
+    day = DateCount.objects.filter(user=user).filter(date=today)
+    
+    # 해당하는 테이블이 없는지 체크 len(day) == 0
+    if len(day) == 0:
+        day = DateCount()
+    # 이미 존재하면 Response
+    else:
+        return Response('이미 있음')
+    
+    # 없을 경우 새로 생성
+    day.user = user
+    day.save()
+    
+    return Response('생성완료')
