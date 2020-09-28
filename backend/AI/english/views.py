@@ -121,7 +121,18 @@ def sound_upload(request):
     # STT 모델 가동
     text = listen.sound
     return_text = STT.main(text)
-    print(return_text)
+    # print(return_text)
+
+    # 기능 이용 카운트를 추가
+    user = request.user
+    today = DateFormat(datetime.now()).format('Y-m-d')
+
+    # 테이블에서 해당하는 오브젝트를 가져옴
+    day = get_object_or_404(DateCount, user=user, date=today)
+    
+    # 해당하는 기능에 카운트를 +1 하고 저장한다
+    day.listening_count += 1
+    day.save()
 
     # 결과물 전송
     return Response(return_text)
