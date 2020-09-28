@@ -4,7 +4,7 @@
     <br>
 
     <!-- section1 분류 -->
-    <div style="text-align: center;">
+    <div style="text-align: right; margin-right: 50px;">
       <v-menu
         transition="scale-transition"
         bottom
@@ -120,6 +120,26 @@ export default {
             this.choice = {'korean_SAT': true}
             this.callVocabulary(this.choice)
         },
+      //   bookmarkWord() {
+      //     let config = {
+      //         headers: {
+      //           Authorization: `Token ${this.$cookies.get('auth-token')}`
+      //         }
+      //     }
+      //     let body = {
+      //         queNo: this.queNo
+      //     }
+      //     http.post(``, body, config)  
+      //     .then((response) => {
+      //         swal('', '내 단어로 등록되었습니다.', 'success')
+      //         this.checkflag()
+      //     })
+      //     .catch((error) => {
+      //         console.log(err.response.data)
+      //         // this.$router.push('/login')
+      //     })
+      // },
+
     }
 }
 </script>
