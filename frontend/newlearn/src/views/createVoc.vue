@@ -37,7 +37,6 @@
 
 <script>
   import http from '../util/http-common.js'
-  
   import Editor from '@tinymce/tinymce-vue'
 
   export default {
@@ -66,7 +65,6 @@
           }
         }
         // article 생성은 Header: Token / Body: { title: , content: }
-        console.log(this.articleData)
         http.post('/community/suggestion/create/', this.articleData, config)
           .then(res => { 
             console.log(res.data) 
