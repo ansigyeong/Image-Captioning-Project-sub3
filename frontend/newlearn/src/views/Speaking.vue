@@ -87,11 +87,16 @@ export default {
         pushImage() {
             var InputData = new FormData()
             InputData.append("inputImage", this.previewImg.file)
+            const config = {
+                headers: {
+                    'Authorization': `Token ${this.$cookies.get('auth-token')}`
+                }
+            }
             http
-            .put(`/english/imageupload/`, InputData)
+            .put(`/english/imageupload/`, InputData, config)
             .then((res) => {
                 this.capText = res.data
-                console.log(res.data)
+                // console.log(res.data)
             })
         },
         callback (data) {
