@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .serializers import VocabularySerializer, SpeakingSerializer
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
@@ -9,6 +9,12 @@ from django.utils.dateformat import DateFormat
 from captioning import main as caption
 from sound import gspeech as speech
 from sound import testspeech2 as STT
+
+# 출석부에 기능 이용 횟수를 저장하기 위해 accounts에서 DateCount를 가져옴
+# 이 때, from [패키지명].models import [모델명(테이블명)] 의 형태로 가져온다
+# ..[패키지명].models import [모델명] 의 형태인 경우
+# ValueError: attempted relative import beyond top-level package 에러 발생
+from accounts.models import DateCount
 
 @api_view(['POST'])
 def vocabulary(request):
@@ -31,6 +37,19 @@ def vocabulary(request):
         "today": today,
         "vocabulary": serializer.data
     }
+
+    # 기능 이용 카운트를 추가
+    # 요청 보낸 유저 및 날짜에 맞는 테이블 체크
+    user = request.user
+
+    # DateCount.objects.filter()의 형태로 가져올 경우,
+    # object가 아니라 QuerySet으로 가져옴
+    # QuerySet 보다 object로 가져올 경우 수정이 쉽다
+    day = get_object_or_404(DateCount, user=user, date=today)
+    
+    # 해당하는 기능에 카운트를 +1 하고 저장한다
+    day.vocabulary_count += 1
+    day.save()
 
     return Response(data)
 
@@ -70,6 +89,17 @@ def image_upload(request):
     text = speak.image
     return_text = caption.main(text)
 
+    # 기능 이용 카운트를 추가
+    user = request.user
+    today = DateFormat(datetime.now()).format('Y-m-d')
+
+    # 테이블에서 해당하는 오브젝트를 가져옴
+    day = get_object_or_404(DateCount, user=user, date=today)
+    
+    # 해당하는 기능에 카운트를 +1 하고 저장한다
+    day.image_speak_count += 1
+    day.save()
+
     # 결과물 전송
     return Response(return_text)
 
@@ -91,7 +121,18 @@ def sound_upload(request):
     # STT 모델 가동
     text = listen.sound
     return_text = STT.main(text)
-    print(return_text)
+    # print(return_text)
+
+    # 기능 이용 카운트를 추가
+    user = request.user
+    today = DateFormat(datetime.now()).format('Y-m-d')
+
+    # 테이블에서 해당하는 오브젝트를 가져옴
+    day = get_object_or_404(DateCount, user=user, date=today)
+    
+    # 해당하는 기능에 카운트를 +1 하고 저장한다
+    day.listening_count += 1
+    day.save()
 
     # 결과물 전송
     return Response(return_text)
