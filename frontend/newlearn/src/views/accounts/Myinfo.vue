@@ -180,10 +180,7 @@
                 Authorization: `Token ${this.$cookies.get('auth-token')}`
             }
         }
-        const dummy = {
-          'dummy' : 'dummy',
-        }
-        http.post(`accounts/userwithdraw/`, dummy, config)
+        http.post(`accounts/userwithdraw/`, null, config)
         .then(() => {
           console.log('회원탈퇴')
           this.$router.push('/')
