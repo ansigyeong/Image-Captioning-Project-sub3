@@ -94,11 +94,8 @@ def daily(request):
 
 @api_view(['POST'])
 def userdelete(request):
-    print(request.user)
     user = get_object_or_404(User, username=request.user)
     # user = User.objects.get(username=request.user)
-    print(user)
-    print(type(user))
     request.user.delete()
     return Response('삭제됨')
 
