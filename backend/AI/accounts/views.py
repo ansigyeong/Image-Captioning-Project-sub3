@@ -96,7 +96,7 @@ def daily(request):
 def userdelete(request):
     print(request.user)
     user = get_object_or_404(User, username=request.user)
-    user = User.objects.get(username=request.user)
+    # user = User.objects.get(username=request.user)
     print(user)
     print(type(user))
     request.user.delete()
@@ -122,5 +122,5 @@ def createattendance(request):
     # 없을 경우 새로 생성
     day.user = user
     day.save()
-    
+
     return Response('생성완료')

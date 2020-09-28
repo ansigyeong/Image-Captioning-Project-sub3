@@ -52,6 +52,10 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'rest_auth.registration',
+
+    # rest_auth 추가
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.openid',
     
     # rest_password change
     'django_rest_passwordreset',
