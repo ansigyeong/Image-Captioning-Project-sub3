@@ -11,7 +11,7 @@
             </v-col>
             <v-col cols="12" md="4" v-if="daily.length >= 1" style="text-align:center;">
                 <p>{{ daily[0].date }}</p>
-                <p>이미지 스피킹 : {{ daily[0].image_speak_count }}</p>
+                <p>스피킹 : {{ daily[0].image_speak_count }}</p>
                 <p>리스닝 : {{ daily[0].listening_count }}</p>
                 <p>단어장 : {{ daily[0].vocabulary_count }}</p>
             </v-col>
