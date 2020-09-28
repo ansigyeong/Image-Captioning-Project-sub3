@@ -16,7 +16,7 @@
       <div v-for="suggestion in suggestions" :key="`suggestion_${suggestion.id}`">
           <v-row>
               <v-col cols="3">{{ suggestion.id }}</v-col>
-              <v-col cols="6">{{ suggestion.title }}</v-col>
+              <v-col cols="6" @click="goDetail(suggestion.id)">{{ suggestion.title }}</v-col>
               <v-col cols="3">{{ suggestion.finish }}</v-col>
           </v-row>
       </div>
@@ -43,6 +43,9 @@ export default {
     goCreateVoc() {
       this.$router.push('/mypage/createvoc/')
     },
+    goDetail(id) {
+      this.$router.push('/mypage/vocdetail/' + id)
+    }
   },
   created() {
     this.fetchArticles()
