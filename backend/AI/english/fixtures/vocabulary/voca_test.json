@@ -1825,7 +1825,7 @@
 {"model": "english.vocabulary","pk": 1812,"fields": {	"word": "meteorologist", "mean": " 기상학자, 기상 전문가; ", "Toeic": "True", "Opic": "False", "korean_SAT": "False"} },
 {"model": "english.vocabulary","pk": 1813,"fields": {	"word": "methodology", "mean": " 방법론, 계통적 분류법 ", "Toeic": "True", "Opic": "False", "korean_SAT": "False"} },
 {"model": "english.vocabulary","pk": 1814,"fields": {	"word": "metric", "mean": " 미터(법)의", "Toeic": "True", "Opic": "False", "korean_SAT": "False"} },
-{"model": "english.vocabulary","pk": 1815,"fields": {	"word": "metropolice", "mean": "**********", "Toeic": "True", "Opic": "False", "korean_SAT": "False"} },
+{"model": "english.vocabulary","pk": 1815,"fields": {	"word": "metropolice", "mean": "대도시", "Toeic": "True", "Opic": "False", "korean_SAT": "False"} },
 {"model": "english.vocabulary","pk": 1816,"fields": {	"word": "microorganism", "mean": " 미생물", "Toeic": "True", "Opic": "False", "korean_SAT": "False"} },
 {"model": "english.vocabulary","pk": 1817,"fields": {	"word": "microscopic", "mean": " 현미경으로밖에 보이지 않는[판별할 수 없는].", "Toeic": "True", "Opic": "False", "korean_SAT": "False"} },
 {"model": "english.vocabulary","pk": 1818,"fields": {	"word": "mighty", "mean": "강력한, 거대한, 힘센, 대단히, 전지전능한", "Toeic": "False", "Opic": "True", "korean_SAT": "False"} },
