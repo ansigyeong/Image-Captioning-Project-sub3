@@ -71,6 +71,7 @@
           text
           color="deep-purple accent-4"
           style="text-align: center;"
+          @click="addword(word)"
         >
           + 내 단어장에 추가
         </v-btn>
@@ -127,25 +128,23 @@ export default {
             this.choice = {'korean_SAT': true}
             this.callVocabulary(this.choice)
         },
-      //   bookmarkWord() {
-      //     let config = {
-      //         headers: {
-      //           Authorization: `Token ${this.$cookies.get('auth-token')}`
-      //         }
-      //     }
-      //     let body = {
-      //         queNo: this.queNo
-      //     }
-      //     http.post(``, body, config)  
-      //     .then((response) => {
-      //         swal('', '내 단어로 등록되었습니다.', 'success')
-      //         this.checkflag()
-      //     })
-      //     .catch((error) => {
-      //         console.log(err.response.data)
-      //         // this.$router.push('/login')
-      //     })
-      // },
+        addword(thisword) {
+            const data = {
+                "word": thisword.word,
+                "phonetic_symbols": thisword.phonetic_symbols,
+                "mean": thisword.mean
+            }
+            const config = {
+                headers: {
+                    Authorization: `Token ${this.$cookies.get('auth-token')}`
+                }
+            }
+            http.post(`/english/adduserword/`, data, config)
+            .then()
+            .catch(err => {
+                console.log(err)
+            })
+        },
 
     }
 }

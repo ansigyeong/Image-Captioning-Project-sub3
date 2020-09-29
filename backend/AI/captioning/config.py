@@ -46,12 +46,12 @@ class Config(object):
         self.summary_dir = './summary/'
 
         # about the vocabulary
-        self.vocabulary_file = 'C:/Users/multicampus/SSAFY/Final/backend/AI/captioning/vocabulary.csv'
+        self.vocabulary_file = 'C:/Users/multicampus/Documents/s03p23d107/backend/AI/captioning/vocabulary.csv'
         self.vocabulary_size = 5000
 
         # about the training
         self.train_image_dir = './train/images/'
-        self.train_caption_file = 'C:/Users/multicampus/SSAFY/Final/backend/AI/captioning/train/captions_train2014.json'
+        self.train_caption_file = 'C:/Users/multicampus/Documents/s03p23d107/backend/AI/captioning/train/captions_train2014.json'
         self.temp_annotation_file = './train/anns.csv'
         self.temp_data_file = './train/data.npy'
 
@@ -63,6 +63,6 @@ class Config(object):
         self.save_eval_result_as_image = False
 
         # about the testing
-        self.test_image_dir = 'C:/Users/multicampus/SSAFY/Final/backend/AI/captioning/test/images/'
-        self.test_result_dir = 'C:/Users/multicampus/SSAFY/Final/backend/AI/captioning/test/results/'
-        self.test_result_file = 'C:/Users/multicampus/SSAFY/Final/backend/AI/captioning/test/results.csv'
+        self.test_image_dir = 'C:/Users/multicampus/Documents/s03p23d107/backend/AI/captioning/test/images/'
+        self.test_result_dir = 'C:/Users/multicampus/Documents/s03p23d107/backend/AI/captioning/test/results/'
+        self.test_result_file = 'C:/Users/multicampus/Documents/s03p23d107/backend/AI/captioning/test/results.csv'

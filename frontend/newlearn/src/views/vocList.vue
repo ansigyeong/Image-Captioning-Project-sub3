@@ -35,8 +35,13 @@ export default {
     };
   },
   methods: {
-    fetchArticles() {
-      http.get("/community/suggestion/")
+    fetchData() {
+      const config = {
+          headers: {
+              'Authorization': `Token ${this.$cookies.get('auth-token')}`
+          }
+      }
+      http.post("/community/suggestion/", null, config)
         .then(res => this.suggestions = res.data)
         .catch(err => console.error(err))
     },
@@ -48,7 +53,7 @@ export default {
     }
   },
   created() {
-    this.fetchArticles()
+    this.fetchData()
   }
 };
 </script>

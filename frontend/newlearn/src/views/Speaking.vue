@@ -4,9 +4,7 @@
          <a href="https://convertio.co/kr/png-jpg/">jpg convert site</a>
         <p>jpg 파일만 사용가능</p>
         <div style="text-align:center;">
-            <!-- <v-btn @click="callRandomImage" style="margin:1%;">
-                랜덤 이미지 가져오기
-            </v-btn> -->
+
             <input
                 type="file"
                 ref="files"
@@ -26,17 +24,41 @@
         </div>
         <br>
         <div v-if="image">
-            <h3 style="text-align:center;">
-                <img :src = "`${this.image}`" style=""/>
-            </h3>
+                <img src = "`${this.image}`"  />
             <br>
             <h3 style="text-align:center;">
                 {{ this.capText }}
             </h3>
         </div>
         <br>
-        <v-btn @click="speakSituation" style="margin:1%;">
-            Speaking
+
+        <audio-recorder
+            upload-url="YOUR_API_URL"
+            filename="asdasd"
+            :attempts="3"
+            :time="2"
+            :headers="headers"
+            :before-recording="callback"
+            :pause-recording="callback"
+            :after-recording="callback"
+            :select-record="callback"
+            :before-upload="callback"
+            :successful-upload="callback"
+            :failed-upload="callback"/>
+
+        <input
+            type="file"
+            ref="audio"
+            accept="audio/*"
+            @change="audioUpload" />
+        <br>
+        <br>
+        <audio class="player" controls ref="player">
+            <source src="" ref="source">
+        </audio>
+        <br>
+        <v-btn v-if="this.uploadFile" @click="pushFile">
+            Voice To Text
         </v-btn>
         <p>{{ this.userVoice }}</p>
     </div>
@@ -48,6 +70,7 @@ import http from '../util/http-common.js'
 export default {
     data () {
       return {
+        uploadFile: '',
         image: null,
         capText: '',
         showText: false,
@@ -64,6 +87,32 @@ export default {
     }
     ,
     methods: {
+        audioUpload() {
+            const uploadSound = event.target.files[0];
+            const audioSrc = window.URL.createObjectURL(uploadSound);
+            this.$refs.source.src = audioSrc;
+
+            this.uploadFile = uploadSound
+            
+            //업로드완료 후 파일로딩
+            this.$refs.player.load();
+
+            //다른거 업로드할때를 위해 초기화
+            event.target.value ='';
+        },
+         pushFile() {
+            var InputData = new FormData()
+            InputData.append("inputFile", this.uploadFile)
+            http
+            .put(`/english/soundupload/`, InputData)
+            .then((res) => {
+                this.userVoice = res.data
+                console.log(res.data)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+        },
         callRandomImage() {
             http.post(`/english/speaking/`)
             .then(res => {
@@ -119,5 +168,5 @@ export default {
 </script>
 
 <style>
-
+  
 </style>
