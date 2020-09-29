@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from accounts.serializers import UserSerializer
-from .models import Vocabulary, Speaking
+from .models import Vocabulary, Speaking, Userwordbook
 
 class VocabularySerializer(serializers.ModelSerializer):
     class Meta:
@@ -12,3 +12,8 @@ class SpeakingSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Speaking
         fields = ('cap_text', 'image')
+
+class UserwordbookSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Userwordbook
+        fields = '__all__'
