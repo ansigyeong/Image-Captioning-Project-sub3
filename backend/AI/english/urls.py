@@ -14,4 +14,5 @@ urlpatterns = [
     path('adduserword/', views.addword),
     path('deleteuserword/', views.deleteword),
     path('userwordlist/', views.userwordlist),
+    path('speaksound/', views.speaksound),
 ]
