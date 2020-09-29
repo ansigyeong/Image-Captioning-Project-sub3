@@ -3,7 +3,7 @@
     <div style="text-align: center;"><h1>👩 Voice Of the Customer 👨</h1></div>
     <br>
     <br>
-    <div style="text-align: right;"><v-btn @click='goCreateVoc'>글 쓰러가기</v-btn></div>
+    <div style="text-align: right;"><v-btn @click='goCreateVoc'>글 쓰러 가기</v-btn></div>
     <br>
     <br>
     <div style="text-align: center;"> 
@@ -16,7 +16,7 @@
       <div v-for="suggestion in suggestions" :key="`suggestion_${suggestion.id}`">
           <v-row>
               <v-col cols="3">{{ suggestion.id }}</v-col>
-              <v-col cols="6">{{ suggestion.title }}</v-col>
+              <v-col cols="6" @click="goDetail(suggestion.id)">{{ suggestion.title }}</v-col>
               <v-col cols="3">{{ suggestion.finish }}</v-col>
           </v-row>
       </div>
@@ -43,6 +43,9 @@ export default {
     goCreateVoc() {
       this.$router.push('/mypage/createvoc/')
     },
+    goDetail(id) {
+      this.$router.push('/mypage/vocdetail/' + id)
+    }
   },
   created() {
     this.fetchArticles()

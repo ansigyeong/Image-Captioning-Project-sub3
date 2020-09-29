@@ -67,7 +67,7 @@ const routes = [
     component: createVoc,
   },
   {
-    path: '/mypage/vocdetail',
+    path: '/mypage/vocdetail/:suggestion_pk',
     name: 'vocDetail',
     component: vocDetail,
   },
@@ -92,7 +92,7 @@ const routes = [
     component: noticeList,
   },
   {
-    path: '/notice/noticedetail',
+    path: '/notice/noticedetail/:notice_pk',
     name: 'noticeDetail',
     component: noticeDetail,
   },
