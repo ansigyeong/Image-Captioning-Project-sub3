@@ -14,14 +14,17 @@ import createVoc from '../views/createVoc.vue'
 import vocDetail from '../views/vocDetail.vue'
 import createVocAnswer from '../views/createVocAnswer.vue'
 import vocAnswerDetail from '../views/vocAnswerDetail.vue'
+import editVoc from '../views/editVoc.vue'
 
 import noticeList from '../views/noticeList.vue'
 import createNotice from '../views/createNotice.vue'
 import noticeDetail from '../views/noticeDetail.vue'
+import editNotice from '../views/editNotice.vue'
 
 import Wordbook from '../views/Wordbook.vue'
 import Speaking from '../views/Speaking.vue'
 import Listening from '../views/Listening.vue'
+import UserWordbook from '../views/UserWordbook.vue'
 
 Vue.use(VueRouter)
 
@@ -67,9 +70,14 @@ const routes = [
     component: createVoc,
   },
   {
-    path: '/mypage/vocdetail',
+    path: '/mypage/vocdetail/:suggestion_pk',
     name: 'vocDetail',
     component: vocDetail,
+  },
+  {
+    path: '/mypage/editvoc/:suggestion_pk',
+    name: 'editVoc',
+    component: editVoc,
   },
   {
     path: '/mypage/createvocanswer',
@@ -82,17 +90,22 @@ const routes = [
     component: vocAnswerDetail,
   },
   {
-    path: '/notice/createnotice',
-    name: 'createNotice',
-    component: createNotice,
-  },
-  {
     path: '/notice',
     name: 'noticeList',
     component: noticeList,
   },
   {
-    path: '/notice/noticedetail',
+    path: '/notice/createnotice',
+    name: 'createNotice',
+    component: createNotice,
+  },
+  {
+    path: '/notice/editnotice/:notice_pk',
+    name: 'editNotice',
+    component: editNotice,
+  },
+  {
+    path: '/notice/noticedetail/:notice_pk',
     name: 'noticeDetail',
     component: noticeDetail,
   },
@@ -111,6 +124,11 @@ const routes = [
     name: 'Listening',
     component: Listening,
   },
+  {
+    path: '/english/userwordbook',
+    name: 'UserWordbook',
+    component: UserWordbook,
+  },
 ]
 
 const router = new VueRouter({
@@ -120,7 +138,7 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  const publicPages = ['Login', 'Signup', 'Home', 'List', 'Pointlist', 'Attendance', 'Wordbook', 'Speaking', 'Listening']  // Login 안해도 됨
+  const publicPages = ['Login', 'Signup', 'Home', 'List', 'Pointlist', 'Attendance', 'Wordbook', 'Speaking', 'Listening', 'UserWordbook']  // Login 안해도 됨
   const authPages = ['Login', 'Signup']  // Login 되어있으면 안됨
   
   const authRequired = !publicPages.includes(to.name)  // 로그인 해야 함

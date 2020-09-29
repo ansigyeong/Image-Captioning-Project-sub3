@@ -6,6 +6,8 @@ from .model import CaptionGenerator
 from .dataset import prepare_train_data, prepare_eval_data, prepare_test_data
 
 FLAGS = tf.app.flags.FLAGS
+tf.reset_default_graph()
+tf.Graph().as_default()
 
 tf.flags.DEFINE_string('phase', 'test',
                        'The phase can be train, eval or test')
@@ -37,6 +39,7 @@ def main(argv):
     config.beam_size = FLAGS.beam_size
 
     with tf.Session() as sess:
+        sess.graph._unsafe_unfinalize()
         # testing phase
         data, vocabulary = prepare_test_data(config)
         model = CaptionGenerator(config)

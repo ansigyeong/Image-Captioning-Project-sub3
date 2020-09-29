@@ -4,6 +4,7 @@
     <!-- Header & Nav 시작 -->
     <div class="HeaderNav">
         <div style="background: #536976; -webkit-linear-gradient(to right, #292E49, #536976); linear-gradient(to right, #292E49, #536976); height:50px;">
+            <img src="@/assets/nl.png" @click="goHome" style="height: 50px;">
             <div style="float:left; margin-left:10px; margin-top:8px;">
                 <div @click.stop="drawer = !drawer" style="cursor:pointer;">
                     <i class="fas fa-bars fa-2x"></i>
@@ -37,6 +38,11 @@
                             </v-list-item-content>
                         </v-list-item>
                         <v-list v-if="dropDrawer">
+                            <v-list-item @click="goMyWordbook" style="margin-left:20px;">
+                                <v-list-item-content>
+                                    <v-list-item-title>My Wordbook</v-list-item-title>
+                                </v-list-item-content>
+                            </v-list-item>
                             <v-list-item @click="goAttendance" style="margin-left:20px;">
                                 <v-list-item-content>
                                     <v-list-item-title>Attendance</v-list-item-title>
@@ -119,13 +125,15 @@
       </div>
     </div> -->
 
-      <router-view @submit-login-data="login" @submit-signup-data="signup"/>
- 
+    <router-view @submit-login-data="login" @submit-signup-data="signup"/>
+
   </v-app>
 </template>
 
 <script scoped>
 import http from '@/util/http-common.js'
+import axios from 'axios'
+const SERVER_URL = 'http://localhost:8000'
 
 export default {
   name: 'App',
@@ -144,28 +152,48 @@ export default {
         this.isLoggedIn = true
       },
 
+      createattendance() {
+          const config = {
+              headers: {
+                  'Authorization': `Token ${this.$cookies.get('auth-token')}`
+              }
+          }
+          http.post(SERVER_URL + '/accounts/attendance/', null, config)
+            .then()
+            .catch(err => {
+                console.log(err)
+            })
+      },
+
       signup(signupData) {
-        http.post(`/rest-auth/signup/`, signupData)
+        axios.post(SERVER_URL + '/rest-auth/signup/', signupData)
           .then(res => {
-            alert(res.data.key)
             this.setCookie(res.data.key)
+            alert('회원가입 성공')
             this.$router.push({ name: 'Home' })
           })
-          .catch(err => this.errorMessages = err.response.data)
+          .catch(err => {
+          alert('회원가입 실패')
+          this.errorMessages = err.response.data})
       },
 
       login(loginData) {
-        alert(loginData.password)
-        http.post(`/rest-auth/login/`, loginData)
+        
+        axios.post(SERVER_URL + '/rest-auth/login/', loginData)
           .then(res => {
-            console.log(res.data.key)
-            console.log(res.data)
-            setTimeout(
-              alert(res.data.key), 7000);
+            // console.log(res.data.key)
+            // console.log(res.data)
+
             this.setCookie(res.data.key)
+
+            this.createattendance()
+
+            alert('로그인 성공')
             this.$router.push({ name: 'Home' })
           })
-          .catch(err => this.errorMessages = err.response.data)
+          .catch(err => {
+            alert('로그인 실패')
+            this.errorMessages = err.response.data})
       },
 
       logout() {
@@ -175,14 +203,18 @@ export default {
           }
         }
 
-        http.get(`/rest-auth/logout/`, null, config)
+        axios.get(SERVER_URL + '/rest-auth/logout/', null, config)
           // .then(() => {})
           .catch(err => console.log(err.response))
           .finally(() => {
             this.$cookies.remove('auth-token')
             this.isLoggedIn = false
+            alert('로그아웃 성공')
             this.$router.push({ name: 'Home' })
           })
+      },
+      goHome() {
+        this.$router.push('/')
       },
       goSignup() {
         this.$router.push('/accounts/signup')
@@ -214,6 +246,9 @@ export default {
       goListening() {
           this.$router.push('/english/listening')
       },
+      goMyWordbook() {
+          this.$router.push('/english/userwordbook')
+      }
       
     },
     mounted() {

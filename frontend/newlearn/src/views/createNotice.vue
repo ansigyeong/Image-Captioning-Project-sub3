@@ -1,10 +1,11 @@
 <template>
   <div class="container">
-    <div style="text-align: center;"><h1>공지사항 작성</h1></div>
+    <div style="text-align: center;"><h1>🔉 Notice 🔉</h1></div>
     <br>
     <br>
     <v-form>
-      <v-text-field v-model="title"
+      <v-text-field v-model="noticeData.title"
+        id="title"
         label="제목을 입력해주세요"
         single-line
         full-width
@@ -23,14 +24,13 @@
             'undo redo codesample | formatselect | bold italic backcolor | \
             alignleft aligncenter alignright alignjustify | \
             bullist numlist outdent indent | removeformat | help'
-        }" v-model="contents"  />
+        }" v-model="noticeData.content" id="content" />
+      <br>
+      <br>
+      <div style="text-align: right;">
+        <v-btn @click="createNotice">Submit</v-btn>
+      </div>
     </div>
-      <v-divider></v-divider>
-      <v-card-actions style="float:right">
-        <v-btn text @click="back">취소</v-btn>
-        <v-spacer></v-spacer>
-        <v-btn text @click="createNotice">Submit</v-btn>
-      </v-card-actions>
     </v-form>
   </div>
 </template>
@@ -50,12 +50,12 @@ export default {
         noticeData: {
           title: null,
           content: null,
-          editorText: 'This is initialValue.',
-          editorOptions: {
-            hideModeSwitch: true
-          },
-
-        }
+          created_at: null,
+        },
+        editorText: 'This is initialValue.',
+        editorOptions: {
+          hideModeSwitch: true
+        },
       };
     },
     methods: {
@@ -66,7 +66,7 @@ export default {
           }
         }
         // 게시글 생성은 Header: Token / Body: { title: , content: }
-        http.post("/notice/create", this.noticeData, config)
+        http.post('/community/notice/create/', this.noticeData, config)
           .then(res => { 
             console.log(res.data) 
             this.$router.push({ name: 'noticeList' })

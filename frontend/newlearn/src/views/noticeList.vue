@@ -16,8 +16,8 @@
       <div v-for="notice in notices" :key="`notice_${notice.id}`">
           <v-row>
               <v-col cols="3">{{ notice.id }}</v-col>
-              <v-col cols="6">{{ notice.title }}</v-col>
-              <v-col cols="3">{{ notice.created_at.format('YYYY-MM-DD HH:mm') }}</v-col>
+              <v-col cols="6" @click="goDetail(notice.id)">{{ notice.title }}</v-col>
+              <v-col cols="3">{{ notice.created_at }}</v-col>
           </v-row>
       </div>
     </div>
@@ -35,17 +35,32 @@ export default {
     };
   },
   methods: {
-    fetchArticles() {
+    fetchData() {
       http.get("/community/notice/")
         .then(res => this.notices = res.data)
         .catch(err => console.error(err))
     },
     goCreateNotice() {
-      this.$router.push('/notice/createnotice')
+      const config = {
+          headers: {
+              'Authorization': `Token ${this.$cookies.get('auth-token')}`
+          }
+      }
+      http.post('/community/notice/check/', null, config)
+      .then(res => {
+        if (res.data == '통과') {
+          this.$router.push('/notice/createnotice/')
+        } else {
+          alert('운영자만 공지사항을 작성할 수 있습니다')
+        }
+      })
     },
+    goDetail(id) {
+      this.$router.push('/notice/noticedetail/' + id)
+    }
   },
   created() {
-    this.fetchArticles()
+    this.fetchData()
   }
 }
 </script>

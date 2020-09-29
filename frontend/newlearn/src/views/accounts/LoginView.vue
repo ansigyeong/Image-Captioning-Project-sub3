@@ -21,7 +21,7 @@
     </div>
     <div class="login-box">
       <h2>Sign In</h2>
-      <form>
+      <form onsubmit="return false;">
         <div class="user-box">
           <input v-model="loginData.username" id="username" type="text">
           <label for="username"><p style="color: white;">ID</p></label>
