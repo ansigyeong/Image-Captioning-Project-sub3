@@ -4,6 +4,7 @@
     <!-- Header & Nav 시작 -->
     <div class="HeaderNav">
         <div style="background: #536976; -webkit-linear-gradient(to right, #292E49, #536976); linear-gradient(to right, #292E49, #536976); height:50px;">
+            <img src="@/assets/nl.png" @click="goHome" style="height: 50px;">
             <div style="float:left; margin-left:10px; margin-top:8px;">
                 <div @click.stop="drawer = !drawer" style="cursor:pointer;">
                     <i class="fas fa-bars fa-2x"></i>
@@ -37,6 +38,11 @@
                             </v-list-item-content>
                         </v-list-item>
                         <v-list v-if="dropDrawer">
+                            <v-list-item @click="goMyWordbook" style="margin-left:20px;">
+                                <v-list-item-content>
+                                    <v-list-item-title>My Wordbook</v-list-item-title>
+                                </v-list-item-content>
+                            </v-list-item>
                             <v-list-item @click="goAttendance" style="margin-left:20px;">
                                 <v-list-item-content>
                                     <v-list-item-title>Attendance</v-list-item-title>
@@ -121,7 +127,7 @@
 
     <router-view @submit-login-data="login" @submit-signup-data="signup"/>
 
-    </v-app>
+  </v-app>
 </template>
 
 <script scoped>
@@ -207,6 +213,9 @@ export default {
             this.$router.push({ name: 'Home' })
           })
       },
+      goHome() {
+        this.$router.push('/')
+      },
       goSignup() {
         this.$router.push('/accounts/signup')
       },
@@ -237,6 +246,9 @@ export default {
       goListening() {
           this.$router.push('/english/listening')
       },
+      goMyWordbook() {
+          this.$router.push('/english/userwordbook')
+      }
       
     },
     mounted() {

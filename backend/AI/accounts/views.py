@@ -10,8 +10,6 @@ from django.forms.models import model_to_dict
 from datetime import datetime
 from django.utils.dateformat import DateFormat
 
-finduser = get_user_model()
-
 @api_view(['POST'])
 def point_reward(request):
 
