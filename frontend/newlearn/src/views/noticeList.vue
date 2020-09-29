@@ -17,7 +17,7 @@
           <v-row>
               <v-col cols="3">{{ notice.id }}</v-col>
               <v-col cols="6" @click="goDetail(notice.id)">{{ notice.title }}</v-col>
-              <v-col cols="3">{{ notice.created_at.format('YYYY-MM-DD HH:mm') }}</v-col>
+              <v-col cols="3">{{ notice.created_at }}</v-col>
           </v-row>
       </div>
     </div>
@@ -41,7 +41,7 @@ export default {
         .catch(err => console.error(err))
     },
     goCreateNotice() {
-      this.$router.push('/notice/createnotice')
+      this.$router.push('/notice/createnotice/')
     },
     goDetail(id) {
       this.$router.push('/notice/noticedetail/' + id)

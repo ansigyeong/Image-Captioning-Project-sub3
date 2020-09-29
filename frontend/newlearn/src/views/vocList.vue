@@ -3,7 +3,7 @@
     <div style="text-align: center;"><h1>👩 Voice Of the Customer 👨</h1></div>
     <br>
     <br>
-    <div style="text-align: right;"><v-btn @click='goCreateVoc'>글 쓰러가기</v-btn></div>
+    <div style="text-align: right;"><v-btn @click='goCreateVoc'>글 쓰러 가기</v-btn></div>
     <br>
     <br>
     <div style="text-align: center;"> 

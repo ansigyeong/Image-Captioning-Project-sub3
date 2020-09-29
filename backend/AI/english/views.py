@@ -57,12 +57,12 @@ def vocabulary(request):
 def speaking(request):
     speak = Speaking.objects.order_by('?')[0:1]
     for val in speak:
-        print(val)
+        # print(val)
         text = val.image
     return_text = caption.main(text)
     
-    print('텍스트 체크')
-    print(text)
+    # print('텍스트 체크')
+    # print(text)
     serializer = SpeakingSerializer(speak, many=True)
     data = {
         'return_text': return_text,
