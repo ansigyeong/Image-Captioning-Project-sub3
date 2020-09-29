@@ -19,7 +19,7 @@
 
             <img v-if="previewImg.preview" :src="previewImg.preview" style="min-width:100px; max-width:600px;">
 
-            <div class="img" v-if="image">
+            <div v-if="image">
                 <img src = "`${this.image}`" />
                 <p class = "res">{{ this.capText }}</p>
             </div>
@@ -33,7 +33,7 @@
                 {{ this.capText }}
             </p>
         </div>
-        
+        <h2><i class="fa fa-file" aria-hidden="true" style="font-size:30px;"></i> My Voice Recorder</h2>
         <div class="recorder">
             <audio-recorder 
                 upload-url="YOUR_API_URL"
@@ -48,7 +48,7 @@
                 :successful-upload="callback"
                 :failed-upload="callback"/>
         </div>
-
+        <h2><i class="fa fa-download" aria-hidden="true" style="font-size:30px;"></i> My Voice RecorderFile Upload</h2>
         <div class="putfile">
             <input
                 type="file"
@@ -64,7 +64,7 @@
             <br>
             <v-btn class="button button1" v-if="this.uploadFile" @click="pushFile">Voice To Text</v-btn>
 
-            <v-btn class="button button1" v-if="capText != ''" @click="viewText" style="margin:1%;">
+            <v-btn class="button button1" v-if="userVoice != ''" @click="viewText" style="margin:1%;">
                 Your Vocie Text
             </v-btn>
             <p class = "res" v-if="this.showText == true">
@@ -115,7 +115,7 @@ export default {
             var InputData = new FormData()
             InputData.append("inputFile", this.uploadFile)
             http
-            .put(`/english/soundupload/`, InputData)
+            .put(`/english/speaksound/`, InputData)
             .then((res) => {
                 this.userVoice = res.data
                 console.log(res.data)
@@ -185,7 +185,7 @@ export default {
     }
     .recorder{
         text-align: center;
-        margin-left: 25%;
+        margin-left: 30%;
         margin-right: 25%;
     }
     .fileload{
@@ -196,15 +196,22 @@ export default {
         font-weight: 700;
         text-align: center;
     }
+    h2{
+        margin: 20px;
+        font-family: 'Secular One', sans-serif;
+        font-size: 30px ;
+        text-align: center;
+    }
     h1{
         margin: 20px;
         font-family: 'Secular One', sans-serif;
         font-size: 50px ;
         text-align: center;
     }
-    .img{
-        text-align: center;
-        margin-top: 10%;
+    img {
+        width: 400px;
+        height: 400px;
+        object-fit: contain;
     }
     .link, .putfile, .mytext, .compare{
         font-family: 'Secular One', sans-serif;
