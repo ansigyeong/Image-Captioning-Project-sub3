@@ -11,4 +11,7 @@ urlpatterns = [
     path('speakSituation/', views.situation),
     path('soundupload/', views.sound_upload),
     path('checktext/', views.checktext),
+    path('adduserword/', views.addword),
+    path('deleteuserword/', views.deleteword),
+    path('userwordlist/', views.userwordlist),
 ]
