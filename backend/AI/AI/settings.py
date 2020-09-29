@@ -53,6 +53,13 @@ INSTALLED_APPS = [
     'allauth.account',
     'rest_auth.registration',
 
+    # rest_auth 추가
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.openid',
+    
+    # rest_password change
+    'django_rest_passwordreset',
+
     # my apps
     'accounts',
     'community',
@@ -159,8 +166,12 @@ ACCOUNT_EMAIL_REQUIRED = False
 
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 ACCOUNT_LOGOUT_ON_GET = True
-REST_USE_JWT = True
+# REST_USE_JWT = True
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:8080",
+    "http://172.30.1.36:8080"
 ]
+
+# 비밀번호 변경 시 로그인 상태 유지
+LOGOUT_ON_PASSWORD_CHANGE = False
