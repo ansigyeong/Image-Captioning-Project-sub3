@@ -24,6 +24,7 @@ import editNotice from '../views/editNotice.vue'
 import Wordbook from '../views/Wordbook.vue'
 import Speaking from '../views/Speaking.vue'
 import Listening from '../views/Listening.vue'
+import UserWordbook from '../views/UserWordbook.vue'
 
 Vue.use(VueRouter)
 
@@ -123,6 +124,11 @@ const routes = [
     name: 'Listening',
     component: Listening,
   },
+  {
+    path: '/english/userwordbook',
+    name: 'UserWordbook',
+    component: UserWordbook,
+  },
 ]
 
 const router = new VueRouter({
@@ -132,7 +138,7 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  const publicPages = ['Login', 'Signup', 'Home', 'List', 'Pointlist', 'Attendance', 'Wordbook', 'Speaking', 'Listening']  // Login 안해도 됨
+  const publicPages = ['Login', 'Signup', 'Home', 'List', 'Pointlist', 'Attendance', 'Wordbook', 'Speaking', 'Listening', 'UserWordbook']  // Login 안해도 됨
   const authPages = ['Login', 'Signup']  // Login 되어있으면 안됨
   
   const authRequired = !publicPages.includes(to.name)  // 로그인 해야 함

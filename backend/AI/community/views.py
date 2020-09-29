@@ -5,13 +5,22 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from .models import Notice, Suggestion, Comment
 from django.contrib import messages
-
+from accounts.models import User
 
 @api_view(['GET'])
 def notice_list(request):
     notices = Notice.objects.all()
     serializer = NoticeListSerializer(notices, many=True)
     return Response(serializer.data)
+
+
+@api_view(['POST'])
+def noticecheck(request):
+    user = get_object_or_404(User, username = request.user)
+    if user.username == 'admin':
+        return Response('통과')
+    else:
+        return Response('실패')
 
 
 @api_view(['POST'])
@@ -61,9 +70,13 @@ def notice_update(request, notice_pk):
         # 2. 403 status code를 반환.
         # return HttpResponseForbidden()
 
-@api_view(['GET'])
+@api_view(['POST'])
 def suggestion_list(request):
-    suggestions = Suggestion.objects.all()
+    user = get_object_or_404(User, username = request.user)
+    if user.username == 'admin':
+        suggestions = Suggestion.objects.all()
+    else:
+        suggestions = Suggestion.objects.filter(user=request.user)
     serializer = SuggestionListSerializer(suggestions, many=True)
     return Response(serializer.data)
 
