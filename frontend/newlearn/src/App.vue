@@ -4,6 +4,7 @@
     <!-- Header & Nav 시작 -->
     <div class="HeaderNav">
         <div style="background: #536976; -webkit-linear-gradient(to right, #292E49, #536976); linear-gradient(to right, #292E49, #536976); height:50px;">
+            <img src="@/assets/nl.png" @click="goHome" style="height: 50px;">
             <div style="float:left; margin-left:10px; margin-top:8px;">
                 <div @click.stop="drawer = !drawer" style="cursor:pointer;">
                     <i class="fas fa-bars fa-2x"></i>
@@ -121,7 +122,7 @@
 
     <router-view @submit-login-data="login" @submit-signup-data="signup"/>
 
-    </v-app>
+  </v-app>
 </template>
 
 <script scoped>
@@ -206,6 +207,9 @@ export default {
             alert('로그아웃 성공')
             this.$router.push({ name: 'Home' })
           })
+      },
+      goHome() {
+        this.$router.push('/')
       },
       goSignup() {
         this.$router.push('/accounts/signup')
