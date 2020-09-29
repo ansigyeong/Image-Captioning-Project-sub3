@@ -66,8 +66,8 @@
                             </v-list-item>
 
                         </v-list>
-
                         <v-divider></v-divider>
+                        
                         <v-list-item to="/accounts/logout" @click.native="logout">
                             <v-list-item-content>
                                 <v-list-item-title>Logout</v-list-item-title>
@@ -129,14 +129,12 @@
       </div>
     </div> -->
 
-    <router-view @submit-login-data="login" @submit-signup-data="signup"/>
-
+    <!-- <router-view @submit-login-data="login" @submit-signup-data="signup"/> -->
+  </div>
 </template>
 
 <script scoped>
 import http from '@/util/http-common.js'
-import axios from 'axios'
-const SERVER_URL = 'http://localhost:8000'
 
 export default {
   name: 'NavBar',
@@ -144,60 +142,11 @@ export default {
     return {
       isLoggedIn: false,
       errorMessages: null,
-
       drawer: null,
       dropDrawer: null,
     }
   },
   methods: {
-      setCookie(token) {
-        this.$cookies.set('auth-token', token)
-        this.isLoggedIn = true
-      },
-
-      createattendance() {
-          const config = {
-              headers: {
-                  'Authorization': `Token ${this.$cookies.get('auth-token')}`
-              }
-          }
-          http.post(SERVER_URL + '/accounts/attendance/', null, config)
-            .then()
-            .catch(err => {
-                console.log(err)
-            })
-      },
-
-      signup(signupData) {
-        axios.post(SERVER_URL + '/rest-auth/signup/', signupData)
-          .then(res => {
-            this.setCookie(res.data.key)
-            alert('회원가입 성공')
-            this.$router.push({ name: 'Home' })
-          })
-          .catch(err => {
-          alert('회원가입 실패')
-          this.errorMessages = err.response.data})
-      },
-
-      login(loginData) {
-        
-        axios.post(SERVER_URL + '/rest-auth/login/', loginData)
-          .then(res => {
-            // console.log(res.data.key)
-            // console.log(res.data)
-
-            this.setCookie(res.data.key)
-
-            this.createattendance()
-
-            alert('로그인 성공')
-            this.$router.push({ name: 'Home' })
-          })
-          .catch(err => {
-            alert('로그인 실패')
-            this.errorMessages = err.response.data})
-      },
 
       logout() {
         const config = {
@@ -206,7 +155,7 @@ export default {
           }
         }
 
-        axios.get(SERVER_URL + '/rest-auth/logout/', null, config)
+        http.get('/rest-auth/logout/', null, config)
           // .then(() => {})
           .catch(err => console.log(err.response))
           .finally(() => {
@@ -216,12 +165,12 @@ export default {
             this.$router.push({ name: 'Home' })
           })
       },
-      goSignup() {
-        this.$router.push('/accounts/signup')
-      },
-      goSignin() {
-        this.$router.push('/accounts/login')
-      },
+    //   goSignup() {
+    //     this.$router.push('/accounts/signup')
+    //   },
+    //   goSignin() {
+    //     this.$router.push('/accounts/login')
+    //   },
       goPointList() {
             this.$router.push('/mypage/pointList')
       },

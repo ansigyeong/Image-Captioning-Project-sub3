@@ -1,18 +1,18 @@
 <template>
   <div class="home">
-    <Logo :component="component" />
+    <Navbar></Navbar>
   
   </div>
 </template>
 
 <script>
 
-import Logo from "../components/user/Logo.vue";
+import Navbar from "../components/common/Navigation"
 
 export default {
   name: 'Home',
   components: {
-    Logo,
+    Navbar,
   }
 }
 </script>
