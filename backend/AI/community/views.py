@@ -98,7 +98,12 @@ def suggestion_detail(request, suggestion_pk):
     suggestion = get_object_or_404(Suggestion, pk=suggestion_pk)
     comments = suggestion.comment_set.all()
     serializer = SuggestionSerializer(suggestion)
-    return Response(serializer.data)
+    comment_serializer = CommentSerializer(commnets, many=True)
+    data = {
+        'suggestion': serializer.data,
+        'comments': comment_serializer.data
+    }
+    return Response(data)
 
 
 @api_view(['DELETE'])
@@ -129,3 +134,13 @@ def suggestion_update(request, suggestion_pk):
         return Response('본인이 작성한 글만 수정할 수 있습니다.')
         # 2. 403 status code를 반환.
         # return HttpResponseForbidden()
+
+@api_view(['POST'])
+def commentcreate(request, suggestion_pk):
+    comment = Comment()
+    comment.user = request.user
+    suggestion = get_object_or_404(Suggestion, pk = suggestion_pk)
+    comment.suggestion = suggestion
+    comment.content = request.data['content']
+    comment.save()
+    return Response('성공')
