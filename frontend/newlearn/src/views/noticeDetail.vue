@@ -12,7 +12,7 @@
       <p>{{ this.notice.created_at }}</p>
     </div>
     <div style="text-align: right;">
-      <v-btn>EDIT</v-btn>
+      <v-btn @click="goEdit">EDIT</v-btn>
       <v-btn @click="goDelete">DELETE</v-btn>
     </div>
 
@@ -73,6 +73,9 @@ export default {
         // this.$router.push({name: 'vocList'})
       })
     },
+    goEdit() {
+      this.$router.push('/notice/editnotice/' + this.notice_pk)
+    }
   }
 }
 </script>

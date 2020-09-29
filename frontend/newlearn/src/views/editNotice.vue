@@ -1,10 +1,10 @@
 <template>
   <div class="container">
-    <div style="text-align: center;"><h1>👩 Voice Of the Customer 👨</h1></div>
+    <div style="text-align: center;"><h1>🔉 Notice 🔉</h1></div>
     <br>
     <br>
     <v-form>
-      <v-text-field v-model="suggestion.title"
+      <v-text-field v-model="notice.title"
         id="title"
         label="제목을 입력해주세요."
         single-line
@@ -24,11 +24,11 @@
               'undo redo codesample | formatselect | bold italic backcolor | \
               alignleft aligncenter alignright alignjustify | \
               bullist numlist outdent indent | removeformat | help'
-          }" v-model="suggestion.content" id="content" />
+          }" v-model="notice.content" id="content" />
         <br>
         <br>
         <div style="text-align: right;">
-          <v-btn @click="updateVoc">Submit</v-btn>
+          <v-btn @click="updateNotice">Submit</v-btn>
         </div>
     </div>
     </v-form>
@@ -40,17 +40,17 @@ import http from '../util/http-common.js'
 import Editor from '@tinymce/tinymce-vue'
 
 export default {
-  name: 'editVoc',
+  name: 'editNotice',
   components: {
     'editor': Editor
   },
   data() {
     return {
-      suggestion: [],
+      notice: [],
     };
   },
   created() {
-    this.suggestion_pk = this.$route.params.suggestion_pk
+    this.notice_pk = this.$route.params.notice_pk
     this.fetchData()
   },
   methods: {
@@ -60,21 +60,21 @@ export default {
           Authorization: `Token ${this.$cookies.get('auth-token')}`
         }
       }
-      http.get("/community/suggestion/" + this.suggestion_pk, config)
+      http.get("/community/notice/" + this.notice_pk, config)
       .then((res) => {
-        this.suggestion = res.data
+        this.notice = res.data
       })
       .catch(err => console.log(err))
     },
-    updateVoc() {
+    updateNotice() {
       const config = {
         headers: {
           Authorization: `Token ${this.$cookies.get('auth-token')}`
         }
       }
-      http.post(`/community/suggestion/` + this.suggestion_pk + `/update/`, this.suggestion, config)
+      http.post(`/community/notice/` + this.notice_pk + `/update/`, this.notice, config)
       .then(() => {
-        this.$router.push({ name: 'vocList' })
+        this.$router.push({ name: 'noticeList' })
       })
       .catch((err) => {
         console.log(err)
