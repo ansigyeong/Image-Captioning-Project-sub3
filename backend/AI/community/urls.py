@@ -17,5 +17,6 @@ urlpatterns = [
     path('suggestion/<int:suggestion_pk>/', views.suggestion_detail),
     path('suggestion/<int:suggestion_pk>/delete/', views.suggestion_delete),
     path('suggestion/<int:suggestion_pk>/update/', views.suggestion_update),
+    path('suggestion/<int:suggestion_pk>/commentcreate/', views.commentcreate),
     
 ]
