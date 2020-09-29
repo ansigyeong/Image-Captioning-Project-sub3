@@ -11,9 +11,9 @@
             </v-col>
             <v-col cols="12" md="4" v-if="daily.length >= 1" style="text-align:center;">
                 <p>{{ daily[0].date }}</p>
-                <p>이미지 스피킹 : {{ daily[0].image_speak_count }}</p>
-                <p>텍스트 스피킹 : {{ daily[0].text_speak_count }}</p>
+                <p>스피킹 : {{ daily[0].image_speak_count }}</p>
                 <p>리스닝 : {{ daily[0].listening_count }}</p>
+                <p>단어장 : {{ daily[0].vocabulary_count }}</p>
             </v-col>
             <v-col cols="12" md="4" v-else style="text-align:center;">
                 <p>활동 내역이 없습니다</p>
@@ -57,11 +57,11 @@ export default {
             this.day = { 'day' : this.picker }
             // 테스트용으로 '2번' 유저에 대해 요청을 보냄.
             // 연동 완료 시 요청보내는 유저로 보낼 것
+            // 수정완료
             http.post(`/accounts/daily/`, this.day, config)
             .then(res => {
                 this.daily = res.data.day
                 this.month = res.data.month
-                // console.log(res.data)
             })
         },
         functionEvents (date) {

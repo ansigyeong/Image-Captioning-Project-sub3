@@ -1,9 +1,16 @@
 from django.shortcuts import render, get_object_or_404
+from django.contrib.auth import get_user_model
 from .serializers import PointSerializer, PointListSerializer, DailySerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .models import Point, User, DateCount
 from django.forms.models import model_to_dict
+
+# 오늘 날짜 가져오기 위함
+from datetime import datetime
+from django.utils.dateformat import DateFormat
+
+finduser = get_user_model()
 
 @api_view(['POST'])
 def point_reward(request):
@@ -18,8 +25,8 @@ def point_reward(request):
         return Response(serializer.data)
 
 @api_view(['GET'])
-def point_list(request, user_pk):
-    user = get_object_or_404(User, pk=user_pk)
+def point_list(request):
+    user = get_object_or_404(User, user=request.user)
 
     points = Point.objects.filter(user=user).order_by('-pk')
     
@@ -52,10 +59,10 @@ def daily(request):
     # json 으로 넘어온 날짜 데이터를 받아서 사용
     time = request.data['day']
 
-    print(request)
-    print(request.data)
-    print(request.data['day'])
-    print(request.user)
+    # print(request)
+    # print(request.data)
+    # print(request.data['day'])
+    # print(request.user)
 
     user = request.user
 
@@ -84,3 +91,33 @@ def daily(request):
     }
 
     return Response(data)
+
+@api_view(['POST'])
+def userdelete(request):
+    user = get_object_or_404(User, username=request.user)
+    # user = User.objects.get(username=request.user)
+    request.user.delete()
+    return Response('삭제됨')
+
+@api_view(['POST'])
+def createattendance(request):
+    user = request.user
+    
+    # 오늘(요청이 온 날) 체크
+    today = DateFormat(datetime.now()).format('Y-m-d')
+
+    # db에서 해당 날짜와 유저에 해당하는 테이블 체크
+    day = DateCount.objects.filter(user=user).filter(date=today)
+    
+    # 해당하는 테이블이 없는지 체크 len(day) == 0
+    if len(day) == 0:
+        day = DateCount()
+    # 이미 존재하면 Response
+    else:
+        return Response('이미 있음')
+    
+    # 없을 경우 새로 생성
+    day.user = user
+    day.save()
+
+    return Response('생성완료')
