@@ -58,7 +58,9 @@
           <p class="display-1 text--primary">
             {{ word.word }}
           </p>
-          <p>adjective</p>
+          <p>
+              {{ word.phonetic_symbols }}
+          </p>
           <div class="text--primary">
             {{ word.mean }}<br>
             <!-- 예시 -->
