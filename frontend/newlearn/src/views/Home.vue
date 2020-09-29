@@ -1,16 +1,18 @@
 <template>
   <div class="home">
-    <div style="text-align: center; vertical-align: middle;">
-      <a href="/"><h1 style="font-size: 100px; color: white;">New Learn</h1></a>
-    </div>
+    <Logo :component="component" />
+  
   </div>
 </template>
 
 <script>
 
+import Logo from "../components/user/Logo.vue";
+
 export default {
   name: 'Home',
   components: {
+    Logo,
   }
 }
 </script>
