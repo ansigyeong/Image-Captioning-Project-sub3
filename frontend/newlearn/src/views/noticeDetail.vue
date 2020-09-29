@@ -38,10 +38,10 @@ export default {
   },
   created() {
     this.notice_pk = this.$route.params.notice_pk
-    this.fetchDetail()
+    this.fetchData()
   },
   methods: {
-    fetchDetail() {
+    fetchData() {
       const config = {
         headers: {
           Authorization: `Token ${this.$cookies.get('auth-token')}`

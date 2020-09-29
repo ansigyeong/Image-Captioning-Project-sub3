@@ -34,8 +34,6 @@ export default {
   data() {
     return {
       suggestion: [],
-      // title: null,
-      // content: null,
     }
   },
   created() {
@@ -76,8 +74,21 @@ export default {
       })
     },
     goEdit() {
-      
-    }
+      // const config = {
+      //   headers: {
+      //     Authorization: `Token ${this.$cookies.get('auth-token')}`
+      //   }
+      // }
+      // const editinfo = {
+      //   title: this.suggestion.title,
+      //   content: this.suggestion.content,
+      // }
+      // http.post(`/community/suggestion/` + `${this.suggestion_pk}` + `/update/`, editinfo, config)
+      // .then(() => {
+      //   this.$router.push('/mypage/editvoc/' + this.suggestion_pk)
+      // })
+      this.$router.push('/mypage/editvoc/' + this.suggestion_pk)
+    },
   },
 }
 </script>

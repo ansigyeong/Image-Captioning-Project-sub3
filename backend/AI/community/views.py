@@ -38,13 +38,28 @@ def notice_delete(request, notice_pk):
     notice.delete()
     return
 
-@api_view(['PATCH'])
+@api_view(['POST'])
 def notice_update(request, notice_pk):
+    # 수정시에는 해당 article 인스턴스를 넘겨줘야한다!
     notice = get_object_or_404(Notice, pk=notice_pk)
-    notice.title = request.POST.get('title')
-    notice.content = request.POST.get('content')
-    notice.save()
-    return Response('성공')
+    if request.user == notice.user:
+        if request.data['title']:
+            notice.title = request.data['title']
+            notice.content = request.data['content']
+            notice.save()
+            return Response('성공')
+        else:
+            form = notice(instance=notice)
+        context = {
+            'title': notice.title,
+            'content': notice.content,
+        }
+        return Response(context)
+    else:
+        # 1. 메시지프레임워크를 사용하여, 메인페이지로 이동.
+        return Response('본인이 작성한 글만 수정할 수 있습니다.')
+        # 2. 403 status code를 반환.
+        # return HttpResponseForbidden()
 
 @api_view(['GET'])
 def suggestion_list(request):
@@ -79,10 +94,25 @@ def suggestion_delete(request, suggestion_pk):
     suggestion.delete()
     return
 
-@api_view(['PATCH'])
+@api_view(['POST'])
 def suggestion_update(request, suggestion_pk):
+    # 수정시에는 해당 article 인스턴스를 넘겨줘야한다!
     suggestion = get_object_or_404(Suggestion, pk=suggestion_pk)
-    suggestion.title = request.POST.get('title')
-    suggestion.content = request.POST.get('content')
-    suggestion.save()
-    return Response('성공')
+    if request.user == suggestion.user:
+        if request.data['title']:
+            suggestion.title = request.data['title']
+            suggestion.content = request.data['content']
+            suggestion.save()
+            return Response('성공')
+        else:
+            form = Suggestion(instance=suggestion)
+        context = {
+            'title': suggestion.title,
+            'content': suggestion.content,
+        }
+        return Response(context)
+    else:
+        # 1. 메시지프레임워크를 사용하여, 메인페이지로 이동.
+        return Response('본인이 작성한 글만 수정할 수 있습니다.')
+        # 2. 403 status code를 반환.
+        # return HttpResponseForbidden()
