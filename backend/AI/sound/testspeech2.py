@@ -12,9 +12,9 @@ def main(name):
     from google.cloud.speech import enums
     from google.cloud.speech import types
 
-    AudioSegment.converter = "C:\\ffmpeg\\ffmpeg\\bin\\ffmpeg.exe"
-    AudioSegment.ffmpeg = "C:\\ffmpeg\\ffmpeg\\bin\\ffmpeg.exe"
-    AudioSegment.ffprobe ="C:\\ffmpeg\\ffmpeg\\bin\\ffprobe.exe"        
+    # AudioSegment.converter = "C:\\ffmpeg\\ffmpeg\\bin\\ffmpeg.exe"
+    # AudioSegment.ffmpeg = "C:\\ffmpeg\\ffmpeg\\bin\\ffmpeg.exe"
+    # AudioSegment.ffprobe ="C:\\ffmpeg\\ffmpeg\\bin\\ffprobe.exe"        
     # [END migration_import]
 
     # Instantiates a client
@@ -34,7 +34,7 @@ def main(name):
     print(file_name)
     #file_name = argv
     str_name = str(file_name).split('.')[-1]
-    filename1 = "C:/Users/multicampus/SSAFY/Final/backend/AI/captioning/test/images/" + str(file_name)
+    filename1 = "/home/ubuntu/s03p23d107/backend/AI/captioning/test/images/" + str(file_name)
 
     if str_name == "wav":
         print("wav")    
