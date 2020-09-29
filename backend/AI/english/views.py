@@ -171,3 +171,21 @@ def userwordlist(request):
     words = Userwordbook.objects.filter(user=user)
     serializer = UserwordbookSerializer(words, many=True)
     return Response(serializer.data)
+
+@api_view(['PUT'])
+def speaksound(request):
+    # 저장할 db 호출
+    listen = Listening()
+
+    # 전송받은 파일 저장
+    listen.sound = request.FILES['inputFile']
+    listen.extraction_text = 'test'
+    listen.save()
+
+    # STT 모델 가동
+    text = listen.sound
+    return_text = STT.main(text)
+    # print(return_text)
+
+    # 결과물 전송
+    return Response(return_text)
