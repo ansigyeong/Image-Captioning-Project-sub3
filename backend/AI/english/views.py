@@ -1,9 +1,9 @@
 from django.shortcuts import render, get_object_or_404
-from .serializers import VocabularySerializer, SpeakingSerializer
+from .serializers import VocabularySerializer, SpeakingSerializer, UserwordbookSerializer
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from .models import Vocabulary, Speaking, Listening
+from .models import Vocabulary, Speaking, Listening, Userwordbook
 from datetime import datetime
 from django.utils.dateformat import DateFormat
 from captioning import main as caption
@@ -146,3 +146,46 @@ def checktext(request):
         'stttext': sttText
     }
     return Response(data)
+
+@api_view(['POST'])
+def addword(request):
+    user = request.user
+    newword = Userwordbook()
+    newword.user = user
+    newword.word = request.data['word']
+    newword.phonetic_symbols = request.data['phonetic_symbols']
+    newword.mean = request.data['mean']
+    newword.save()
+    return Response('저장')
+
+@api_view(['POST'])
+def deleteword(request):
+    user = request.user
+    delword = get_object_or_404(Userwordbook, user=user, word=request.data['word'])
+    delword.delete()
+    return Response('삭제')
+
+@api_view(['POST'])
+def userwordlist(request):
+    user = request.user
+    words = Userwordbook.objects.filter(user=user)
+    serializer = UserwordbookSerializer(words, many=True)
+    return Response(serializer.data)
+
+@api_view(['PUT'])
+def speaksound(request):
+    # 저장할 db 호출
+    listen = Listening()
+
+    # 전송받은 파일 저장
+    listen.sound = request.FILES['inputFile']
+    listen.extraction_text = 'test'
+    listen.save()
+
+    # STT 모델 가동
+    text = listen.sound
+    return_text = STT.main(text)
+    # print(return_text)
+
+    # 결과물 전송
+    return Response(return_text)

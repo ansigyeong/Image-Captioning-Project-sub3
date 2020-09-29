@@ -35,20 +35,32 @@ export default {
     };
   },
   methods: {
-    fetchArticles() {
+    fetchData() {
       http.get("/community/notice/")
         .then(res => this.notices = res.data)
         .catch(err => console.error(err))
     },
     goCreateNotice() {
-      this.$router.push('/notice/createnotice/')
+      const config = {
+          headers: {
+              'Authorization': `Token ${this.$cookies.get('auth-token')}`
+          }
+      }
+      http.post('/community/notice/check/', null, config)
+      .then(res => {
+        if (res.data == '통과') {
+          this.$router.push('/notice/createnotice/')
+        } else {
+          alert('운영자만 공지사항을 작성할 수 있습니다')
+        }
+      })
     },
     goDetail(id) {
       this.$router.push('/notice/noticedetail/' + id)
     }
   },
   created() {
-    this.fetchArticles()
+    this.fetchData()
   }
 }
 </script>
