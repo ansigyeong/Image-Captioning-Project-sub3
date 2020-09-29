@@ -1,66 +1,76 @@
 <template>
-    <div style="text-align:center;">
-        <h1 style="text-align:center;">스피킹</h1>
-         <a href="https://convertio.co/kr/png-jpg/">jpg convert site</a>
-        <p>jpg 파일만 사용가능</p>
-        <div style="text-align:center;">
+    <div>
+        <h1><i class="fas fa-volume-up" style="font-size:50px;"></i> Speaking</h1>
 
-            <input
-                type="file"
-                ref="files"
-                accept="image/*"
-                @change="imageUpload" />
+        <div class="link">
+            <p><i class="fa fa-exclamation-triangle" aria-hidden="true" style="color:red;"></i>
+            jpg 파일만 사용가능 (<a href="https://convertio.co/kr/png-jpg/">jpg convert site</a>)</p>
         </div>
-        <div style="text-align:center;">
+
+        <div class="putfile">
+            <div class="putfile">
+                <input
+                    type="file"
+                    class="fileload"
+                    ref="files"
+                    accept="image/*"
+                    @change="imageUpload" />
+            </div>
+
             <img v-if="previewImg.preview" :src="previewImg.preview" style="min-width:100px; max-width:600px;">
-            <br>
-            <v-btn v-if="previewImg.preview" @click="pushImage">이미지 업로드하기</v-btn>
-            <v-btn v-if="capText != ''" @click="viewText" style="margin:1%;">
-                예시 답안 보기
-            </v-btn>
-            <p v-if="this.showText == true">
+
+            <div class="img" v-if="image">
+                <img src = "`${this.image}`" />
+                <p class = "res">{{ this.capText }}</p>
+            </div>
+            <div>
+                <v-btn class="button button1" v-if="previewImg.preview" @click="pushImage">Image Captioning</v-btn>
+                <v-btn class="button button1" v-if="capText != ''" @click="viewText" style="margin:1%;">
+                    Example Answer
+                </v-btn>
+            </div>
+            <p class = "res" v-if="this.showText == true">
                 {{ this.capText }}
             </p>
         </div>
-        <br>
-        <div v-if="image">
-                <img src = "`${this.image}`"  />
-            <br>
-            <h3 style="text-align:center;">
-                {{ this.capText }}
-            </h3>
+        
+        <div class="recorder">
+            <audio-recorder 
+                upload-url="YOUR_API_URL"
+                :attempts="3"
+                :time="2"
+                :headers="headers"
+                :before-recording="callback"
+                :pause-recording="callback"
+                :after-recording="callback"
+                :select-record="callback"
+                :before-upload="callback"
+                :successful-upload="callback"
+                :failed-upload="callback"/>
         </div>
-        <br>
 
-        <audio-recorder
-            upload-url="YOUR_API_URL"
-            filename="asdasd"
-            :attempts="3"
-            :time="2"
-            :headers="headers"
-            :before-recording="callback"
-            :pause-recording="callback"
-            :after-recording="callback"
-            :select-record="callback"
-            :before-upload="callback"
-            :successful-upload="callback"
-            :failed-upload="callback"/>
+        <div class="putfile">
+            <input
+                type="file"
+                class="fileload"
+                ref="audio"
+                accept="audio/*"
+                @change="audioUpload" />
+            <br>
+            <br>
+            <audio class="player" controls ref="player">
+                <source src="" ref="source">
+            </audio>
+            <br>
+            <v-btn class="button button1" v-if="this.uploadFile" @click="pushFile">Voice To Text</v-btn>
 
-        <input
-            type="file"
-            ref="audio"
-            accept="audio/*"
-            @change="audioUpload" />
-        <br>
-        <br>
-        <audio class="player" controls ref="player">
-            <source src="" ref="source">
-        </audio>
-        <br>
-        <v-btn v-if="this.uploadFile" @click="pushFile">
-            Voice To Text
-        </v-btn>
-        <p>{{ this.userVoice }}</p>
+            <v-btn class="button button1" v-if="capText != ''" @click="viewText" style="margin:1%;">
+                Your Vocie Text
+            </v-btn>
+            <p class = "res" v-if="this.showText == true">
+                {{ this.userVoice }}
+            </p>
+        </div>
     </div>
 </template>
 
@@ -88,17 +98,18 @@ export default {
     ,
     methods: {
         audioUpload() {
+
             const uploadSound = event.target.files[0];
             const audioSrc = window.URL.createObjectURL(uploadSound);
+            
             this.$refs.source.src = audioSrc;
-
             this.uploadFile = uploadSound
             
             //업로드완료 후 파일로딩
             this.$refs.player.load();
 
             //다른거 업로드할때를 위해 초기화
-            event.target.value ='';
+            //event.target.value ='';
         },
          pushFile() {
             var InputData = new FormData()
@@ -168,5 +179,56 @@ export default {
 </script>
 
 <style>
-  
+    .res{
+         font-family: 'Secular One', sans-serif;
+         font-size: 20px;
+    }
+    .recorder{
+        text-align: center;
+        margin-left: 25%;
+        margin-right: 25%;
+    }
+    .fileload{
+        border-style: solid;
+        border-width: thin medium thick 5px;
+        padding:10px;
+        font-size: 15px;
+        font-weight: 700;
+        text-align: center;
+    }
+    h1{
+        margin: 20px;
+        font-family: 'Secular One', sans-serif;
+        font-size: 50px ;
+        text-align: center;
+    }
+    .img{
+        text-align: center;
+        margin-top: 10%;
+    }
+    .link, .putfile, .mytext, .compare{
+        font-family: 'Secular One', sans-serif;
+        text-align: center;
+        margin: 20px;
+    }
+    .button {
+        background-color: #4CAF50; /* Green */
+        border: none;
+        color: white;
+        padding: 16px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-family: 'Secular One', sans-serif;
+        font-size: 20px;
+        margin: 4px 2px;
+        transition-duration: 0.4s;
+        cursor: pointer;
+    }
+
+    .button1 {
+        background-color: white; 
+        color: black; 
+        border: 2px solid #4CAF50;
+    }
 </style>
