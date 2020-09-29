@@ -14,7 +14,7 @@ tf.flags.DEFINE_boolean('load', False,
                         'Turn on to load a pretrained model from either \
                         the latest checkpoint or a specified file')
 
-tf.flags.DEFINE_string('model_file', 'C:/Users/multicampus/SSAFY/Final/backend/AI/captioning/models/289999.npy',
+tf.flags.DEFINE_string('model_file', '/home/ubuntu/s03p23d107/backend/AI/captioning/models/289999.npy',
                        'If sepcified, load a pretrained model from this file')
 
 tf.flags.DEFINE_boolean('load_cnn', False,
