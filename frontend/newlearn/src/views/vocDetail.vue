@@ -4,7 +4,7 @@
     <br>
     <br>
 
-    <!-- title & etc -->
+    <!-- 1. title & etc -->
     <div class="title">
       <h1>{{ this.suggestion.title }}</h1>
     </div>
@@ -12,13 +12,13 @@
       <p>{{ this.suggestion.created_at }}</p>
     </div>
     <div style="text-align: right;">
-      <v-btn>EDIT</v-btn>
+      <v-btn @click="goEdit">EDIT</v-btn>
       <v-btn @click="goDelete">DELETE</v-btn>
     </div>
 
     <hr>
 
-    <!-- content -->
+    <!-- 2. content -->
     <div v-html="this.suggestion.content" style="margin:20px" class="contentbox"></div>
     <!-- <div class="content">
       <h3>{{ this.suggestion.content }}</h3>
@@ -75,6 +75,9 @@ export default {
         // this.$router.push({name: 'vocList'})
       })
     },
+    goEdit() {
+      
+    }
   },
 }
 </script>
