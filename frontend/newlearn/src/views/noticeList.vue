@@ -35,7 +35,7 @@ export default {
     };
   },
   methods: {
-    fetchArticles() {
+    fetchData() {
       http.get("/community/notice/")
         .then(res => this.notices = res.data)
         .catch(err => console.error(err))
@@ -48,7 +48,7 @@ export default {
     }
   },
   created() {
-    this.fetchArticles()
+    this.fetchData()
   }
 }
 </script>

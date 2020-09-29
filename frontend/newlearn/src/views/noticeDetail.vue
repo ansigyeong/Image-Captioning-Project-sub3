@@ -12,8 +12,8 @@
       <p>{{ this.notice.created_at }}</p>
     </div>
     <div style="text-align: right;">
-      <v-btn>EDIT</v-btn>
-      <!-- <v-btn @click="goDelete">DELETE</v-btn> -->
+      <v-btn @click="goEdit">EDIT</v-btn>
+      <v-btn @click="goDelete">DELETE</v-btn>
     </div>
 
     <hr>
@@ -38,10 +38,10 @@ export default {
   },
   created() {
     this.notice_pk = this.$route.params.notice_pk
-    this.fetchDetail()
+    this.fetchData()
   },
   methods: {
-    fetchDetail() {
+    fetchData() {
       const config = {
         headers: {
           Authorization: `Token ${this.$cookies.get('auth-token')}`
@@ -52,6 +52,29 @@ export default {
         this.notice = res.data
       })
       .catch(err => console.log(err))
+    },
+    goDelete() {
+      const config = {
+        headers: {
+          Authorization: `Token ${this.$cookies.get('auth-token')}`
+        }
+      }
+      http.delete(`/community/notice/` + this.notice_pk + `/delete/`, config)
+      .then((res) => {
+        console.log(res)
+        alert('성공적으로 삭제되었습니다.')
+        this.$router.go(-1)
+        // this.$router.push({ name: 'vocList' })
+      })
+      .catch((err) => {
+        console.log(err)
+        alert('성공적으로 삭제되었습니다.') // 여기서 삭제됨, 에러 해결하기
+        this.$router.go(-1)
+        // this.$router.push({name: 'vocList'})
+      })
+    },
+    goEdit() {
+      this.$router.push('/notice/editnotice/' + this.notice_pk)
     }
   }
 }
