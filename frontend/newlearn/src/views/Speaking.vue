@@ -178,7 +178,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
     .res{
          font-family: 'Secular One', sans-serif;
          font-size: 20px;
