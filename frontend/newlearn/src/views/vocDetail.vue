@@ -3,7 +3,9 @@
     <Navbar/>
     <div class="bin"></div>
 
-    <div style="text-align: center;"><h1>👩 Voice Of the Customer 👨</h1></div>
+    <div style="text-align: center;">
+      <h1>👩 Voice Of the Customer 👨</h1>
+    </div>
     <br>
     <br>
 
@@ -157,4 +159,9 @@ export default {
   .v-btn {
     margin: 5px;
   }
+  @media(max-width: 480px){
+        h1{
+            font-size: 20px;
+        }
+    }
 </style>

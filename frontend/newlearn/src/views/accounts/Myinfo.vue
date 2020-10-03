@@ -80,7 +80,7 @@
         <br>
         <br>
         <div class="button">
-          <v-btn class="mr-4" @click="submit">Save Profile</v-btn>
+          <v-btn @click="submit">Save Profile</v-btn>
           <v-btn @click="clear">Delete Account</v-btn>
         </div>
       </form>
@@ -211,4 +211,23 @@
     text-align: center !important;
     justify-content: center !important;
   }  
+  @media(max-width: 480px){
+        h1{
+          font-size: 30px;
+        }
+        .bin{
+          height: 70px;
+        }
+        .user_info {
+          max-width: 90%;
+          margin: auto;
+        }
+        .v-application .error {
+          background-color: rgb(0, 0, 0, 0) !important;
+          border-color: rgb(0, 0, 0, 0) !important;
+        }
+        .button {
+          font-size: 15px;
+        }  
+    }
 </style>

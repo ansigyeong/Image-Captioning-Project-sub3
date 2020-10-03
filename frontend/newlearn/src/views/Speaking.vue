@@ -6,10 +6,10 @@
         <h1><i class="fas fa-volume-up" style="font-size:50px;"></i> Speaking</h1>
 
         <div class="link">
-            <p><i class="fa fa-exclamation-triangle" aria-hidden="true" style="color:red;"></i>
-            jpg 파일만 사용가능 (<a href="https://convertio.co/kr/png-jpg/">jpg convert site</a>)</p>
+            <span style="background-color:yellow"><i class="fa fa-exclamation-triangle" aria-hidden="true" style="color:red;"></i>
+            jpg 파일만 사용가능 (<a href="https://convertio.co/kr/png-jpg/">jpg convert site</a>)</span>
         </div>
-
+        <h2><i class="fa fa-download" aria-hidden="true" style="font-size:30px;"></i> Picture Upload</h2>
         <div class="putfile">
             <div class="putfile">
                 <input
@@ -193,8 +193,9 @@ export default {
         height: 70px;
     }
     .res{
-         font-family: 'Secular One', sans-serif;
-         font-size: 20px;
+        background-color: aliceblue;
+        font-family: 'Secular One', sans-serif;
+        font-size: 20px;
     }
     .recorder{
        border-style:double dashed;
@@ -210,6 +211,7 @@ export default {
         text-align: center;
     }
     h2{
+        background-color: aliceblue;
         margin: 20px;
         font-family: 'Secular One', sans-serif;
         font-size: 30px ;
@@ -271,7 +273,7 @@ export default {
         h2{
             margin: 20px;
             font-family: 'Secular One', sans-serif;
-            font-size: 10px ;
+            font-size: 15px ;
             text-align: center;
         }
         .myvoice{
@@ -284,11 +286,12 @@ export default {
             text-align: center;
         }
         img {
-            width: 400px;
-            height: 400px;
+            width: 200px;
+            height: 200px;
             object-fit: contain;
         }
         .link, .putfile, .mytext, .compare{
+            font-weight: 900;
             font-family: 'Secular One', sans-serif;
             text-align: center;
             margin: 10px;
