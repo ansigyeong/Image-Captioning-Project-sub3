@@ -1,16 +1,18 @@
 <template>
   <div class="home">
-    <div style="text-align: center; vertical-align: middle;">
-      <a href="/"><h1 style="font-size: 100px; color: white;">New Learn</h1></a>
-    </div>
+    <Navbar></Navbar>
+  
   </div>
 </template>
 
 <script>
 
+import Navbar from "../components/common/Navigation"
+
 export default {
   name: 'Home',
   components: {
+    Navbar,
   }
 }
 </script>
