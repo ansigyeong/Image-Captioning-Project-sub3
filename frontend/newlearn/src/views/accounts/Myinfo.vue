@@ -1,31 +1,15 @@
 <template>
   <v-app>
     <div class="container">
+      <Navbar/>
+      <div class="bin"></div>
+
       <!-- 로고 -->
       <div style="text-align:center;"><h1>🏡 My Information 🏡</h1></div>
       <br>
       <br>
 
       <!-- 1. 프로필 카드 -->
-      <v-card class="mx-auto" max-width="434" tile>
-        <v-img height="100%" src="@/assets/profile.jpg">
-          <v-row align="end" class="fill-height">
-            <v-col align-self="start" class="pa-0" cols="12">
-              <!-- <v-avatar class="profile" color="grey" size="164" tile>
-                <v-img src="@/assets/profile.jpg"></v-img>
-              </v-avatar> -->
-            </v-col>
-            <v-col class="py-0">
-              <v-list-item color="rgba(0, 0, 0, .4)" dark>
-                <v-list-item-content>
-                  <!-- <v-list-item-title class="title">{{ }}</v-list-item-title> -->
-                  <v-list-item-subtitle>Network Engineer</v-list-item-subtitle>
-                </v-list-item-content>
-              </v-list-item>
-            </v-col>
-          </v-row>
-        </v-img>
-      </v-card>
 
       <br>
       <br>
@@ -108,10 +92,12 @@
   import http from '../../util/http-common.js'
   import { validationMixin } from 'vuelidate'
   import { required, maxLength } from 'vuelidate/lib/validators'
-
+  import Navbar from "../../components/common/Navigation"
+  
   export default {
     name: 'Myinfo',
     components: {
+      Navbar
     },
     data() {
       return {
@@ -210,6 +196,9 @@
   /* form {
     max-width: 50%;
   } */
+  .bin{
+        height: 70px;
+    }
   .user_info {
     max-width: 50%;
     margin: auto;

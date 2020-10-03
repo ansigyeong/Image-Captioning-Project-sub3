@@ -1,5 +1,8 @@
 <template>
   <div class="container">
+    <Navbar/>
+    <div class="bin"></div>
+
     <div style="text-align: center;"><h1>👩 Voice Of the Customer 👨</h1></div>
     <br>
     <br>
@@ -26,9 +29,13 @@
 
 <script>
 import http from '../util/http-common.js'
+import Navbar from "../components/common/Navigation"
 
 export default {
   name: 'vocList',
+  components: {
+        Navbar,
+  },
   data() {
     return {
       suggestions: []
@@ -36,7 +43,12 @@ export default {
   },
   methods: {
     fetchData() {
-      http.get("/community/suggestion/")
+      const config = {
+                headers: {
+                    Authorization: `Token ${this.$cookies.get('auth-token')}`
+                }
+            }
+      http.post("/community/suggestion/", null, config)
         .then(res => this.suggestions = res.data)
         .catch(err => console.error(err))
     },
@@ -54,5 +66,7 @@ export default {
 </script>
 
 <style scoped>
-
+    .bin{
+        height: 70px;
+    }
 </style>
