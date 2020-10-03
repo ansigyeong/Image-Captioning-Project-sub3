@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    
+      <Navbar/>
     <div style="text-align: center;"><h1>🔉 Notice 🔉</h1></div>
     <br>
     <br>
@@ -39,11 +39,13 @@
 <script>
 import http from '../util/http-common.js'
 import Editor from '@tinymce/tinymce-vue'
+import Navbar from "../components/common/Navigation"
 
 export default {
   name: 'editNotice',
   components: {
-    'editor': Editor
+    'editor': Editor,
+    Navbar,
   },
   data() {
     return {

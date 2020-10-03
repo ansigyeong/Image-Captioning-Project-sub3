@@ -1,5 +1,6 @@
 <template>
     <v-container>
+        <Navbar/>
         <h1 style="text-align:center;">📑 My Wordbook 📑</h1>
         <br>
         <div style="text-align: center;">
@@ -39,8 +40,12 @@
 
 <script>
 import http from '../util/http-common.js'
+import Navbar from "../components/common/Navigation"
 
 export default {
+    components: {
+        Navbar,
+    },
     data () {
       return {
         words: '',

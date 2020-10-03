@@ -1,5 +1,6 @@
 <template>
     <div class="container" style="text-align:center;">
+        <Navbar/>
         <h1>💻 Points 💻</h1>
         <br>
         <br>
@@ -25,9 +26,11 @@
 
 <script>
 import http from '../util/http-common.js'
+import Navbar from "../components/common/Navigation"
 
 export default {
     components: {
+        Navbar
     },
     data () {
         return {
