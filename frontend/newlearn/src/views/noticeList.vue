@@ -1,5 +1,8 @@
 <template>
   <div class="container">
+    <Navbar/>
+    <div class="bin"></div>
+    
     <div style="text-align: center;"><h1>🔉 Notice 🔉</h1></div>
     <br>
     <br>
@@ -17,7 +20,7 @@
           <v-row>
               <v-col cols="3">{{ notice.id }}</v-col>
               <v-col cols="6" @click="goDetail(notice.id)">{{ notice.title }}</v-col>
-              <v-col cols="3">{{ notice.created_at }}</v-col>
+              <v-col cols="3">{{ notice.created_at | moment('YYYY-MM-DD') }}</v-col>
           </v-row>
       </div>
     </div>
@@ -26,12 +29,16 @@
 
 <script>
 import http from '../util/http-common.js'
+import Navbar from "../components/common/Navigation"
 
 export default {
   name: 'noticeList',
+  components: {
+        Navbar,
+  },
   data() {
     return {
-      notices: []
+      notices: [],
     };
   },
   methods: {
@@ -66,5 +73,7 @@ export default {
 </script>
 
 <style scoped>
-
+  .bin{
+      height: 70px;
+  }
 </style>

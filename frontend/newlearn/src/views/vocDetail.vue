@@ -1,15 +1,18 @@
 <template>
   <div class="container">
+    <Navbar/>
+    <div class="bin"></div>
+
     <div style="text-align: center;"><h1>👩 Voice Of the Customer 👨</h1></div>
     <br>
     <br>
 
     <!-- 1. title & etc -->
     <div class="title">
-      <h1>{{ this.suggestion.title }}</h1>
+      <h1>{{ suggestion.suggestion.title }}</h1>
     </div>
     <div style="text-align: right;">
-      <p>{{ this.suggestion.created_at }}</p>
+      <p>{{ suggestion.suggestion.created_at | moment('YYYY-MM-DD') }}</p>
     </div>
     <div style="text-align: right;">
       <v-btn @click="goEdit">EDIT</v-btn>
@@ -19,12 +22,19 @@
     <hr>
 
     <!-- 2. content -->
-    <div v-html="this.suggestion.content" style="margin:20px" class="contentbox"></div>
-    <!-- <div class="content">
-      <h3>{{ this.suggestion.content }}</h3>
+    <div v-html="suggestion.suggestion.content" style="margin:20px" class="contentbox"></div>
+    <!-- <div>
+      <h3>{{ suggestion.comments }}</h3>
     </div> -->
 
     <!-- 3. 댓글 리스트 -->
+    <hr>
+    <div v-for="comment in suggestion.comments" :key="comment.id">
+      <!-- {{ comment.content }} -->
+      <div v-html="comment.content" style="margin:20px" class="contentbox"></div>
+    </div>
+
+    <!-- 4. 댓글 작성 -->
     <div>
       <editor api-key="vem3wnp12tvfllgyuf92uzd6e04f9ddz4ke9mzv8uh71ctgq" :init="{
           height: 120,
@@ -52,11 +62,13 @@
 <script>
 import http from '../util/http-common.js'
 import Editor from '@tinymce/tinymce-vue'
+import Navbar from "../components/common/Navigation"
 
 export default {
   name: 'vocDetail',
   components: {
-    'editor': Editor
+    'editor': Editor,
+    Navbar,
   },
   data() {
     return {
@@ -69,6 +81,7 @@ export default {
   created() {
     this.suggestion_pk = this.$route.params.suggestion_pk
     this.fetchDetail()
+    // this.fetchComment()
   },
   methods: {
     fetchDetail() {
@@ -89,7 +102,7 @@ export default {
     //       Authorization: `Token ${this.$cookies.get('auth-token')}`
     //     }
     //   }
-    //   http.get('')
+    //   http.get('/community/suggestion')
     // },
     goDelete() {
       const config = {
@@ -124,6 +137,7 @@ export default {
         .then(res => {
           console.log(res.data)
           alert('댓글이 성공적으로 작성되었습니다.')
+          this.$router.push('/mypage/vocdetail/' + this.suggestion_pk)
         })
         .catch(err => {
           console.log(err)})
@@ -133,6 +147,9 @@ export default {
 </script>
 
 <style scoped>
+    .bin{
+        height: 70px;
+    }
   .title {
     margin: 20px;
   }
