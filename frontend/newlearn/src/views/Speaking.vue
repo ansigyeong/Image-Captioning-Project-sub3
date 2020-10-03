@@ -42,7 +42,6 @@
                 upload-url="YOUR_API_URL"
                 :attempts="3"
                 :time="2"
-                :headers="headers"
                 :before-recording="callback"
                 :pause-recording="callback"
                 :after-recording="callback"

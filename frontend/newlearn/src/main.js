@@ -7,7 +7,7 @@ import VueMoment from 'vue-moment'
 import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
-import '@/assets/css/main.css'
+
 
 // 뷰-구글 차트
 import VueGoogleCharts from 'vue-google-charts'

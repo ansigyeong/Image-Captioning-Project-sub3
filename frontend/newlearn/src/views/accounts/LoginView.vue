@@ -1,6 +1,9 @@
 <template>
-    <div class="vue-tempalte" >
-        <div class="vertical-center">
+    <div >
+      <div style="text-align: center; vertical-align: middle;">
+        <h1 style="font-size: 100px; color: white;">New Learn</h1>
+      </div>
+        <!-- <div class="vertical-center"> -->
           <div class="inner-block">
             <form onsubmit="return false;">
   <!-- <div class="info" v-bind:class="good">
@@ -44,7 +47,7 @@
                   </form>  
               </div>
             </div>
-        </div>
+        <!-- </div> -->
 </template>
 
 
