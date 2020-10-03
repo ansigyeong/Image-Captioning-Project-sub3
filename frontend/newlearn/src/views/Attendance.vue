@@ -1,6 +1,8 @@
 <template>
     <div class="container">
         <Navbar/>
+        <div class="bin"></div>
+
         <div style="text-align: center;"><h1>📅 Attendance 📅</h1></div>
         <br>
         <br>
@@ -117,4 +119,7 @@ export default {
 </script>
 
 <style scoped>
+    .bin{
+        height: 70px;
+    }
 </style>

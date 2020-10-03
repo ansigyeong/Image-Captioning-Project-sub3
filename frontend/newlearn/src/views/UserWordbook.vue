@@ -1,6 +1,8 @@
 <template>
     <v-container>
         <Navbar/>
+        <div class="bin"></div>
+
         <h1 style="text-align:center;">📑 My Wordbook 📑</h1>
         <br>
         <div style="text-align: center;">
@@ -86,5 +88,7 @@ export default {
 </script>
 
 <style scoped>
-
+    .bin{
+        height: 70px;
+    }
 </style>
