@@ -6,7 +6,7 @@ class NoticeListSerializer(serializers.ModelSerializer):
     user = UserSerializer()
     class Meta:
         model = Notice
-        fields = ('id', 'title','content','user',)
+        fields = '__all__'
 
 
 class NoticeSerializer(serializers.ModelSerializer):

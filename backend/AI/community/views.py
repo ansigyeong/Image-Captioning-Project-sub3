@@ -72,6 +72,7 @@ def notice_update(request, notice_pk):
 
 @api_view(['POST'])
 def suggestion_list(request):
+    print(request.user)
     user = get_object_or_404(User, username = request.user)
     if user.username == 'admin':
         suggestions = Suggestion.objects.all()
