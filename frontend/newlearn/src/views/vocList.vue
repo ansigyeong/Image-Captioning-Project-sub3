@@ -36,12 +36,7 @@ export default {
   },
   methods: {
     fetchData() {
-      const config = {
-          headers: {
-              'Authorization': `Token ${this.$cookies.get('auth-token')}`
-          }
-      }
-      http.post("/community/suggestion/", null, config)
+      http.get("/community/suggestion/")
         .then(res => this.suggestions = res.data)
         .catch(err => console.error(err))
     },

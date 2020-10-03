@@ -122,7 +122,7 @@ def sound_upload(request):
     text = listen.sound
     return_text = STT.main(text)
     # print(return_text)
-
+    print(request.user)
     # 기능 이용 카운트를 추가
     user = request.user
     today = DateFormat(datetime.now()).format('Y-m-d')
