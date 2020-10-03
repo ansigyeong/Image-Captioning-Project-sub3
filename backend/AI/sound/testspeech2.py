@@ -38,6 +38,40 @@ def main(name):
 
     filename1 = "C:/Users/multicampus/Documents/s03p23d107/backend/AI/captioning/test/images/" + str(file_name)
 
+    if str_name == "m4a":
+        print("m4a")
+        AudioSegment.converter = "C:/ffmpeg-4.3.1-2020-09-21-full_build/bin/ffmpeg.exe"
+        sound1 = AudioSegment.from_file(filename1, "m4a")
+        sound1.export(str_firstname + "_trans_mp4.wav", format="wav")
+        os.remove(filename1)
+        filename_t = "C:/Users/multicampus/Documents/s03p23d107/backend/AI/captioning/test/images/"+ str_firstname +"trans_mp4.wav"
+        sound = sound1.set_channels(1)
+        sound.export(filename_t, format="wav")
+        sound = AudioSegment.from_wav(filename_t)
+        frames_per_second = sound.frame_rate
+
+        print(frames_per_second)
+
+        # Loads the audio into memory
+        with io.open(filename_t, 'rb') as audio_file:
+            content = audio_file.read()
+            audio = types.RecognitionAudio(content=content)
+
+        config = types.RecognitionConfig(
+            encoding=enums.RecognitionConfig.AudioEncoding.LINEAR16,
+            sample_rate_hertz=frames_per_second,
+            language_code='en')
+
+        # Detects speech in the audio file
+        response = client.recognize(config, audio)
+
+        os.remove(filename_t)
+        for result in response.results:
+            print('Transcript: {}'.format(result.alternatives[0].transcript))
+            stt = result.alternatives[0].transcript
+            return stt
+        # [END speech_quickstart]
+
     if str_name == "mp4":
         print("mp4")
         AudioSegment.converter = "C:/ffmpeg-4.3.1-2020-09-21-full_build/bin/ffmpeg.exe"

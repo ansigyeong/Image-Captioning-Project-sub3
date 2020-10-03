@@ -1,10 +1,13 @@
 <template>
   <div class="container">
+    <Navbar/>
+    <div class="bin"></div>
+
     <div style="text-align: center;"><h1>👩 Voice Of the Customer 👨</h1></div>
     <br>
     <br>
     <v-form>
-      <v-text-field v-model="suggestion.title"
+      <v-text-field v-model="suggestion.suggestion.title"
         id="title"
         label="제목을 입력해주세요."
         single-line
@@ -24,7 +27,7 @@
               'undo redo codesample | formatselect | bold italic backcolor | \
               alignleft aligncenter alignright alignjustify | \
               bullist numlist outdent indent | removeformat | help'
-          }" v-model="suggestion.content" id="content" />
+          }" v-model="suggestion.suggestion.content" id="content" />
         <br>
         <br>
         <div style="text-align: right;">
@@ -38,11 +41,13 @@
 <script>
 import http from '../util/http-common.js'
 import Editor from '@tinymce/tinymce-vue'
+import Navbar from "../components/common/Navigation"
 
 export default {
   name: 'editVoc',
   components: {
-    'editor': Editor
+    'editor': Editor,
+    Navbar,
   },
   data() {
     return {
@@ -85,5 +90,7 @@ export default {
 </script>
 
 <style scoped>
-
+    .bin{
+        height: 70px;
+    }
 </style>

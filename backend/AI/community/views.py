@@ -72,6 +72,7 @@ def notice_update(request, notice_pk):
 
 @api_view(['POST'])
 def suggestion_list(request):
+    print(request.user)
     user = get_object_or_404(User, username = request.user)
     if user.username == 'admin':
         suggestions = Suggestion.objects.all()
@@ -98,7 +99,7 @@ def suggestion_detail(request, suggestion_pk):
     suggestion = get_object_or_404(Suggestion, pk=suggestion_pk)
     comments = suggestion.comment_set.all()
     serializer = SuggestionSerializer(suggestion)
-    comment_serializer = CommentSerializer(commnets, many=True)
+    comment_serializer = CommentSerializer(comments, many=True)
     data = {
         'suggestion': serializer.data,
         'comments': comment_serializer.data

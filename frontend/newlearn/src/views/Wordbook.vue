@@ -1,5 +1,8 @@
 <template>
   <v-container>
+    <Navbar/>
+    <div class="bin"></div>
+    
     <h1 style="text-align:center;">📑 Word of the Day 📑</h1>
     <br>
 
@@ -88,8 +91,12 @@
 
 <script>
 import http from '../util/http-common.js'
+import Navbar from "../components/common/Navigation"
 
 export default {
+    components: {
+      Navbar,
+    },
     data () {
       return {
         words: JSON.parse(localStorage.getItem("words")),
@@ -140,7 +147,12 @@ export default {
                 }
             }
             http.post(`/english/adduserword/`, data, config)
-            .then()
+            .then(res => {
+                // console.log(res)
+                if(res.data == '존재함') {
+                  alert('이미 단어장에 추가한 단어입니다.')
+                }
+            })
             .catch(err => {
                 console.log(err)
             })
@@ -151,5 +163,7 @@ export default {
 </script>
 
 <style scoped>
-  
+    .bin{
+        height: 70px;
+    }
 </style>
