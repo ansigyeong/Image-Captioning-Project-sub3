@@ -70,4 +70,9 @@ export default {
     .bin{
         height: 70px;
     }
+    @media(max-width: 480px){
+        h1{
+            font-size: 20px;
+        }
+    }
 </style>

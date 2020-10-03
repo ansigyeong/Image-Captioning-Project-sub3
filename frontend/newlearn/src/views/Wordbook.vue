@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <div class="speak">
     <Navbar/>
     <div class="bin"></div>
     
@@ -51,14 +51,14 @@
       
       <v-card
         width="350"
-        height="230"
+        height="200"
         v-for="(word) in words" 
         :key="word.pid"
         style="margin-bottom: 20px; margin-right: 20px; display: inline-block; vertical-align: middle;"
       >
         <v-card-text style="vertical-align: middle;">
           <!-- <div>Word of the Day</div> -->
-          <p class="display-1 text--primary">
+          <p class="word">
             {{ word.word }}
           </p>
           <p>
@@ -86,7 +86,7 @@
       </li> -->
 
     </div>
-  </v-container>
+  </div>
 </template>
 
 <script>
@@ -163,7 +163,19 @@ export default {
 </script>
 
 <style scoped>
+ .speak{
+        background-image: url(../assets/images/Newyork.jpg) !important;
+        background-size : cover;
+    }
+  .word{
+    font-size: 30px;
+  }
     .bin{
         height: 70px;
+    }
+    @media(max-width: 480px){
+        h1{
+            font-size: 30px;
+        }
     }
 </style>
