@@ -74,6 +74,11 @@ export default {
 
 <style scoped>
   .bin{
-      height: 70px;
+    height: 70px;
+  }
+  @media(max-width: 480px){
+    h1{
+      font-size: 30px;
+    }
   }
 </style>
