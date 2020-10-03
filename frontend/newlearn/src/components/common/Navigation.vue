@@ -1,8 +1,8 @@
 <template>
-  <div class="fixed-top">
+    <div class="fixed-top">
 
     <!-- Header & Nav 시작 -->
-    <div class="Navi">
+        <div class="Navi">
             <div class="draw">
                 <div @click.stop="drawer = !drawer" style="cursor:pointer;">
                     <i class="fas fa-bars fa-2x"></i>
@@ -74,14 +74,16 @@
                             </v-list-item-content>
                         </v-list-item>
                     </v-list>
-                    </v-menu>
+                </v-menu>
             </div>
     
 
         <!-- 사이드바 항목은 목업 내용 그대로 넣었음 -->
         <!-- 간격, 크기 등 조절해야 함 -->
 
-        <v-navigation-drawer v-if="isLoggedIn" v-model="drawer" absolute temporary>
+        
+        </div>
+        <v-navigation-drawer v-if="isLoggedIn" v-model="drawer" temporary style="height:100vh;">
             <v-list-item @click="goListening" style="margin-top:100px;">
                 <v-list-item-icon>
                     <i class="fas fa-headphones-alt"></i>
@@ -116,7 +118,6 @@
                 </v-list-item-content>
             </v-list-item>
         </v-navigation-drawer>
-    </div>
     <!-- Header & Nav 끝 -->
 
     <!-- <div id="nav">
@@ -130,7 +131,7 @@
     </div> -->
 
     <!-- <router-view @submit-login-data="login" @submit-signup-data="signup"/> -->
-  </div>
+    </div>
 </template>
 
 <script scoped>
@@ -162,7 +163,7 @@ export default {
             this.$cookies.remove('auth-token')
             this.isLoggedIn = false
             alert('로그아웃 성공')
-            this.$router.push({ name: 'Home' })
+            this.$router.push({ name: 'Login' })
           })
       },
     //   goSignup() {

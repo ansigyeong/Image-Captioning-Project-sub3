@@ -76,8 +76,8 @@ export default {
             })
       },
 
-     signup(signupData) {
-        http.post('/rest-auth/signup/', signupData)
+     signup() {
+        http.post('/rest-auth/signup/', this.signupData)
           .then(res => {
             this.setCookie(res.data.key)
             this.createattendance()
