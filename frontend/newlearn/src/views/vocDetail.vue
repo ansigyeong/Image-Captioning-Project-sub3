@@ -23,17 +23,47 @@
     <!-- <div class="content">
       <h3>{{ this.suggestion.content }}</h3>
     </div> -->
+
+    <!-- 3. 댓글 리스트 -->
+    <div>
+      <editor api-key="vem3wnp12tvfllgyuf92uzd6e04f9ddz4ke9mzv8uh71ctgq" :init="{
+          height: 120,
+          menubar: ['file edit view insert format tools'],
+          plugins: [
+            'advlist autolink lists link image charmap print preview anchor',
+            'searchreplace visualblocks code fullscreen',
+            'insertdatetime media table paste code help wordcount codesample'
+          ],
+          toolbar:
+            'undo redo codesample | formatselect | bold italic backcolor | \
+            alignleft aligncenter alignright alignjustify | \
+            bullist numlist outdent indent | removeformat | help'
+        }" v-model="commentData.content" id="comment" />
+        <br>
+        <div style="text-align: right;">
+          <v-btn @click="createComment">Submit</v-btn>
+        </div>
+    </div>
+    <!-- 4. 댓글 작성 -->
+
   </div>
 </template>
 
 <script>
 import http from '../util/http-common.js'
+import Editor from '@tinymce/tinymce-vue'
 
 export default {
   name: 'vocDetail',
+  components: {
+    'editor': Editor
+  },
   data() {
     return {
       suggestion: [],
+      commentData: {
+        content: null,
+      },
     }
   },
   created() {
@@ -53,6 +83,14 @@ export default {
       })
       .catch(err => console.log(err))
     },
+    // fetchComment() {
+    //   const config = {
+    //     headers: {
+    //       Authorization: `Token ${this.$cookies.get('auth-token')}`
+    //     }
+    //   }
+    //   http.get('')
+    // },
     goDelete() {
       const config = {
         headers: {
@@ -75,6 +113,20 @@ export default {
     },
     goEdit() {
       this.$router.push('/mypage/editvoc/' + this.suggestion_pk)
+    },
+    createComment() {
+      const config = {
+        headers: {
+          Authorization: `Token ${this.$cookies.get('auth-token')}`
+        }
+      }
+      http.post(`/community/suggestion/` + this.suggestion_pk + `/commentcreate/`, this.commentData, config)
+        .then(res => {
+          console.log(res.data)
+          alert('댓글이 성공적으로 작성되었습니다.')
+        })
+        .catch(err => {
+          console.log(err)})
     },
   },
 }

@@ -38,7 +38,8 @@ export default {
     fetchData() {
       http.get("/community/suggestion/")
         .then(res => this.suggestions = res.data)
-        .catch(err => console.error(err))
+        .catch(err => {
+          console.log(err)})
     },
     goCreateVoc() {
       this.$router.push('/mypage/createvoc/')
