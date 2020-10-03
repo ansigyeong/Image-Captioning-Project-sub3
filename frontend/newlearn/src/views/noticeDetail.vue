@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <Navbar/>
     <div style="text-align: center;"><h1>🔉 Notice 🔉</h1></div>
     <br>
     <br>
@@ -28,9 +29,13 @@
 
 <script>
 import http from '../util/http-common.js'
+import Navbar from "../components/common/Navigation"
 
 export default {
   name: 'noticeDetail',
+  components: {
+        Navbar,
+  },
   data() {
     return {
       notice: [],

@@ -1,5 +1,6 @@
 <template>
     <div class="container">
+        <Navbar/>
         <div style="text-align: center;"><h1>📅 Attendance 📅</h1></div>
         <br>
         <br>
@@ -31,12 +32,16 @@
 
 <script>
 import http from '../util/http-common.js'
+import Navbar from "../components/common/Navigation"
+
 import { GChart } from 'vue-google-charts'
 
 export default {
     name: 'Attendance',
+
     components: {
-        GChart
+        GChart,
+        Navbar
     },
     data () {
         return {
