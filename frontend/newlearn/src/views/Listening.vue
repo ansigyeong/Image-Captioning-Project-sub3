@@ -1,5 +1,8 @@
 <template>
+        
   <div>
+        <Navbar></Navbar>
+        <div class="bin"></div>
         <h1><i class="fas fa-headphones-alt" style="font-size:50px;"></i> Listening</h1>
 
         <div class="link">
@@ -47,8 +50,12 @@
 
 <script>
 import http from '../util/http-common.js'
+import Navbar from "../components/common/Navigation"
 
 export default {
+    components: {
+        Navbar,
+    },
     data () {
         return {
             uploadFile: '',
@@ -115,6 +122,9 @@ export default {
 
 <style scoped>
     @import url('https://fonts.googleapis.com/css2?family=Secular+One&display=swap');
+    .bin{
+        height: 70px;
+    }
     .res{
          font-family: 'Secular One', sans-serif;
          font-size: 20px;
