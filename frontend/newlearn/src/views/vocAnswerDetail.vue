@@ -1,6 +1,7 @@
 <template>
   <div>
     <Navbar/>
+    <div class="bin"></div>
   </div>
 </template>
 
@@ -16,5 +17,7 @@ export default {
 </script>
 
 <style scoped>
-
+    .bin{
+        height: 70px;
+    }
 </style>
