@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="speak">
         <Navbar/>
         <div class="bin"></div>
 
@@ -185,6 +185,10 @@ export default {
 </script>
 
 <style scoped>
+    .speak{
+        background-image: url(../assets/images/Newyork.jpg) !important;
+        background-size : cover;
+    }
     .bin{
         height: 70px;
     }

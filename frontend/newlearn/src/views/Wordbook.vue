@@ -51,14 +51,14 @@
       
       <v-card
         width="350"
-        height="230"
+        height="200"
         v-for="(word) in words" 
         :key="word.pid"
         style="margin-bottom: 20px; margin-right: 20px; display: inline-block; vertical-align: middle;"
       >
         <v-card-text style="vertical-align: middle;">
           <!-- <div>Word of the Day</div> -->
-          <p class="display-1 text--primary">
+          <p class="word">
             {{ word.word }}
           </p>
           <p>
@@ -163,6 +163,9 @@ export default {
 </script>
 
 <style scoped>
+  .word{
+    font-size: 30px;
+  }
     .bin{
         height: 70px;
     }
