@@ -140,7 +140,12 @@ export default {
                 }
             }
             http.post(`/english/adduserword/`, data, config)
-            .then()
+            .then(res => {
+                // console.log(res)
+                if(res.data == '존재함') {
+                  alert('이미 단어장에 추가한 단어입니다.')
+                }
+            })
             .catch(err => {
                 console.log(err)
             })
