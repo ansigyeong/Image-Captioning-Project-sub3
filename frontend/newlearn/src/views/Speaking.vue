@@ -33,7 +33,7 @@
                 {{ this.capText }}
             </p>
         </div>
-        <h2><i class="fa fa-file" aria-hidden="true" style="font-size:30px;"></i> My Voice Recorder</h2>
+        <h2 class="myvoice"><i class="fa fa-file" aria-hidden="true" style="font-size:30px;"></i> My Voice Recorder</h2>
         <div class="recorder">
             <audio-recorder 
                 upload-url="YOUR_API_URL"
@@ -107,7 +107,7 @@ export default {
             
             //업로드완료 후 파일로딩
             this.$refs.player.load();
-
+            this.userVoice = '';
             //다른거 업로드할때를 위해 초기화
             //event.target.value ='';
         },
@@ -161,7 +161,6 @@ export default {
         },
         callback (data) {
             console.debug(data)
-            this.userVoice = data
         },
         viewText() {
             this.showText = !this.showText
@@ -237,5 +236,71 @@ export default {
         background-color: white; 
         color: black; 
         border: 2px solid #4CAF50;
+    }  
+
+    @media(max-width: 480px){
+        .recorder{
+           display: none;
+        }
+        .res{
+         font-family: 'Secular One', sans-serif;
+         font-size: 10px;
+        }
+        .fileload{
+            border-style: solid;
+            border-width: thin medium thick 5px;
+            padding: 10px;
+            font-size: 10px;
+            font-weight: 200;
+            text-align: center;
+        }
+        h2{
+            margin: 20px;
+            font-family: 'Secular One', sans-serif;
+            font-size: 10px ;
+            text-align: center;
+        }
+        .myvoice{
+            display: none;
+        }
+        h1{
+            margin: 10px;
+            font-family: 'Secular One', sans-serif;
+            font-size: 50px ;
+            text-align: center;
+        }
+        img {
+            width: 400px;
+            height: 400px;
+            object-fit: contain;
+        }
+        .link, .putfile, .mytext, .compare{
+            font-family: 'Secular One', sans-serif;
+            text-align: center;
+            margin: 10px;
+        }
+        .button {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 16px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-family: 'Secular One', sans-serif;
+            font-size: 10px;
+            margin: 4px 2px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+        }
+
+        .button1 {
+            background-color: white; 
+            color: black; 
+            border: 2px solid #4CAF50;
+            margin-left: 25%;
+            margin-right: 25%;
+        }  
     }
+    
 </style>
