@@ -1,5 +1,8 @@
 <template>
   <div class="container">
+    <Navbar/>
+    <div class="bin"></div>
+    
     <div style="text-align: center;"><h1>🔉 Notice 🔉</h1></div>
     <br>
     <br>
@@ -26,12 +29,16 @@
 
 <script>
 import http from '../util/http-common.js'
+import Navbar from "../components/common/Navigation"
 
 export default {
   name: 'noticeList',
+  components: {
+        Navbar,
+  },
   data() {
     return {
-      notices: []
+      notices: [],
     };
   },
   methods: {
@@ -66,5 +73,7 @@ export default {
 </script>
 
 <style scoped>
-
+    .bin{
+        height: 70px;
+    }
 </style>

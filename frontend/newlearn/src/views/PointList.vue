@@ -1,5 +1,8 @@
 <template>
     <div class="container" style="text-align:center;">
+        <Navbar/>
+        <div class="bin"></div>
+
         <h1>💻 Points 💻</h1>
         <br>
         <br>
@@ -25,9 +28,11 @@
 
 <script>
 import http from '../util/http-common.js'
+import Navbar from "../components/common/Navigation"
 
 export default {
     components: {
+        Navbar
     },
     data () {
         return {
@@ -58,5 +63,7 @@ export default {
 </script>
 
 <style scoped>
-
+    .bin{
+        height: 70px;
+    }
 </style>
