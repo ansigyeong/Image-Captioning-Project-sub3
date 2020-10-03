@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <div class="speak">
     <Navbar/>
     <div class="bin"></div>
     
@@ -86,7 +86,7 @@
       </li> -->
 
     </div>
-  </v-container>
+  </div>
 </template>
 
 <script>
@@ -163,10 +163,19 @@ export default {
 </script>
 
 <style scoped>
+ .speak{
+        background-image: url(../assets/images/Newyork.jpg) !important;
+        background-size : cover;
+    }
   .word{
     font-size: 30px;
   }
     .bin{
         height: 70px;
+    }
+    @media(max-width: 480px){
+        h1{
+            font-size: 30px;
+        }
     }
 </style>
