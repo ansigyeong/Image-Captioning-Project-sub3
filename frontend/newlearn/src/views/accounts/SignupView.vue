@@ -38,25 +38,12 @@
       </form>
     </div>
   </div>
-    <!-- <div>
-        <label for="username">username: </label>
-        <input v-model="signupData.username" id="username" type="text">
-    </div>
-    <div>
-        <label for="password1">password: </label>
-        <input v-model="signupData.password1" id="password1" type="password">
-    </div>
-    <div>
-        <label for="password2">password: </label>
-        <input v-model="signupData.password2" id="password2" type="password">
-    </div>
-    <div>
-        <button @click="signup">Signup</button>
-    </div>
-  </div> -->
+
 </template>
 
 <script>
+import http from '@/util/http-common.js'
+
 export default {
     name: 'SignupView',
     data() {
@@ -70,9 +57,38 @@ export default {
         }
     },
     methods: {
-        signup() {
-            this.$emit('submit-signup-data', this.signupData)
-        }
+     setCookie(token) {
+        this.$cookies.set('auth-token', token)
+        this.isLoggedIn = true
+      },
+
+       createattendance() {
+          const config = {
+              headers: {
+                  'Authorization': `Token ${this.$cookies.get('auth-token')}`
+              }
+          }
+          
+          http.post('/accounts/attendance/', null, config)
+            .then()
+            .catch(err => {
+                console.log(err)
+            })
+      },
+
+     signup() {
+        http.post('/rest-auth/signup/', this.signupData)
+          .then(res => {
+            this.setCookie(res.data.key)
+            this.createattendance()
+            alert('회원가입 성공')
+            this.$router.push({ name: 'Home' })
+          })
+          .catch(err => {
+          alert('회원가입 실패')
+          this.errorMessages = err.response.data})
+      },
+
     }
 }
 </script>
@@ -81,6 +97,7 @@ export default {
   html {
     height: 100%;
   }
+
   body {
     margin: 0;
     padding: 0;
