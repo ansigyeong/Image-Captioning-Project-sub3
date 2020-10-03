@@ -1,5 +1,8 @@
 <template>
     <div>
+        <Navbar/>
+        <div class="bin"></div>
+
         <h1><i class="fas fa-volume-up" style="font-size:50px;"></i> Speaking</h1>
 
         <div class="link">
@@ -76,8 +79,12 @@
 
 <script>
 import http from '../util/http-common.js'
+import Navbar from "../components/common/Navigation"
 
 export default {
+    components: {
+        Navbar,
+    },
     data () {
       return {
         uploadFile: '',
@@ -178,6 +185,9 @@ export default {
 </script>
 
 <style scoped>
+    .bin{
+        height: 70px;
+    }
     .res{
          font-family: 'Secular One', sans-serif;
          font-size: 20px;
