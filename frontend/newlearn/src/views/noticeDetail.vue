@@ -9,7 +9,7 @@
       <h1>{{ this.notice.title }}</h1>
     </div>
     <div style="text-align: right;">
-      <p>{{ this.notice.created_at }}</p>
+      <p>{{ this.notice.created_at | moment('YYYY-MM-DD') }}</p>
     </div>
     <div style="text-align: right;">
       <v-btn @click="goEdit">EDIT</v-btn>
