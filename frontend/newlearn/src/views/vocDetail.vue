@@ -12,7 +12,7 @@
       <h1>{{ suggestion.suggestion.title }}</h1>
     </div>
     <div style="text-align: right;">
-      <p>{{ suggestion.suggestion.created_at }}</p>
+      <p>{{ suggestion.suggestion.created_at | moment('YYYY-MM-DD') }}</p>
     </div>
     <div style="text-align: right;">
       <v-btn @click="goEdit">EDIT</v-btn>
