@@ -193,8 +193,8 @@ export default {
          font-size: 20px;
     }
     .recorder{
-        text-align: center;
-        margin-left: 30%;
+       border-style:double dashed;
+        margin-left: 25%;
         margin-right: 25%;
     }
     .fileload{
