@@ -5,9 +5,9 @@
         <div class="bin"></div>
         <h1><i class="fas fa-headphones-alt" style="font-size:50px;"></i> Listening</h1>
 
-        <div class="link">
-            <p><i class="fa fa-exclamation-triangle" aria-hidden="true" style="color:red;"></i>
-            10MB 이하의 wav/mp3/mp4/m4a 파일만 사용가능 (<a href="https://online-audio-converter.com/ko/">wav/mp3/mp4/m4a convert site</a>)</p>
+        <div  class="link">
+            <span style="background-color:yellow"><i class="fa fa-exclamation-triangle" aria-hidden="true" style="color:red;"></i>
+            10MB 이하의 wav/mp3/mp4/m4a 파일만 사용가능 (<a href="https://online-audio-converter.com/ko/">wav/mp3/mp4/m4a convert site</a>)</span>
         </div>
 
         <div class="putfile">
@@ -122,12 +122,16 @@ export default {
 
 <style scoped>
     @import url('https://fonts.googleapis.com/css2?family=Secular+One&display=swap');
+
     .bin{
         height: 70px;
     }
-    .res{
-         font-family: 'Secular One', sans-serif;
-         font-size: 20px;
+    .res, .compare{
+        background-color: aliceblue;
+        font-family: 'Secular One', sans-serif;
+        text-align: center;
+        font-size: 20px;
+        margin: 20px;
     }
     .fileload{
         border-style: solid;
@@ -137,7 +141,12 @@ export default {
         font-weight: 700;
         text-align: center;
     }
-    .link, .putfile, .mytext, .compare{
+    .link{
+        font-family: 'Secular One', sans-serif;
+        text-align: center;
+        margin: 20px;
+    }
+    .putfile, .mytext{
         font-family: 'Secular One', sans-serif;
         text-align: center;
         margin: 20px;
