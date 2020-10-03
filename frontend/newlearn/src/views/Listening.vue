@@ -26,7 +26,7 @@
             <v-btn class="button button1" v-if="this.uploadFile" @click="pushFile">Voice To Text</v-btn>
 
             <v-btn class="button button1" v-if="capText != ''" @click="viewText" style="margin:1%;">
-                Example answer
+                Result
             </v-btn>
             <p class = "res" v-if="this.showText == true">
                 {{ this.capText }}
