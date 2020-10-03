@@ -7,7 +7,7 @@
     <br>
     <br>
     <v-form>
-      <v-text-field v-model="suggestion.title"
+      <v-text-field v-model="suggestion.suggestion.title"
         id="title"
         label="제목을 입력해주세요."
         single-line
@@ -27,7 +27,7 @@
               'undo redo codesample | formatselect | bold italic backcolor | \
               alignleft aligncenter alignright alignjustify | \
               bullist numlist outdent indent | removeformat | help'
-          }" v-model="suggestion.content" id="content" />
+          }" v-model="suggestion.suggestion.content" id="content" />
         <br>
         <br>
         <div style="text-align: right;">
