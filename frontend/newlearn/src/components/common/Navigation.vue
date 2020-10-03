@@ -90,7 +90,7 @@
 
         
         </div>
-        <v-navigation-drawer v-if="isLoggedIn" v-model="drawer" temporary style="height:100vh;">
+        <v-navigation-drawer v-if="isLoggedIn" v-model="drawer" app clipped temporary>
             <v-list-item @click="goListening" style="margin-top:100px;">
                 <v-list-item-icon>
                     <i class="fas fa-headphones-alt"></i>
