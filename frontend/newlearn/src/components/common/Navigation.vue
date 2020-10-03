@@ -41,6 +41,12 @@
 
                         <v-list v-if="dropDrawer">
 
+                            <v-list-item @click="goMyWordbook" style="margin-left:20px;">
+                                <v-list-item-content>
+                                    <v-list-item-title>My Wordbook</v-list-item-title>
+                                </v-list-item-content>
+                            </v-list-item>
+
                             <v-list-item @click="goAttendance" style="margin-left:20px;">
                                 <v-list-item-content>
                                     <v-list-item-title>Attendance</v-list-item-title>
@@ -53,11 +59,12 @@
                                 </v-list-item-content>
                             </v-list-item>
 
-                            <v-list-item @click="goPointList" style="margin-left:20px;">
+                            <!-- 포인트 항목 삭제 -->
+                            <!-- <v-list-item @click="goPointList" style="margin-left:20px;">
                                 <v-list-item-content>
                                     <v-list-item-title>Points</v-list-item-title>
                                 </v-list-item-content>
-                            </v-list-item>
+                            </v-list-item> -->
 
                             <v-list-item @click="goVocList" style="margin-left:20px;">
                                 <v-list-item-content>
@@ -174,6 +181,9 @@ export default {
     //   },
       goPointList() {
             this.$router.push('/mypage/pointList')
+      },
+      goMyWordbook() {
+          this.$router.push('/english/userwordbook')
       },
       goAttendance() {
           this.$router.push('/mypage/attendance')
