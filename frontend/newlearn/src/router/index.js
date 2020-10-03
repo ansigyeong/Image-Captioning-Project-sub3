@@ -12,7 +12,6 @@ import Attendance from '../views/Attendance.vue'
 import vocList from '../views/vocList.vue'
 import createVoc from '../views/createVoc.vue'
 import vocDetail from '../views/vocDetail.vue'
-import createVocAnswer from '../views/createVocAnswer.vue'
 import vocAnswerDetail from '../views/vocAnswerDetail.vue'
 import editVoc from '../views/editVoc.vue'
 
@@ -78,11 +77,6 @@ const routes = [
     path: '/mypage/editvoc/:suggestion_pk',
     name: 'editVoc',
     component: editVoc,
-  },
-  {
-    path: '/mypage/createvocanswer',
-    name: 'createVocAnswer',
-    component: createVocAnswer,
   },
   {
     path: '/mypage/vocAnswerDetail',
