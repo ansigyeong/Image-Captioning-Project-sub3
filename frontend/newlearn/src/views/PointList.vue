@@ -1,6 +1,8 @@
 <template>
     <div class="container" style="text-align:center;">
         <Navbar/>
+        <div class="bin"></div>
+
         <h1>💻 Points 💻</h1>
         <br>
         <br>
@@ -61,5 +63,7 @@ export default {
 </script>
 
 <style scoped>
-
+    .bin{
+        height: 70px;
+    }
 </style>
