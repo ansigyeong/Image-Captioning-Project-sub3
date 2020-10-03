@@ -1,16 +1,17 @@
 <template>
  <!-- <section id="login" v-bind:class="isShake"> -->
  <div class="login" id="login">
-   <form>
+   <Logo />
+   <form onsubmit="return false;">
   <!-- <div class="info" v-bind:class="good">
    <p>{{ alert.message }}</p>
    <p v-show="login.login && login.password">{{ login.login}} / {{ login.password}}</p>
   </div> -->
-    <Logo :component="component" />
+    
 
-      <input type="text" v-model="loginData.login" placeholder="Username" />
-      <input type="password" v-model="loginData.password" placeholder="Password" />
-      <button v-on:click="login">Log in</button>
+      <input v-model="loginData.username" type="text" placeholder="Username" />
+      <input v-model="loginData.password" type="password" placeholder="Password" />
+      <button @click="login()">Log in</button>
     </form>
  
 
@@ -25,7 +26,7 @@
         </div>
         <div class="wrap">
           <p>아직 회원이 아니신가요?</p>
-          <router-link to="/user/join/1" class="btn--text">가입하기</router-link>
+          <router-link to="/accounts/signup" class="btn--text">가입하기</router-link>
         </div>
    </div>
 
@@ -35,7 +36,7 @@
 
 <script>
 
-import http from '@/util/http-common.js'
+import http from '../../util/http-common.js'
 import Logo from "../../components/user/Logo.vue";
 
 export default {
@@ -54,13 +55,17 @@ export default {
         }
     },
     methods: {
+      setCookie(token) {
+        this.$cookies.set('auth-token', token)
+        this.isLoggedIn = true
+      },
       createattendance() {
           const config = {
               headers: {
                   'Authorization': `Token ${this.$cookies.get('auth-token')}`
               }
           }
-
+          
           http.post('/accounts/attendance/', null, config)
             .then()
             .catch(err => {
@@ -68,11 +73,12 @@ export default {
             })
       },
 
-      login(loginData) {
-        http.post('/rest-auth/login/', loginData)
+      login() {
+        http.post('/rest-auth/login/', this.loginData)
           .then(res => {
             // console.log(res.data.key)
             // console.log(res.data)
+          
             this.setCookie(res.data.key)
             this.createattendance()
             alert('로그인 성공')
@@ -80,7 +86,8 @@ export default {
           })
           .catch(err => {
             alert('로그인 실패')
-            this.errorMessages = err.response.data})
+            console.log(err)
+          })
       },
     }
 }
