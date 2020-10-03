@@ -100,8 +100,6 @@ def userdelete(request):
 @api_view(['POST'])
 def createattendance(request):
     
-    print(request.user)
-    
     user = request.user
     
     # 오늘(요청이 온 날) 체크
