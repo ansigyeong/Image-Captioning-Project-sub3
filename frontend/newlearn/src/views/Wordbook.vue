@@ -1,6 +1,8 @@
 <template>
   <v-container>
     <Navbar/>
+    <div class="bin"></div>
+    
     <h1 style="text-align:center;">📑 Word of the Day 📑</h1>
     <br>
 
@@ -161,5 +163,7 @@ export default {
 </script>
 
 <style scoped>
-  
+    .bin{
+        height: 70px;
+    }
 </style>
