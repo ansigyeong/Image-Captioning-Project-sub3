@@ -52,10 +52,6 @@ export default {
           content: null,
           created_at: null,
         },
-        editorText: 'This is initialValue.',
-        editorOptions: {
-          hideModeSwitch: true
-        },
       };
     },
     methods: {
