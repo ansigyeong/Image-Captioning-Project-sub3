@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <v-container>
         <h1 style="text-align:center;">📑 My Wordbook 📑</h1>
         <br>
         <div style="text-align: center;">
@@ -34,7 +34,7 @@
                 </v-btn>
             </v-card>
         </div>
-    </div>
+    </v-container>
 </template>
 
 <script>
