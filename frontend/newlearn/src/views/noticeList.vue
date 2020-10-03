@@ -17,7 +17,7 @@
           <v-row>
               <v-col cols="3">{{ notice.id }}</v-col>
               <v-col cols="6" @click="goDetail(notice.id)">{{ notice.title }}</v-col>
-              <v-col cols="3">{{ notice.created_at }}</v-col>
+              <v-col cols="3">{{ notice.created_at | moment('YYYY-MM-DD') }}</v-col>
           </v-row>
       </div>
     </div>
