@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="signUp">
     <div style="text-align: center; vertical-align: middle;">
       <a href="/"><h1 style="font-size: 100px; color: white;">New Learn</h1></a>
     </div>
@@ -8,8 +8,7 @@
     <br>
     <div class="signup-box">
       <h2>Signup</h2>
-      <form
-      onsubmit="return false;">
+      <form onsubmit="return false;">
         <div class="user-box">
           <input v-model="signupData.username" id="username" type="text">
           <label for="username"><p style="color: white;">ID</p></label>
@@ -27,7 +26,7 @@
           <label for="password2"><p style="color: white;">Repeat Password</p></label>
         </div>
         <div style="text-align: center;">
-          <button @click="signup">
+          <button @click="signup" style="color: white;">
             <span></span>
             <span></span>
             <span></span>
@@ -43,6 +42,7 @@
 
 <script>
 import http from '@/util/http-common.js'
+import '@/assets/css/main.css'
 
 export default {
     name: 'SignupView',

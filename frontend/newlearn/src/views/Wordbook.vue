@@ -1,5 +1,5 @@
 <template>
-  <div class="speak">
+  <div class="bg">
     <Navbar/>
     <div class="bin"></div>
     
@@ -92,6 +92,7 @@
 <script>
 import http from '../util/http-common.js'
 import Navbar from "../components/common/Navigation"
+import '@/assets/css/background.css'
 
 export default {
     components: {
@@ -151,6 +152,8 @@ export default {
                 // console.log(res)
                 if(res.data == '존재함') {
                   alert('이미 단어장에 추가한 단어입니다.')
+                } else{
+                  alert('내단어자에 추가되었습니다.')
                 }
             })
             .catch(err => {
@@ -163,10 +166,6 @@ export default {
 </script>
 
 <style scoped>
- .speak{
-        background-image: url(../assets/images/Newyork.jpg) !important;
-        background-size : cover;
-    }
   .word{
     font-size: 30px;
   }
