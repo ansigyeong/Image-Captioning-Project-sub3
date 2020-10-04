@@ -200,3 +200,10 @@ def speaksound(request):
 
     # 결과물 전송
     return Response(return_text)
+
+@api_view(['POST'])
+def wordcheck(request):
+    user = request.user
+    words = Userwordbook.objects.filter(user=user).order_by('?')[0:20]
+    serializer = UserwordbookSerializer(words, many=True)
+    return Response(serializer.data)
