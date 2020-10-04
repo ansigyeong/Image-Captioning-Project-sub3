@@ -25,6 +25,8 @@ import Speaking from '../views/Speaking.vue'
 import Listening from '../views/Listening.vue'
 import UserWordbook from '../views/UserWordbook.vue'
 
+import WordCheck from '../views/Wordcheck.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -123,6 +125,11 @@ const routes = [
     name: 'UserWordbook',
     component: UserWordbook,
   },
+  {
+    path: '/english/wordcheck',
+    name: 'WordCheck',
+    component: WordCheck,
+  },
 ]
 
 const router = new VueRouter({
@@ -132,7 +139,7 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  const publicPages = ['Login', 'Signup', 'Home', 'List', 'Pointlist', 'Attendance', 'Wordbook', 'Speaking', 'Listening', 'UserWordbook']  // Login 안해도 됨
+  const publicPages = ['Login', 'Signup', 'Home', 'List', 'Pointlist', 'Attendance', 'Wordbook', 'Speaking', 'Listening', 'UserWordbook', 'WordCheck']  // Login 안해도 됨
   const authPages = ['Login', 'Signup']  // Login 되어있으면 안됨
   
   const authRequired = !publicPages.includes(to.name)  // 로그인 해야 함

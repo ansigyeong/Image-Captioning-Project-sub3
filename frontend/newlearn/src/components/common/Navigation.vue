@@ -115,6 +115,14 @@
                     <v-list-item-title>Wordbook</v-list-item-title>
                 </v-list-item-content>
             </v-list-item>
+            <v-list-item @click="goWordcheck">
+                <v-list-item-icon>
+                    <i class="fas fa-book"></i>
+                </v-list-item-icon>
+                <v-list-item-content>
+                    <v-list-item-title>Wordcheck</v-list-item-title>
+                </v-list-item-content>
+            </v-list-item>
             <v-divider></v-divider>
             <v-list-item @click="goNotice">
                 <v-list-item-icon>
@@ -206,6 +214,9 @@ export default {
       goListening() {
           this.$router.push('/english/listening')
       },
+      goWordcheck() {
+          this.$router.push('/english/wordcheck')
+      }
       
     },
     mounted() {
