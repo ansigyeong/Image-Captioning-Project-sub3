@@ -147,7 +147,7 @@ export default {
           Authorization: `Token ${this.$cookies.get('auth-token')}`
         }
       }
-      http.delete('/community/suggestion/' + this.suggestion_pk + '/' + commentId + '/commentdelete/', config)
+      http.post(`/community/suggestion/` + this.suggestion_pk + `/` + commentId + `/commentdelete/`, config)
       .then((res) => {
         console.log(res)
         alert('성공적으로 삭제되었습니다.')
@@ -155,8 +155,8 @@ export default {
       })
       .catch((err) => {
         console.log(err)
-        alert('성공적으로 삭제되었습니다.')
-        this.$router.go()
+        // alert('성공적으로 삭제되지 않았습니다.')
+        // this.$router.go()
       })
     },
   },

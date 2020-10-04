@@ -146,7 +146,7 @@ def commentcreate(request, suggestion_pk):
     comment.save()
     return Response('성공')
 
-@api_view(['DELETE'])
+@api_view(['POST'])
 def commentdelete(request, suggestion_pk, comment_pk):
     comment = get_object_or_404(Comment, pk=comment_pk)
     comment.delete()

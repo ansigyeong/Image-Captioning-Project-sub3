@@ -89,8 +89,8 @@
         background-size : cover;
     } */
     .content-back {
-      background-color: rgb(255, 255, 255, 0.9);
-      border-radius: 1rem;
+      /* background-color: rgb(255, 255, 255, 0.9);
+      border-radius: 1rem; */
     }
     @media(max-width: 480px){
         h1{
