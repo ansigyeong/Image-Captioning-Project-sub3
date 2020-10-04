@@ -100,14 +100,14 @@ export default {
     background-color: rgb(255, 255, 255, 0.9);
     border-radius: 1rem;
   }
-   @media(max-width: 480px){
+  @media(max-width: 480px){
     h1{
       font-size: 20px;
     }
   }
 </style>
 <style>
- .theme--light.v-pagination .v-pagination__item--active {
+  .theme--light.v-pagination .v-pagination__item--active {
     color: black;
   }
 </style>

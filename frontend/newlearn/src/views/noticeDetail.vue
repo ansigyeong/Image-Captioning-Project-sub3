@@ -6,27 +6,28 @@
     <!-- <div style="text-align: center;"><h1>🔉 Notice 🔉</h1></div>
     <br>
     <br> -->
+    <div class="container">
+      <div class="content-back">
+        <!-- title & etc -->
+        <div class="title">
+          <h1>{{ this.notice.title }}</h1>
+        </div>
+        <!-- <div style="text-align: right;">
+        </div> -->
+        <div style="text-align: right;">
+          <v-btn icon style="margin-right: 50px;">{{ this.notice.created_at | moment('YYYY-MM-DD') }}</v-btn>
+          <v-btn icon @click="goEdit" style="margin-right: 50px;"><v-icon left>mdi-pencil</v-icon>EDIT</v-btn>
+          <v-btn icon @click="goDelete" style="margin-right: 50px;"><v-icon left>mdi-cancel</v-icon>DELETE</v-btn>
+        </div>
 
-    <div class="content-back">
-      <!-- title & etc -->
-      <div class="title">
-        <h1>{{ this.notice.title }}</h1>
+        <hr>
+
+        <!-- content -->
+        <h3><div v-html="this.notice.content" style="margin:20px" class="contentbox"></div></h3>
+        <!-- <div class="content">
+          <h3>{{ this.suggestion.content }}</h3>
+        </div> -->
       </div>
-      <!-- <div style="text-align: right;">
-      </div> -->
-      <div style="text-align: right;">
-        <v-btn icon style="margin-right: 50px;">{{ this.notice.created_at | moment('YYYY-MM-DD') }}</v-btn>
-        <v-btn icon @click="goEdit" style="margin-right: 50px;"><v-icon left>mdi-pencil</v-icon>EDIT</v-btn>
-        <v-btn icon @click="goDelete" style="margin-right: 50px;"><v-icon left>mdi-cancel</v-icon>DELETE</v-btn>
-      </div>
-
-      <hr>
-
-      <!-- content -->
-      <h3><div v-html="this.notice.content" style="margin:20px" class="contentbox"></div></h3>
-      <!-- <div class="content">
-        <h3>{{ this.suggestion.content }}</h3>
-      </div> -->
     </div>
   </div>
 </template>
