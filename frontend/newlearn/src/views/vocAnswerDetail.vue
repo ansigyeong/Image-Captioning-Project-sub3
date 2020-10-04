@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="bg">
     <Navbar/>
     <div class="bin"></div>
   </div>
@@ -7,6 +7,7 @@
 
 <script>
 import Navbar from "../components/common/Navigation"
+import '@/assets/css/background1.css'
 
 export default {
   components: {

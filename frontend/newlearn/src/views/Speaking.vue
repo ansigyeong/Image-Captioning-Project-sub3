@@ -1,5 +1,5 @@
 <template>
-    <div class="speak">
+    <div class="bg">
         <Navbar/>
         <div class="bin"></div>
 
@@ -9,8 +9,11 @@
             <span style="background-color:yellow"><i class="fa fa-exclamation-triangle" aria-hidden="true" style="color:red;"></i>
             jpg 파일만 사용가능 (<a href="https://convertio.co/kr/png-jpg/">jpg convert site</a>)</span>
         </div>
+
         <h2><i class="fa fa-download" aria-hidden="true" style="font-size:30px;"></i> Picture Upload</h2>
+
         <div class="putfile">
+
             <div class="putfile">
                 <input
                     type="file"
@@ -36,7 +39,9 @@
                 {{ this.capText }}
             </p>
         </div>
+
         <h2 class="myvoice"><i class="fa fa-file" aria-hidden="true" style="font-size:30px;"></i> My Voice Recorder</h2>
+        
         <div class="recorder">
             <audio-recorder 
                 upload-url="YOUR_API_URL"
@@ -51,7 +56,9 @@
                 :successful-upload="callback"
                 :failed-upload="callback"/>
         </div>
+
         <h2><i class="fa fa-download" aria-hidden="true" style="font-size:30px;"></i> My Voice RecorderFile Upload</h2>
+        
         <div class="putfile">
             <input
                 type="file"
@@ -74,12 +81,14 @@
                 {{ this.userVoice }}
             </p>
         </div>
+
     </div>
 </template>
 
 <script>
 import http from '../util/http-common.js'
 import Navbar from "../components/common/Navigation"
+import '@/assets/css/background.css'
 
 export default {
     components: {
@@ -185,15 +194,10 @@ export default {
 </script>
 
 <style scoped>
-    .speak{
-        background-image: url(../assets/images/Newyork.jpg) !important;
-        background-size : cover;
-    }
     .bin{
         height: 70px;
     }
     .res{
-        background-color: aliceblue;
         font-family: 'Secular One', sans-serif;
         font-size: 20px;
     }
@@ -211,7 +215,6 @@ export default {
         text-align: center;
     }
     h2{
-        background-color: aliceblue;
         margin: 20px;
         font-family: 'Secular One', sans-serif;
         font-size: 30px ;

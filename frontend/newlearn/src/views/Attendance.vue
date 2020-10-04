@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="bg">
         <Navbar/>
         <div class="bin"></div>
 
@@ -37,6 +37,7 @@ import http from '../util/http-common.js'
 import Navbar from "../components/common/Navigation"
 
 import { GChart } from 'vue-google-charts'
+import '@/assets/css/background.css'
 
 export default {
     name: 'Attendance',
