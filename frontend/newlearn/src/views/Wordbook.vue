@@ -118,6 +118,7 @@ export default {
             }
             http.post(`/english/vocabulary/`, choice, config)
             .then(res => {
+                console.log(res)
                 this.words = res.data.vocabulary
                 localStorage.setItem("words", JSON.stringify(this.words))
                 this.today = res.data.today

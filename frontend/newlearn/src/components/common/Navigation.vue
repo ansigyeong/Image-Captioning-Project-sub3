@@ -8,8 +8,9 @@
                     <i class="fas fa-bars fa-2x"></i>
                 </div>
             </div>
+            <span style="font-size:30px; margin-left:10px;  cursor: pointer" @click="goHome">New Learn</span>
 
-            <div class="user">
+            <div class="user" style="float:right;">
                 
                 <v-menu bottom transition="slide-y-transition">
                     <template v-slot:activator="{ on, attrs }">
@@ -216,8 +217,10 @@ export default {
       },
       goWordcheck() {
           this.$router.push('/english/wordcheck')
+      },
+      goHome(){
+          this.$router.push('/home')
       }
-      
     },
     mounted() {
       // cookie 에 auth-token 이 존재하는가 체크
