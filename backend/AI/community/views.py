@@ -72,7 +72,7 @@ def notice_update(request, notice_pk):
 
 @api_view(['POST'])
 def suggestion_list(request):
-    print(request.user)
+    # print(request.user)
     user = get_object_or_404(User, username = request.user)
     if user.username == 'admin':
         suggestions = Suggestion.objects.all()
@@ -144,4 +144,10 @@ def commentcreate(request, suggestion_pk):
     comment.suggestion = suggestion
     comment.content = request.data['content']
     comment.save()
+    return Response('성공')
+
+@api_view(['POST'])
+def commentdelete(request, suggestion_pk, comment_pk):
+    comment = get_object_or_404(Comment, pk=comment_pk)
+    comment.delete()
     return Response('성공')
