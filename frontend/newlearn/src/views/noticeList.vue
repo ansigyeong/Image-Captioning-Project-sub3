@@ -51,7 +51,7 @@ export default {
   data() {
     return {
       notices: [],
-      dataPerPage: 6,
+      dataPerPage: 5,
       curPageNum: 1,
     };
   },
