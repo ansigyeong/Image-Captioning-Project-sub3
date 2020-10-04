@@ -92,7 +92,7 @@ export default {
 };
 </script>
 
-<style> /* pagination 스타일링 문제로 scoped 삭제 */
+<style scoped> /* pagination 스타일링 문제로 scoped 삭제 */
   .bin{
     height: 70px;
   }
@@ -100,12 +100,14 @@ export default {
     background-color: rgb(255, 255, 255, 0.9);
     border-radius: 1rem;
   }
-  @media(max-width: 480px){
+   @media(max-width: 480px){
     h1{
       font-size: 20px;
     }
   }
-  .theme--light.v-pagination .v-pagination__item--active {
+</style>
+<style>
+ .theme--light.v-pagination .v-pagination__item--active {
     color: black;
   }
 </style>
