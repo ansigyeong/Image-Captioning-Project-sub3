@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="bg">
     <Navbar/>
     <div class="bin"></div>
 
@@ -43,6 +43,7 @@
 import http from '../util/http-common.js'
 import Editor from '@tinymce/tinymce-vue'
 import Navbar from "../components/common/Navigation"
+import '@/assets/css/background.css'
 
 export default {
   name: 'createNotice',

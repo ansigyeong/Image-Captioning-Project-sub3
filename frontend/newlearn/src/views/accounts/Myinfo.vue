@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <div class="container">
+    <div class="bg1">
       <Navbar/>
       <div class="bin"></div>
 
@@ -93,7 +93,8 @@
   import { validationMixin } from 'vuelidate'
   import { required, maxLength } from 'vuelidate/lib/validators'
   import Navbar from "../../components/common/Navigation"
-  
+  import '@/assets/css/background1.css'
+
   export default {
     name: 'Myinfo',
     components: {

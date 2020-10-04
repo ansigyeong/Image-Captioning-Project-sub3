@@ -1,5 +1,5 @@
 <template>
-  <div class="speak">
+  <div class="bg">
     <Navbar/>
     <div class="bin"></div>
 
@@ -42,6 +42,7 @@
   import http from '../util/http-common.js'
   import Editor from '@tinymce/tinymce-vue'
   import Navbar from "../components/common/Navigation"
+  import '@/assets/css/background.css'
 
   export default {
     name: 'createVoc',
@@ -80,10 +81,6 @@
 <style scoped>
     .bin{
         height: 70px;
-    }
-    .speak{
-        background-image: url(../assets/images/Newyork.jpg) !important;
-        background-size : cover;
     }
     @media(max-width: 480px){
         h1{
