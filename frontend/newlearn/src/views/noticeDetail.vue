@@ -7,25 +7,27 @@
     <br>
     <br> -->
 
-    <!-- title & etc -->
-    <div class="title">
-      <h1>{{ this.notice.title }}</h1>
-    </div>
-    <!-- <div style="text-align: right;">
-    </div> -->
-    <div style="text-align: right;">
-      <v-btn icon style="margin-right: 50px;">{{ this.notice.created_at | moment('YYYY-MM-DD') }}</v-btn>
-      <v-btn icon @click="goEdit" style="margin-right: 50px;"><v-icon left>mdi-pencil</v-icon>EDIT</v-btn>
-      <v-btn icon @click="goDelete" style="margin-right: 50px;"><v-icon left>mdi-cancel</v-icon>DELETE</v-btn>
-    </div>
+    <div class="content-back">
+      <!-- title & etc -->
+      <div class="title">
+        <h1>{{ this.notice.title }}</h1>
+      </div>
+      <!-- <div style="text-align: right;">
+      </div> -->
+      <div style="text-align: right;">
+        <v-btn icon style="margin-right: 50px;">{{ this.notice.created_at | moment('YYYY-MM-DD') }}</v-btn>
+        <v-btn icon @click="goEdit" style="margin-right: 50px;"><v-icon left>mdi-pencil</v-icon>EDIT</v-btn>
+        <v-btn icon @click="goDelete" style="margin-right: 50px;"><v-icon left>mdi-cancel</v-icon>DELETE</v-btn>
+      </div>
 
-    <hr>
+      <hr>
 
-    <!-- content -->
-    <h3><div v-html="this.notice.content" style="margin:20px" class="contentbox"></div></h3>
-    <!-- <div class="content">
-      <h3>{{ this.suggestion.content }}</h3>
-    </div> -->
+      <!-- content -->
+      <h3><div v-html="this.notice.content" style="margin:20px" class="contentbox"></div></h3>
+      <!-- <div class="content">
+        <h3>{{ this.suggestion.content }}</h3>
+      </div> -->
+    </div>
   </div>
 </template>
 
@@ -91,6 +93,11 @@ export default {
   .bin{
     height: 70px;
   }
+  .content-back {
+    background-color: rgb(255, 255, 255, 0.9);
+    border-radius: 1rem;
+    min-height: 300px;
+  }
   .title {
     margin: 20px;
   }
@@ -101,8 +108,8 @@ export default {
     margin: 5px;
   }  
   @media(max-width: 480px){
-        h1{
-            font-size: 30px;
-        }
+    h1{
+        font-size: 30px;
+    }
   }
 </style>
