@@ -9,19 +9,21 @@
     <div style="text-align: right;"><v-btn @click='goCreateNotice'>공지사항 작성(관리자)</v-btn></div>
     <br>
     <br>
-    <div style="text-align: center;"> 
-      <v-row>
-          <v-col cols="3">번호</v-col>
-          <v-col cols="6">제목</v-col>
-          <v-col cols="3">작성 일자</v-col>
-      </v-row>
-      <hr>
-      <div v-for="notice in notices" :key="`notice_${notice.id}`">
-          <v-row>
-              <v-col cols="3">{{ notice.id }}</v-col>
-              <v-col cols="6" @click="goDetail(notice.id)">{{ notice.title }}</v-col>
-              <v-col cols="3">{{ notice.created_at | moment('YYYY-MM-DD') }}</v-col>
-          </v-row>
+    <div class="content-back">
+      <div style="text-align: center;"> 
+        <v-row>
+            <v-col cols="3">번호</v-col>
+            <v-col cols="6">제목</v-col>
+            <v-col cols="3">작성 일자</v-col>
+        </v-row>
+        <hr>
+        <div v-for="notice in notices" :key="`notice_${notice.id}`">
+            <v-row>
+                <v-col cols="3">{{ notice.id }}</v-col>
+                <v-col cols="6" @click="goDetail(notice.id)">{{ notice.title }}</v-col>
+                <v-col cols="3">{{ notice.created_at | moment('YYYY-MM-DD') }}</v-col>
+            </v-row>
+        </div>
       </div>
     </div>
   </div>
@@ -73,12 +75,16 @@ export default {
 </script>
 
 <style scoped>
-    .bin{
-        height: 70px;
+  .bin{
+    height: 70px;
+  }
+  @media(max-width: 480px){
+    h1{
+      font-size: 30px;
     }
-     @media(max-width: 480px){
-        h1{
-            font-size: 30px;
-        }
-    }
+  }
+  .content-back {
+    background-color: rgb(255, 255, 255, 0.9);
+    border-radius: 1rem;
+  }
 </style>
