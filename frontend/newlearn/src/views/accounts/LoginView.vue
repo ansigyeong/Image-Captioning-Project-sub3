@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
     <div >
       <div style="text-align: center; vertical-align: middle;">
         <h1 style="font-size: 100px; color: white;">New Learn</h1>
@@ -14,21 +15,42 @@
           <div class = "form-group">
              <label>Username</label>
             <input v-model="loginData.username" type="text" class="form-control form-control-lg"/>
+=======
+    <div class="login">
+       
+       
+        <div style="text-align: center; vertical-align: middle;">
+            <a href="/"> <h1 style="font-size: 100px; color: white;"> New Learn </h1></a>
+        </div>
+
+         <br>
+         <br>
+         <br>
+
+        <div class="signup-box">
+        <h2>Login</h2> 
+        <form onsubmit="return false;">
+ 
+  
+          <div class = "user-box">
+            <input v-model="loginData.username" id="username" type="text"/>
+            <label for="username"><p style="color: white;">id</p></label>
+>>>>>>> 40af0af4e7f26e5cf0a9fa054fd1ed0fc82b7b48
           </div>
       
-          <div class="form-group">
-            <label>Password</label>
-            <input v-model="loginData.password" type="password" class="form-control form-control-lg"/>
+          <div class="user-box">
+            <input v-model="loginData.password" id="password" type="password"/>
+            <label for="password"><p style="color: white;">password</p></label>
           </div>
       
           <button @click="login()" class="btn btn-dark btn-lg btn-block">Log in</button>
     
+          <span class="forgot-password" style="float:left;">아직 회원이 아니신가요?</span>
 
-          <p class="forgot-password text-right mt-2 mb-4">아직 회원이 아니신가요?
-          <router-link to="/accounts/signup" class="btn--text">가입하기</router-link>
-          </p>
- 
-
+          <span class="btn-signup"><router-link to="/accounts/signup" class="btn--text">가입하기</router-link></span>
+        
+          
+          
    <!-- <div class="add-option mt-4">
         <div class="text">
           <p>혹시</p>
@@ -47,7 +69,10 @@
                   </form>  
               </div>
             </div>
+<<<<<<< HEAD
         <!-- </div> -->
+=======
+>>>>>>> 40af0af4e7f26e5cf0a9fa054fd1ed0fc82b7b48
 </template>
 
 
@@ -112,115 +137,175 @@ export default {
 </script>
 
 <style scoped>
-  /* html, body{
-	width:100%;
-	height:100%;
-	margin:0px;
-	font-family: 'Work Sans', sans-serif;
-}
+  html {
+    height: 100%;
+  }
 
-body{
-  height:100%;
-	background-size: cover;
-	display: flex;
-	flex-direction:column;
-	justify-content:center;
-	align-items:center;
-	color:#0e678a;
-}
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background: linear-gradient(#141e30, #243b55);
+  }
 
-section{
-	background-color: #fff4f4;
-	width:25%;
-  height:100%;
-	display:flex;
-	flex-direction:column;
-	margin-left:auto;
-	margin-right:auto;
-}
-form{
-	display:flex;
-	flex-direction:column;
-  height:100%;
-	padding: 15px; 
-}
+  .signup-box {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    width: 400px;
+    padding: 40px;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.5);
+    box-sizing: border-box;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+    border-radius: 10px;
+  }
 
-h2{
-	font-family: 'Archivo Black', sans-serif;
-	color:#e0dada;
-	margin-left:auto;
-	margin-right:auto;
-}
+  .signup-box h2 {
+    margin: 0 0 30px;
+    padding: 0;
+    color: #fff;
+    text-align: center;
+  }
 
-.info{
-	width:100%;
-	padding: 1em 5px;
-	text-align:center;
-	min-height:45px;
-	display:flex;
-	flex-direction:column;
-	justify-content:center;
-	align-items:center;
-}
+  .signup-box .user-box {
+    position: relative;
+  }
 
-.info p{
-	margin:auto;
-	padding:5px;
-}
-.info.good{
-	border:1px solid #416d50;
-	background-color: #47cf73;
-	color:#416d50;
-}
+  .signup-box .user-box input {
+    width: 100%;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #fff;
+    margin-bottom: 30px;
+    border: none;
+    border-bottom: 1px solid #fff;
+    outline: none;
+    background: transparent;
+  }
+  .signup-box .user-box label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #fff;
+    pointer-events: none;
+    transition: 0.5s;
+  }
 
-input{
-	height:35px;
-	padding: 5px 5px;
-	margin: 10px 0px;
-	background-color:#e0dada;
-	border:none;
-}
+  .signup-box .user-box input:focus ~ label,
+  .signup-box .user-box input:valid ~ label {
+    top: -30px;
+    left: 0;
+    color: #000;
+    font-size: 12px;
+  }
 
-button{
-	height:40px;
-	padding: 5px 5px;
-	margin: 10px 0px;
-	font-weight:bold;
-	background-color:#be5256;
-	border:none;
-	color:#e0dada;
-	cursor:pointer;
-	font-size:16px;
-}
+  .signup-box form a {
+    position: relative;
+    display: inline-block;
+    padding: 10px 20px;
+    color: #03e9f4;
+    font-size: 16px;
+    text-decoration: none;
+    text-transform: uppercase;
+    overflow: hidden;
+    transition: 0.5s;
+    margin-left: 45px;
+    margin-top: 7px;
+    letter-spacing: 4px;
+  }
 
-button:hover{
-	background-color:#711f1b;
-}
+  .signup-box a:hover {
+    background: #03e9f4;
+    color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #03e9f4, 0 0 25px #03e9f4, 0 0 50px #03e9f4,
+      0 0 100px #03e9f4;
+  }
 
-@-webkit-keyframes shake{
-    from, to{
-      -webkit-transform: translate3d(0, 0, 0);
-      transform:translate3d(0,0,0);
+  .signup-box a span {
+    position: absolute;
+    display: block;
+  }
+
+  .signup-box a span:nth-child(1) {
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #03e9f4);
+    animation: btn-anim1 1s linear infinite;
+  }
+
+  @keyframes btn-anim1 {
+    0% {
+      left: -100%;
     }
-    10%,30%,50%,70%,90%{
-      -webkit-transform: translate3d(-10px, 0, 0);
-      transform:translate3d(-10px,0,0);
+    50%,
+    100% {
+      left: 100%;
     }
-    20%,40%,60%,80%{
-		-webkit-transform: translate3d(10px, 0, 0);
-		transform:translate(10px,0,0);
-	}
-} */
+  }
 
-/* .shake{
-	animation-name: shake;
-	animation-duration:1s;
-	animation-fill-mode: both;
-}
+  .signup-box a span:nth-child(2) {
+    top: -100%;
+    right: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(180deg, transparent, #03e9f4);
+    animation: btn-anim2 1s linear infinite;
+    animation-delay: 0.25s;
+  }
 
-@media screen and (max-width: 780px) {
-	section{
-		width:90%;
-	}
-} */
+  @keyframes btn-anim2 {
+    0% {
+      top: -100%;
+    }
+    50%,
+    100% {
+      top: 100%;
+    }
+  }
+
+  .signup-box a span:nth-child(3) {
+    bottom: 0;
+    right: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(270deg, transparent, #03e9f4);
+    animation: btn-anim3 1s linear infinite;
+    animation-delay: 0.5s;
+  }
+
+  @keyframes btn-anim3 {
+    0% {
+      right: -100%;
+    }
+    50%,
+    100% {
+      right: 100%;
+    }
+  }
+
+  .signup-box a span:nth-child(4) {
+    bottom: -100%;
+    left: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(360deg, transparent, #03e9f4);
+    animation: btn-anim4 1s linear infinite;
+    animation-delay: 0.75s;
+  }
+
+  @keyframes btn-anim4 {
+    0% {
+      bottom: -100%;
+    }
+    50%,
+    100% {
+      bottom: 100%;
+    }
+  }
 </style>

@@ -1,5 +1,5 @@
 <template>
-    <div class="container" style="text-align:center;">
+    <div class="bg" style="text-align:center;">
         <Navbar/>
         <div class="bin"></div>
 
@@ -29,6 +29,7 @@
 <script>
 import http from '../util/http-common.js'
 import Navbar from "../components/common/Navigation"
+import '@/assets/css/background.css'
 
 export default {
     components: {
