@@ -194,10 +194,6 @@ export default {
 </script>
 
 <style scoped>
-    /* .speak{
-        background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)),url(../assets/images/Newyork.jpg) !important;
-        background-size : cover;
-    } */
     .bin{
         height: 70px;
     }
