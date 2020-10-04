@@ -33,7 +33,7 @@
                     style="text-align: center;"
                     @click="delword(word)"
                 >
-                    + 내 단어장에서 빼기
+                    <i class="fas fa-trash"> 내 단어장에서 빼기</i>
                 </v-btn>
             </v-card>
         </div>
