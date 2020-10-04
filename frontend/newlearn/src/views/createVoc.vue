@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="speak">
     <Navbar/>
     <div class="bin"></div>
 
@@ -80,5 +80,14 @@
 <style scoped>
     .bin{
         height: 70px;
+    }
+    .speak{
+        background-image: url(../assets/images/Newyork.jpg) !important;
+        background-size : cover;
+    }
+    @media(max-width: 480px){
+        h1{
+            font-size: 20px;
+        }
     }
 </style>

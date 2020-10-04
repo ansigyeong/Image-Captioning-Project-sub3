@@ -1,7 +1,13 @@
 <template>
-  <v-app id="app">
-      <router-view :key="$route.fullPath"></router-view>
-  </v-app>
+<div data-app="true" class="vue-tempalte">
+  <div class = "App">
+    <!-- <div class="vertical-center"> -->
+      <!-- <div class="inner-block"> -->
+        <router-view :key="$route.fullPath" ></router-view>
+      <!-- </div> -->
+    <!-- </div> -->
+  </div>
+</div>
 </template>
 
 <script >
