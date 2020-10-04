@@ -1,21 +1,32 @@
 <template>
- <!-- <section id="login" v-bind:class="isShake"> -->
- <div class="login" id="login">
-   <Logo />
-   <form onsubmit="return false;">
+    <div class="vue-tempalte" >
+        <div class="vertical-center">
+          <div class="inner-block">
+            <form onsubmit="return false;">
   <!-- <div class="info" v-bind:class="good">
    <p>{{ alert.message }}</p>
    <p v-show="login.login && login.password">{{ login.login}} / {{ login.password}}</p>
   </div> -->
+          <h3> Sign In </h3>
+          <div class = "form-group">
+             <label>Username</label>
+            <input v-model="loginData.username" type="text" class="form-control form-control-lg"/>
+          </div>
+      
+          <div class="form-group">
+            <label>Password</label>
+            <input v-model="loginData.password" type="password" class="form-control form-control-lg"/>
+          </div>
+      
+          <button @click="login()" class="btn btn-dark btn-lg btn-block">Log in</button>
     
 
-      <input v-model="loginData.username" type="text" placeholder="Username" />
-      <input v-model="loginData.password" type="password" placeholder="Password" />
-      <button @click="login()">Log in</button>
-    </form>
+          <p class="forgot-password text-right mt-2 mb-4">아직 회원이 아니신가요?
+          <router-link to="/accounts/signup" class="btn--text">가입하기</router-link>
+          </p>
  
 
-  <div class="add-option mt-4">
+   <!-- <div class="add-option mt-4">
         <div class="text">
           <p>혹시</p>
           <div class="bar"></div>
@@ -28,23 +39,27 @@
           <p>아직 회원이 아니신가요?</p>
           <router-link to="/accounts/signup" class="btn--text">가입하기</router-link>
         </div>
-   </div>
+   </div>  -->
 
-</div>
-
+                  </form>  
+              </div>
+            </div>
+        </div>
 </template>
+
 
 <script>
 
 import http from '../../util/http-common.js'
-import Logo from "../../components/user/Logo.vue";
+// import Logo from "../../components/user/Logo.vue";
+import '@/assets/css/main.css'
 
 export default {
     name: 'LoginView',
 
-    components:{
-      Logo,
-    },
+    // components:{
+    //   Logo,
+    // },
 
     data() {
         return {
@@ -94,7 +109,7 @@ export default {
 </script>
 
 <style scoped>
-  html, body{
+  /* html, body{
 	width:100%;
 	height:100%;
 	margin:0px;
@@ -192,17 +207,17 @@ button:hover{
 		-webkit-transform: translate3d(10px, 0, 0);
 		transform:translate(10px,0,0);
 	}
-}
+} */
 
-.shake{
+/* .shake{
 	animation-name: shake;
 	animation-duration:1s;
-	/*animation-fill-mode: both;*/
+	animation-fill-mode: both;
 }
 
 @media screen and (max-width: 780px) {
 	section{
 		width:90%;
 	}
-}
+} */
 </style>
