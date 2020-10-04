@@ -6,32 +6,34 @@
     <div style="text-align: center;"><h1>👩 Voice Of the Customer 👨</h1></div>
     <br>
     <br>
-    <div style="text-align: right;"><v-btn @click='goCreateVoc'>글 쓰러 가기</v-btn></div>
-    <br>
-    <br>
-    <div class="content-back">
-      <div style="text-align: center;"> 
-        <v-row>
-            <v-col cols="3">번호</v-col>
-            <v-col cols="6">제목</v-col>
-            <v-col cols="3">답변</v-col>
-        </v-row>
-        <hr>
-        <div v-for="suggestion in calData" :key="`suggestion_${suggestion.id}`">
-            <v-row>
-                <v-col cols="3">{{ suggestion.id }}</v-col>
-                <v-col cols="6" @click="goDetail(suggestion.id)">{{ suggestion.title }}</v-col>
-                <v-col cols="3">{{ suggestion.finish }}</v-col>
-            </v-row>
+    <div class="container">
+      <div style="text-align: right;"><v-btn @click='goCreateVoc'>글 쓰러 가기</v-btn></div>
+      <br>
+      <br>
+      <div class="content-back">
+        <div style="text-align: center;"> 
+          <v-row>
+              <v-col cols="3">번호</v-col>
+              <v-col cols="6">제목</v-col>
+              <v-col cols="3">답변</v-col>
+          </v-row>
+          <hr>
+          <div v-for="suggestion in calData" :key="`suggestion_${suggestion.id}`">
+              <v-row>
+                  <v-col cols="3">{{ suggestion.id }}</v-col>
+                  <v-col cols="6" @click="goDetail(suggestion.id)">{{ suggestion.title }}</v-col>
+                  <v-col cols="3">{{ suggestion.finish }}</v-col>
+              </v-row>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="text-center">
-      <v-pagination
-        v-model="curPageNum"
-        :length="numOfPages"
-        circle
-      ></v-pagination>
+      <div class="text-center">
+        <v-pagination
+          v-model="curPageNum"
+          :length="numOfPages"
+          circle
+        ></v-pagination>
+      </div>
     </div>
   </div>
 </template>
