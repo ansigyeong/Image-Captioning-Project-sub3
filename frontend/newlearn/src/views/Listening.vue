@@ -1,6 +1,6 @@
 <template>
         
-  <div>
+  <div class="bg1">
         <Navbar></Navbar>
         <div class="bin"></div>
         <h1><i class="fas fa-headphones-alt" style="font-size:50px;"></i> Listening</h1>
@@ -51,6 +51,7 @@
 <script>
 import http from '../util/http-common.js'
 import Navbar from "../components/common/Navigation"
+import '@/assets/css/background1.css'
 
 export default {
     components: {

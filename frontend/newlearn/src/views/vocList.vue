@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="bg1">
     <Navbar/>
     <div class="bin"></div>
 
@@ -32,6 +32,7 @@
 <script>
 import http from '../util/http-common.js'
 import Navbar from "../components/common/Navigation"
+import '@/assets/css/background1.css'
 
 export default {
   name: 'vocList',
