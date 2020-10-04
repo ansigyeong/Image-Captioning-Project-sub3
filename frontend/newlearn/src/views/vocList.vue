@@ -17,7 +17,7 @@
             <v-col cols="3">답변</v-col>
         </v-row>
         <hr>
-        <div v-for="suggestion in suggestions" :key="`suggestion_${suggestion.id}`">
+        <div v-for="suggestion in calData" :key="`suggestion_${suggestion.id}`">
             <v-row>
                 <v-col cols="3">{{ suggestion.id }}</v-col>
                 <v-col cols="6" @click="goDetail(suggestion.id)">{{ suggestion.title }}</v-col>
@@ -25,6 +25,13 @@
             </v-row>
         </div>
       </div>
+    </div>
+    <div class="text-center">
+      <v-pagination
+        v-model="curPageNum"
+        :length="numOfPages"
+        circle
+      ></v-pagination>
     </div>
   </div>
 </template>
@@ -37,20 +44,25 @@ import '@/assets/css/background1.css'
 export default {
   name: 'vocList',
   components: {
-        Navbar,
+    Navbar,
   },
   data() {
     return {
-      suggestions: []
+      suggestions: [],
+      dataPerPage: 6,
+      curPageNum: 1,
     };
+  },
+  created() {
+    this.fetchData()
   },
   methods: {
     fetchData() {
       const config = {
-                headers: {
-                    Authorization: `Token ${this.$cookies.get('auth-token')}`
-                }
-            }
+        headers: {
+          Authorization: `Token ${this.$cookies.get('auth-token')}`
+        }
+      }
       http.post("/community/suggestion/", null, config)
         .then(res => this.suggestions = res.data)
         .catch(err => {
@@ -63,23 +75,37 @@ export default {
       this.$router.push('/mypage/vocdetail/' + id)
     }
   },
-  created() {
-    this.fetchData()
-  }
+  computed: {
+    startOffset() {
+      return ((this.curPageNum - 1) * this.dataPerPage);
+    },
+    endOffset() {
+      return (this.startOffset + this.dataPerPage);
+    },
+    numOfPages() {
+      return Math.ceil(this.suggestions.length / this.dataPerPage);
+    },
+    calData() {
+      return this.suggestions.slice(this.startOffset, this.endOffset);
+    },
+  },
 };
 </script>
 
-<style scoped>
-    .bin{
-        height: 70px;
+<style> /* pagination 스타일링 문제로 scoped 삭제 */
+  .bin{
+    height: 70px;
+  }
+  .content-back {
+    background-color: rgb(255, 255, 255, 0.9);
+    border-radius: 1rem;
+  }
+  @media(max-width: 480px){
+    h1{
+      font-size: 20px;
     }
-    .content-back {
-      background-color: rgb(255, 255, 255, 0.9);
-      border-radius: 1rem;
-    }
-    @media(max-width: 480px){
-      h1{
-          font-size: 20px;
-      }
-    }
+  }
+  .theme--light.v-pagination .v-pagination__item--active {
+    color: black;
+  }
 </style>
