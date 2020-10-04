@@ -30,20 +30,30 @@
                     </v-list-item>
                 </v-list>
             </v-menu>
+            <br>
+            <br>
+            <v-btn
+                color="deep-purple accent-4"
+                style="text-align: center; width:99.35px;"
+                @click="displayword()"
+            >
+                확인하기
+            </v-btn>
         </div>
+        
         <br>
 
         <!-- section2 단어 카드-->
         <div style="text-align: center;">
             <v-card
                 width="350"
-                height="200"
+                height="250"
                 v-for="(word, i) in words" 
                 :key="i"
                 style="margin-bottom: 20px; margin-right: 20px; display: inline-block; vertical-align: middle;"
             >
                 <v-card-text style="vertical-align: middle;">
-                    <div>
+                    <div :class="{ hidden: visible && i%2==0 }">
                         <p class="word">
                             {{ word.word }}
                         </p>
@@ -51,19 +61,13 @@
                             {{ word.phonetic_symbols }}
                         </p>
                     </div>
-                    <div class="text--primary" :style="{ visibility: computedvisible }">
+                    <div class="text--primary" :class="{ hidden: visible && i%2==1 }">
                         {{ word.mean }}
                         <br>
                     </div>
-                    <v-btn
-                        text
-                        color="deep-purple accent-4"
-                        style="text-align: center;"
-                        @click="displayword()"
-                    >
-                        표시 전환하기
-                    </v-btn>
+                    
                 </v-card-text>
+                <v-text-field label="입력해 보세요" style="width:250px; margin-left:15%;" />
             </v-card>
         </div>
     </div>
@@ -81,13 +85,8 @@ export default {
       return {
         words: JSON.parse(localStorage.getItem("words")),
         userword: '',
-        visible: 'hidden',
+        visible: true,
       }
-    },
-    computed: {
-        computedvisible() {
-            return this.visible
-        }
     },
     methods: {
         callVocabulary(choice) {
@@ -122,11 +121,8 @@ export default {
             })
         },
         displayword() {
-            if(this.visible == 'visible') {
-                this.visible = 'hidden'
-            } else {
-                this.visible='visible'
-            }
+            console.log()
+            this.visible = !this.visible
         }
     },
 }
@@ -147,5 +143,8 @@ export default {
         h1{
             font-size: 30px;
         }
+    }
+    .hidden{
+        visibility: hidden;
     }
 </style>
