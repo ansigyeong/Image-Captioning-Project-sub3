@@ -33,7 +33,7 @@
       <div style="background-color: #F5F5F5;">
         <h6 style="display: inline-block; margin-left: 20px;">{{ comment.user.username }}</h6>
         <v-btn icon x-small @click="deleteComment(comment.id)" style="display: inline-block; float: right; margin-right: 50px;"><v-icon left>mdi-cancel</v-icon>DELETE</v-btn>
-        <v-btn icon x-small style="display: inline-block; float: right; margin-right: 50px;"><v-icon left>mdi-pencil</v-icon>EDIT</v-btn>
+        <!-- <v-btn icon x-small style="display: inline-block; float: right; margin-right: 50px;"><v-icon left>mdi-pencil</v-icon>EDIT</v-btn> -->
         <p style="display: inline-block; float: right; margin-right: 50px;"><small>{{ comment.created_at | moment('YYYY-MM-DD') }}</small></p>
       </div>
       <div v-html="comment.content" style="margin: 10px 0px 0px 20px;" class="contentbox"></div>
@@ -133,7 +133,7 @@ export default {
       http.post(`/community/suggestion/` + this.suggestion_pk + `/commentcreate/`, this.commentData, config)
         .then(res => {
           console.log(res.data)
-          alert('댓글이 성공적으로 작성되었습니다.')
+          alert('성공적으로 작성되었습니다.')
           this.$router.go() // 현재 페이지로 새로고침
         })
         .catch(err => {
@@ -145,8 +145,17 @@ export default {
           Authorization: `Token ${this.$cookies.get('auth-token')}`
         }
       }
-      http.delete('/community/suggestion/' + this.suggestion_pk + '/', commentId, config)
-      this.$router.go()
+      http.delete('/community/suggestion/' + this.suggestion_pk + '/' + commentId + '/commentdelete/', config)
+      .then((res) => {
+        console.log(res)
+        alert('성공적으로 삭제되었습니다.')
+        this.$router.go()
+      })
+      .catch((err) => {
+        console.log(err)
+        alert('성공적으로 삭제되었습니다.')
+        this.$router.go()
+      })
     },
   },
 }
