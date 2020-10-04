@@ -18,5 +18,6 @@ urlpatterns = [
     path('suggestion/<int:suggestion_pk>/delete/', views.suggestion_delete),
     path('suggestion/<int:suggestion_pk>/update/', views.suggestion_update),
     path('suggestion/<int:suggestion_pk>/commentcreate/', views.commentcreate),
+    path('suggestion/<int:suggestion_pk>/<int:comment_pk>/commentdelete/', views.commentdelete),
     
 ]
