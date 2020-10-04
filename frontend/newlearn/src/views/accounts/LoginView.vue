@@ -1,21 +1,4 @@
 <template>
-<<<<<<< HEAD
-    <div >
-      <div style="text-align: center; vertical-align: middle;">
-        <h1 style="font-size: 100px; color: white;">New Learn</h1>
-      </div>
-        <!-- <div class="vertical-center"> -->
-          <div class="inner-block">
-            <form onsubmit="return false;">
-  <!-- <div class="info" v-bind:class="good">
-   <p>{{ alert.message }}</p>
-   <p v-show="login.login && login.password">{{ login.login}} / {{ login.password}}</p>
-  </div> -->
-          <h3> Sign In </h3>
-          <div class = "form-group">
-             <label>Username</label>
-            <input v-model="loginData.username" type="text" class="form-control form-control-lg"/>
-=======
     <div class="login">
        
        
@@ -35,7 +18,6 @@
           <div class = "user-box">
             <input v-model="loginData.username" id="username" type="text"/>
             <label for="username"><p style="color: white;">id</p></label>
->>>>>>> 40af0af4e7f26e5cf0a9fa054fd1ed0fc82b7b48
           </div>
       
           <div class="user-box">
@@ -69,10 +51,6 @@
                   </form>  
               </div>
             </div>
-<<<<<<< HEAD
-        <!-- </div> -->
-=======
->>>>>>> 40af0af4e7f26e5cf0a9fa054fd1ed0fc82b7b48
 </template>
 
 
