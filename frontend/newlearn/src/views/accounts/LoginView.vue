@@ -1,8 +1,7 @@
 <template>
     <div class="login">
        
-       
-        <div style="text-align: center; vertical-align: middle;">
+       <div style="text-align: center; vertical-align: middle;">
             <a href="/"> <h1 style="font-size: 100px; color: white;"> New Learn </h1></a>
         </div>
 

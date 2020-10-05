@@ -82,28 +82,6 @@
                     {{ this.userVoice }}
                 </p>
             </div>
-<<<<<<< HEAD
-            <p class = "res" v-if="this.showText == true">
-                {{ this.capText }}
-            </p>
-        </div>
-
-        <h2 class="myvoice"><i class="fa fa-file" aria-hidden="true" style="font-size:30px;"></i> My Voice Recorder</h2>
-        
-        <div class="recorder">
-            <audio-recorder 
-                upload-url="YOUR_API_URL"
-                :attempts="3"
-                :time="2"
-                :before-recording="callback"
-                :pause-recording="callback"
-                :after-recording="callback"
-                :select-record="callback"
-                :before-upload="callback"
-                :successful-upload="callback"
-                :failed-upload="callback"/>
-=======
->>>>>>> 22b697203b0ec27559a53e441fdab465dfc7e1a7
         </div>
         <Footer/>
     </div>
