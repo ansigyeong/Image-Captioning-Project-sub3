@@ -3,7 +3,7 @@
        
        
         <div style="text-align: center; vertical-align: middle;">
-            <a href="/"> <h1 style="font-size: 100px; color: white;"> New Learn </h1></a>
+            <a href="/"> <h1> New Learn </h1></a>
         </div>
 
          <br>
@@ -115,6 +115,10 @@ export default {
 </script>
 
 <style scoped>
+  h1{
+    font-size: 100px;
+    color: white;
+  }
   html {
     height: 100%;
   }
@@ -285,5 +289,11 @@ export default {
     100% {
       bottom: 100%;
     }
+  }
+
+  @media(max-width: 480px){
+   h1{
+     font-size:70px;
+   }
   }
 </style>

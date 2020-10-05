@@ -1,22 +1,23 @@
  <template>
   <!-- Site footer -->
     <footer class="site-footer">
-      <div class="row">
-        <div class="col-sm-12" style="padding-bottom:0px;">
-          <h6>Developer</h6>
-          <span class="text-justify" style="padding:0px;">Kim Ho Han</span>
+      <!-- <div class="row">
+        <div class="col-sm-12" style="padding-bottom:0px;"> -->
+          <h6 style="padding-left:5%; padding-top:10px;">Developer</h6>
+          <span class="text-justify" style="padding:0px; padding-left:10%;">Kim Ho Han</span>
           <span class="text-justify" style="margin-left: 50px; padding:0px;">Moon Jong Hyeok</span>
-          <span class="text-justify" style="margin-left: 50px; padding:0px;">An Si Gyeong</span>
+          <br>
+          <span class="text-justify" style="padding:0px; padding-left:3%;">An Si Gyeong</span>
           <span class="text-justify" style="margin-left: 50px; padding:0px;">Cho Dae Heum</span>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-8 col-sm-6 col-xs-12" style="padding:0px 0px 10px 15px;">
-          <span class="copyright-text">Copyright &copy; 2020 All Rights Reserved by 
+        <!-- </div>
+      </div> -->
+      <!-- <div class="row">
+        <div class="col-md-8 col-sm-6 col-xs-12" style="padding:0px 0px 10px 15px;"> -->
+          <p class="copyright-text" style="padding-bottom:3px; padding-left:3%">Copyright &copy; 2020 All Rights Reserved by 
               <a href="http://localhost:8080/home">New Learn</a>.
-          </span>
-        </div>
-      </div>
+          </p>
+        <!-- </div>
+      </div> -->
 </footer>
 </template>
 
