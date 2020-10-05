@@ -134,4 +134,10 @@ export default {
     .v-date-picker-table .v-btn.v-btn--active{
         color: black;
     }
+    .v-date-picker-table__events > div{
+        background-color: lightgreen;
+    }
+    .v-date-picker-table .v-btn{
+        border: none;
+    }
 </style>
