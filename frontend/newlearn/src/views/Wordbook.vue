@@ -8,7 +8,7 @@
       <br>
 
       <!-- section1 분류 -->
-      <div style="text-align: right; margin-right: 50px;">
+      <div class="container" style="text-align: right; margin-right: 60px;">
         <v-menu
           transition="scale-transition"
           bottom
@@ -181,6 +181,9 @@ export default {
     @media(max-width: 480px){
         h1{
             font-size: 30px;
+        }
+        .container {
+          margin-right: 40px;
         }
     }
     .theme--light.v-card{
