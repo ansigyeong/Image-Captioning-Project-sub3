@@ -2,6 +2,7 @@
   <v-app>
     <div class="bg1">
       <Navbar/>
+      <div style="min-height: 100%;">
       <div class="bin"></div>
 
       <!-- 로고 -->
@@ -47,43 +48,45 @@
         <!-- </v-col> -->
 
         <!-- <v-col cols="12" sm="6"> -->
-          <v-text-field
-            :append-icon="show4 ? 'mdi-eye' : 'mdi-eye-off'"
-            v-model="password"
-            :rules="[rules.required, rules.min]"
-            :type="show4 ? 'text' : 'password'"
-            name="input-10-2"
-            label="Error"
-            hint="At least 8 characters"
-            :value="this.password"
-            error
-            @click:append="show4 = !show4"
-          ></v-text-field>
-        <!-- </v-col> -->
+            <v-text-field
+              :append-icon="show4 ? 'mdi-eye' : 'mdi-eye-off'"
+              v-model="password"
+              :rules="[rules.required, rules.min]"
+              :type="show4 ? 'text' : 'password'"
+              name="input-10-2"
+              label="Error"
+              hint="At least 8 characters"
+              :value="this.password"
+              error
+              @click:append="show4 = !show4"
+            ></v-text-field>
+          <!-- </v-col> -->
 
-        <!-- 비밀번호 확인 -->
-        <!-- <v-col cols="12" sm="6"> -->
-          <v-text-field
-            :append-icon="show4 ? 'mdi-eye' : 'mdi-eye-off'"
-            v-model="repeatPassword"
-            :rules="confirmPasswordRules.concat(passwordConfirmationRule)"
-            :type="show4 ? 'text' : 'password'"
-            name="input-10-2"
-            label="Error"
-            hint="At least 8 characters"
-            :value="this.repeatPassword"
-            error
-            @click:append="show4 = !show4"
-          ></v-text-field>
-        <!-- </v-col> -->
+          <!-- 비밀번호 확인 -->
+          <!-- <v-col cols="12" sm="6"> -->
+            <v-text-field
+              :append-icon="show4 ? 'mdi-eye' : 'mdi-eye-off'"
+              v-model="repeatPassword"
+              :rules="confirmPasswordRules.concat(passwordConfirmationRule)"
+              :type="show4 ? 'text' : 'password'"
+              name="input-10-2"
+              label="Error"
+              hint="At least 8 characters"
+              :value="this.repeatPassword"
+              error
+              @click:append="show4 = !show4"
+            ></v-text-field>
+          <!-- </v-col> -->
 
-        <br>
-        <br>
-        <div class="button">
-          <v-btn @click="submit">Save Profile</v-btn>
-          <v-btn @click="clear">Delete Account</v-btn>
-        </div>
-      </form>
+          <br>
+          <br>
+          <div class="button">
+            <v-btn @click="submit">Save Profile</v-btn>
+            <v-btn @click="clear">Delete Account</v-btn>
+          </div>
+        </form>
+      </div>
+      <Footer/>
     </div>
   </v-app>
 </template>
@@ -93,12 +96,14 @@
   import { validationMixin } from 'vuelidate'
   import { required, maxLength } from 'vuelidate/lib/validators'
   import Navbar from "../../components/common/Navigation"
+  import Footer from "../../components/common/footer"
   import '@/assets/css/background1.css'
 
   export default {
     name: 'Myinfo',
     components: {
-      Navbar
+      Navbar,
+      Footer
     },
     data() {
       return {
