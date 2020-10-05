@@ -109,7 +109,7 @@ export default {
             }
             http.post(`/english/checktext/`, check)
             .then((res) => {
-                console.log(res.data)
+                // console.log(res.data)
                 this.wrongCheck = res.data.stttext,
                 this.userText = res.data.usertext
             })

@@ -71,8 +71,7 @@ export default {
         }
       }
       http.delete(`/community/notice/` + this.notice_pk + `/delete/`, config)
-      .then((res) => {
-        console.log(res)
+      .then(() => {
         alert('성공적으로 삭제되었습니다.')
         this.$router.go(-1)
         // this.$router.push({ name: 'vocList' })
