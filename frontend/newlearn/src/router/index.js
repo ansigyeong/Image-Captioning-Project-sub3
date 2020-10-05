@@ -141,7 +141,7 @@ router.beforeEach((to, from, next) => {
   const isLoggedIn = !!Vue.$cookies.isKey('auth-token')
 
   if(unauthRequired && isLoggedIn) {
-    next('/')
+    next({ name: 'Home'})
   }
   authRequired && !isLoggedIn ? next({ name: 'Login'}) : next()
 })

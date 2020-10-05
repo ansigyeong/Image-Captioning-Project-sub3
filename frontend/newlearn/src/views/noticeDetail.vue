@@ -1,46 +1,51 @@
 <template>
-  <div class="bg">
+  <div class="bg1">
     <Navbar/>
-    <div class="bin"></div>
+    <div style="min-height: 100%;">
+      <div class="bin"></div>
 
-    <!-- <div style="text-align: center;"><h1>🔉 Notice 🔉</h1></div>
-    <br>
-    <br> -->
-    <div class="container">
-      <div class="content-back">
-        <!-- title & etc -->
-        <div class="title">
-          <h1>{{ this.notice.title }}</h1>
+      <!-- <div style="text-align: center;"><h1>🔉 Notice 🔉</h1></div>
+      <br>
+      <br> -->
+      <div class="container">
+        <div class="content-back">
+          <!-- title & etc -->
+          <div class="title">
+            <h1>{{ this.notice.title }}</h1>
+          </div>
+          <!-- <div style="text-align: right;">
+          </div> -->
+          <div style="text-align: right;">
+            <v-btn icon style="margin-right: 50px;">{{ this.notice.created_at | moment('YYYY-MM-DD') }}</v-btn>
+            <v-btn icon @click="goEdit" style="margin-right: 50px;"><v-icon left>mdi-pencil</v-icon>EDIT</v-btn>
+            <v-btn icon @click="goDelete" style="margin-right: 50px;"><v-icon left>mdi-cancel</v-icon>DELETE</v-btn>
+          </div>
+
+          <hr>
+
+          <!-- content -->
+          <h3><div v-html="this.notice.content" style="margin:20px" class="contentbox"></div></h3>
+          <!-- <div class="content">
+            <h3>{{ this.suggestion.content }}</h3>
+          </div> -->
         </div>
-        <!-- <div style="text-align: right;">
-        </div> -->
-        <div style="text-align: right;">
-          <v-btn icon style="margin-right: 50px;">{{ this.notice.created_at | moment('YYYY-MM-DD') }}</v-btn>
-          <v-btn icon @click="goEdit" style="margin-right: 50px;"><v-icon left>mdi-pencil</v-icon>EDIT</v-btn>
-          <v-btn icon @click="goDelete" style="margin-right: 50px;"><v-icon left>mdi-cancel</v-icon>DELETE</v-btn>
-        </div>
-
-        <hr>
-
-        <!-- content -->
-        <h3><div v-html="this.notice.content" style="margin:20px" class="contentbox"></div></h3>
-        <!-- <div class="content">
-          <h3>{{ this.suggestion.content }}</h3>
-        </div> -->
       </div>
     </div>
+    <Footer/>
   </div>
 </template>
 
 <script>
 import http from '../util/http-common.js'
 import Navbar from "../components/common/Navigation"
+import Footer from "../components/common/footer"
 import '@/assets/css/background.css'
 
 export default {
   name: 'noticeDetail',
   components: {
         Navbar,
+        Footer,
   },
   data() {
     return {
