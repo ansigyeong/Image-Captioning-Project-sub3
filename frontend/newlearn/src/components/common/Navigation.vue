@@ -5,23 +5,24 @@
         <div class="Navi">
             <div class="draw">
                 <div @click.stop="drawer = !drawer" style="cursor:pointer;">
-                    <i class="fas fa-bars fa-2x"></i>
+                    <i class="fas fa-bars fa-2x" style="color:white;"></i>
                 </div>
             </div>
-            <span style="font-size:30px; margin-left:10px;  cursor: pointer" @click="goHome">New Learn</span>
-
+            <span @click="goHome">
+                <img style="height:50px; cursor: pointer;" src="../../assets/images/Logo.png">
+            </span>
             <div class="user" style="float:right;">
                 
                 <v-menu bottom transition="slide-y-transition">
                     <template v-slot:activator="{ on, attrs }">
                         <div v-bind="attrs" v-on="on">
-                            <i class="fas fa-user fa-2x"></i>
+                            <i class="fas fa-user fa-2x" style="color:white;"></i>
                         </div>
                     </template>
                     
                     <!-- <v-list v-if="!isLoggedIn">
                       <v-list-item @click="goSignup" style="margin-left:20px;">
-                          <v-list-item-content>
+                          <v-list-item-content> 
                               <v-list-item-title>Sign Up</v-list-item-title>
                           </v-list-item-content>
                       </v-list-item>
@@ -152,9 +153,10 @@
 
 <script scoped>
 import http from '@/util/http-common.js'
-
 export default {
   name: 'NavBar',
+  components: {
+  },
   data() {
     return {
       isLoggedIn: false,
@@ -237,7 +239,7 @@ export default {
 
 <style scoped>
   .Navi{
-    background-color: #95bfd3;
+    background-color: #350303;
     height: 50px;
    }
 
