@@ -169,7 +169,7 @@ ACCOUNT_LOGOUT_ON_GET = True
 # REST_USE_JWT = True
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:8081",
+    "http://localhost:8080",
     "http://172.30.1.36:8080"
 ]
 

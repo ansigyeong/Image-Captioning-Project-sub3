@@ -106,4 +106,7 @@ export default {
             font-size: 30px;
         }
     }
+    .theme--light.v-card{
+        background-color: white;
+    }
 </style>
