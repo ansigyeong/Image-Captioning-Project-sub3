@@ -154,7 +154,7 @@ export default {
                 if(res.data == '존재함') {
                   alert('이미 단어장에 추가한 단어입니다.')
                 } else{
-                  alert('내단어자에 추가되었습니다.')
+                  alert('내 단어장에 추가되었습니다.')
                 }
             })
             .catch(err => {
@@ -177,5 +177,8 @@ export default {
         h1{
             font-size: 30px;
         }
+    }
+    .theme--light.v-card{
+        background-color: white;
     }
 </style>
