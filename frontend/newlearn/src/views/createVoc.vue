@@ -73,10 +73,7 @@
         }
         // article 생성은 Header: Token / Body: { title: , content: }
         http.post('/community/suggestion/create/', this.articleData, config)
-          .then(res => { 
-            console.log(res.data) 
-            this.$router.push({ name: 'vocList' })
-          })
+          .then(this.$router.push({ name: 'vocList' }))
           .catch(err => console.log(err.response.data))
       },
     },
