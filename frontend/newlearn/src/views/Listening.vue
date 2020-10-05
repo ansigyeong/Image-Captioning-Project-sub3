@@ -2,60 +2,65 @@
         
   <div class="bg1">
         <Navbar></Navbar>
-        <div class="bin"></div>
-        <h1><i class="fas fa-headphones-alt" style="font-size:50px;"></i> Listening</h1>
+        <div style="min-height: 100%;">
+            <div class="bin"></div>
+            <h1><i class="fas fa-headphones-alt" style="font-size:50px;"></i> Listening</h1>
 
-        <div  class="link">
-            <span style="background-color:yellow"><i class="fa fa-exclamation-triangle" aria-hidden="true" style="color:red;"></i>
-            10MB 이하의 wav/mp3/mp4/m4a 파일만 사용가능 (<a href="https://online-audio-converter.com/ko/">wav/mp3/mp4/m4a convert site</a>)</span>
+            <div  class="link">
+                <span style="background-color:yellow"><i class="fa fa-exclamation-triangle" aria-hidden="true" style="color:red;"></i>
+                10MB 이하의 wav/mp3/mp4/m4a 파일만 사용가능 (<a href="https://online-audio-converter.com/ko/">wav/mp3/mp4/m4a convert site</a>)</span>
+            </div>
+
+            <div class="putfile">
+                <input
+                    type="file"
+                    class="fileload"
+                    ref="files"
+                    accept="audio/*"
+                    @change="audioUpload" />
+                <br>
+                <br>
+                <audio class="player" controls ref="player">
+                    <source src="" ref="source">
+                </audio>
+                <br>
+                <v-btn class="button button1" v-if="this.uploadFile" @click="pushFile">Voice To Text</v-btn>
+
+                <v-btn class="button button1" v-if="capText != ''" @click="viewText" style="margin:1%;">
+                    Result
+                </v-btn>
+                <p class = "res" v-if="this.showText == true">
+                    {{ this.capText }}
+                </p>
+            </div>
+
+            <div class="mytext">
+                <textarea v-model="message" id="textbox" onkeyup="charcountupdate(this.value)"> Start typing here to see results</textarea>
+                <span id=charcount></span>
+                <br>
+                <v-btn  class="button button1" @click="checkText">Compare My Text</v-btn>
+            </div>
+
+            <div class="compare">
+                <span class = "res" v-for="(word, i) in userText" :class="{ wrong: userText[i] != wrongCheck[i] }" :key="{i}">
+                    {{ word }}
+                </span>
+            </div>
         </div>
-
-        <div class="putfile">
-            <input
-                type="file"
-                class="fileload"
-                ref="files"
-                accept="audio/*"
-                @change="audioUpload" />
-            <br>
-            <br>
-            <audio class="player" controls ref="player">
-                <source src="" ref="source">
-            </audio>
-            <br>
-            <v-btn class="button button1" v-if="this.uploadFile" @click="pushFile">Voice To Text</v-btn>
-
-            <v-btn class="button button1" v-if="capText != ''" @click="viewText" style="margin:1%;">
-                Result
-            </v-btn>
-            <p class = "res" v-if="this.showText == true">
-                {{ this.capText }}
-            </p>
-        </div>
-
-        <div class="mytext">
-            <textarea v-model="message" id="textbox" onkeyup="charcountupdate(this.value)"> Start typing here to see results</textarea>
-            <span id=charcount></span>
-            <br>
-            <v-btn  class="button button1" @click="checkText">Compare My Text</v-btn>
-        </div>
-
-        <div class="compare">
-            <span class = "res" v-for="(word, i) in userText" :class="{ wrong: userText[i] != wrongCheck[i] }" :key="{i}">
-                {{ word }}
-            </span>
-        </div>
+    <Footer/>
   </div>
 </template>
 
 <script>
 import http from '../util/http-common.js'
 import Navbar from "../components/common/Navigation"
+import Footer from "../components/common/footer"
 import '@/assets/css/background1.css'
 
 export default {
     components: {
         Navbar,
+        Footer
     },
     data () {
         return {

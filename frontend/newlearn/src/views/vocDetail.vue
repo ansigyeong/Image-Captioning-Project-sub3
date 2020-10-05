@@ -1,69 +1,72 @@
 <template>
   <div class="bg">
     <Navbar/>
-    <div class="bin"></div>
+    <div style="min-height: 100%;">
+      <div class="bin"></div>
 
-    <div style="text-align: center;">
-      <h1 style="font-size: 20px;">👩 Voice Of the Customer 👨</h1>
-    </div>
-    <br>
-    <br>
+      <div style="text-align: center;">
+        <h1 style="font-size: 20px;">👩 Voice Of the Customer 👨</h1>
+      </div>
+      <br>
+      <br>
 
-    <div class="container">
-      <div class="content-back">
-        <!-- 1. title & etc -->
-        <div class="title">
-          <h1>{{ suggestion.suggestion.title }}</h1>
-        </div>
-        <!-- <div style="text-align: right;">
-        </div> -->
-        <div style="text-align: right;">
-          <v-btn icon style="margin-right: 50px;">{{ suggestion.suggestion.created_at | moment('YYYY-MM-DD') }}</v-btn>
-          <v-btn icon @click="goEdit" style="margin-right: 50px;"><v-icon left>mdi-pencil</v-icon>EDIT</v-btn>
-          <v-btn icon @click="goDelete" style="margin-right: 50px;"><v-icon left>mdi-cancel</v-icon>DELETE</v-btn>
-        </div>
-        <hr>
-
-        <!-- 2. content -->
-        <h3><div v-html="suggestion.suggestion.content" style="margin:20px; min-height: 250px;" class="contentbox"></div></h3>
-        <hr>
-        <!-- 3. 댓글 리스트 -->
-        <p><v-icon>fas fa-edit</v-icon> Comments</p>
-        <hr>
-        <!-- <p>Comment List</p> -->
-        <div v-for="comment in suggestion.comments" :key="comment.id">
-          <div style="background-color: #F5F5F5;">
-            <h6 style="display: inline-block; margin-left: 20px;">{{ comment.user.username }}</h6>
-            <v-btn icon x-small @click="deleteComment(comment.id)" style="display: inline-block; float: right; margin-right: 50px;"><v-icon left>mdi-cancel</v-icon>DELETE</v-btn>
-            <!-- <v-btn icon x-small style="display: inline-block; float: right; margin-right: 50px;"><v-icon left>mdi-pencil</v-icon>EDIT</v-btn> -->
-            <p style="display: inline-block; float: right; margin-right: 50px;"><small>{{ comment.created_at | moment('YYYY-MM-DD') }}</small></p>
+      <div class="container">
+        <div class="content-back">
+          <!-- 1. title & etc -->
+          <div class="title">
+            <h1>{{ suggestion.suggestion.title }}</h1>
           </div>
-          <div v-html="comment.content" style="margin: 10px 0px 0px 20px;" class="contentbox"></div>
+          <!-- <div style="text-align: right;">
+          </div> -->
+          <div style="text-align: right;">
+            <v-btn icon style="margin-right: 50px;">{{ suggestion.suggestion.created_at | moment('YYYY-MM-DD') }}</v-btn>
+            <v-btn icon @click="goEdit" style="margin-right: 50px;"><v-icon left>mdi-pencil</v-icon>EDIT</v-btn>
+            <v-btn icon @click="goDelete" style="margin-right: 50px;"><v-icon left>mdi-cancel</v-icon>DELETE</v-btn>
+          </div>
           <hr>
-        </div>
 
-        <!-- 4. 댓글 작성 -->
-        <div>
-          <editor api-key="vem3wnp12tvfllgyuf92uzd6e04f9ddz4ke9mzv8uh71ctgq" :init="{
-              height: 120,
-              menubar: ['file edit view insert format tools'],
-              plugins: [
-                'advlist autolink lists link image charmap print preview anchor',
-                'searchreplace visualblocks code fullscreen',
-                'insertdatetime media table paste code help wordcount codesample'
-              ],
-              toolbar:
-                'undo redo codesample | formatselect | bold italic backcolor | \
-                alignleft aligncenter alignright alignjustify | \
-                bullist numlist outdent indent | removeformat | help'
-            }" v-model="commentData.content" id="comment"/>
-            <br>
-            <div style="text-align: right;">
-              <v-btn tile @click="createComment"><v-icon>mdi-pencil</v-icon>Submit</v-btn>
+          <!-- 2. content -->
+          <h3><div v-html="suggestion.suggestion.content" style="margin:20px; min-height: 250px;" class="contentbox"></div></h3>
+          <hr>
+          <!-- 3. 댓글 리스트 -->
+          <p><v-icon>fas fa-edit</v-icon> Comments</p>
+          <hr>
+          <!-- <p>Comment List</p> -->
+          <div v-for="comment in suggestion.comments" :key="comment.id">
+            <div style="background-color: #F5F5F5;">
+              <h6 style="display: inline-block; margin-left: 20px;">{{ comment.user.username }}</h6>
+              <v-btn icon x-small @click="deleteComment(comment.id)" style="display: inline-block; float: right; margin-right: 50px;"><v-icon left>mdi-cancel</v-icon>DELETE</v-btn>
+              <!-- <v-btn icon x-small style="display: inline-block; float: right; margin-right: 50px;"><v-icon left>mdi-pencil</v-icon>EDIT</v-btn> -->
+              <p style="display: inline-block; float: right; margin-right: 50px;"><small>{{ comment.created_at | moment('YYYY-MM-DD') }}</small></p>
             </div>
+            <div v-html="comment.content" style="margin: 10px 0px 0px 20px;" class="contentbox"></div>
+            <hr>
+          </div>
+
+          <!-- 4. 댓글 작성 -->
+          <div>
+            <editor api-key="vem3wnp12tvfllgyuf92uzd6e04f9ddz4ke9mzv8uh71ctgq" :init="{
+                height: 120,
+                menubar: ['file edit view insert format tools'],
+                plugins: [
+                  'advlist autolink lists link image charmap print preview anchor',
+                  'searchreplace visualblocks code fullscreen',
+                  'insertdatetime media table paste code help wordcount codesample'
+                ],
+                toolbar:
+                  'undo redo codesample | formatselect | bold italic backcolor | \
+                  alignleft aligncenter alignright alignjustify | \
+                  bullist numlist outdent indent | removeformat | help'
+              }" v-model="commentData.content" id="comment"/>
+              <br>
+              <div style="text-align: right;">
+                <v-btn tile @click="createComment"><v-icon>mdi-pencil</v-icon>Submit</v-btn>
+              </div>
+          </div>
         </div>
       </div>
-    </div>  
+    </div>
+    <Footer/>  
   </div>
 </template>
 
@@ -71,6 +74,7 @@
 import http from '../util/http-common.js'
 import Editor from '@tinymce/tinymce-vue'
 import Navbar from "../components/common/Navigation"
+import Footer from "../components/common/footer"
 import '@/assets/css/background.css'
 
 export default {
@@ -78,6 +82,7 @@ export default {
   components: {
     'editor': Editor,
     Navbar,
+    Footer
   },
   data() {
     return {
