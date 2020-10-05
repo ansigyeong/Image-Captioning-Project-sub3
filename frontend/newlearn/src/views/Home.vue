@@ -1,39 +1,44 @@
 <template>
   <div class="bg2">
     <Navbar></Navbar>
+    <div style="min-height:90%;">
+      <div class="bin"></div>
 
-    <div class="bin"></div>
+      <!-- 네온 타이틀 -->
+      <p class="first neon">Develop your English ability</p>
+      <p class="second neon">with</p>
 
-    <!-- 네온 타이틀 -->
-    <p class="first neon">Develop your English ability</p>
-    <p class="second neon">with</p>
-
-    <!-- 움직이는 타이틀 --> 
-    <div class="content">
-      <div class="content__container">
-        <p class="content__container__text">
-          New
-        </p>
-        <ul class="content__container__list">
-          <li class="content__container__list__item">World !</li>
-          <li class="content__container__list__item">Users !</li>
-          <li class="content__container__list__item">Tech !</li>
-          <li class="content__container__list__item">Learn !</li>
-        </ul>
+      <!-- 움직이는 타이틀 --> 
+      <div class="content">
+        <div class="content__container">
+          <p class="content__container__text">
+            New
+          </p>
+          <ul class="content__container__list">
+            <li class="content__container__list__item">World !</li>
+            <li class="content__container__list__item">Users !</li>
+            <li class="content__container__list__item">Tech !</li>
+            <li class="content__container__list__item">Learn !</li>
+          </ul>
+        </div>
       </div>
     </div>
+    <Footer/>
   </div>
 </template>
 
 <script>
 
 import Navbar from "../components/common/Navigation"
+import Footer from "../components/common/footer"
+
 import '@/assets/css/background2.css'
 
 export default {
   name: 'Home',
   components: {
     Navbar,
+    Footer
   }
 }
 </script>

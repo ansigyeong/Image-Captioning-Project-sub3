@@ -1,98 +1,102 @@
 <template>
     <div class="bg">
         <Navbar/>
-        <div class="bin"></div>
+        <div style="min-height: 100%;">
+            <div class="bin"></div>
 
-        <h1><i class="fas fa-volume-up" style="font-size:50px;"></i> Speaking</h1>
+            <h1><i class="fas fa-volume-up" style="font-size:50px;"></i> Speaking</h1>
 
-        <div class="link">
-            <span style="background-color:yellow"><i class="fa fa-exclamation-triangle" aria-hidden="true" style="color:red;"></i>
-            jpg 파일만 사용가능 (<a href="https://convertio.co/kr/png-jpg/">jpg convert site</a>)</span>
-        </div>
+            <div class="link">
+                <span style="background-color:yellow"><i class="fa fa-exclamation-triangle" aria-hidden="true" style="color:red;"></i>
+                jpg 파일만 사용가능 (<a href="https://convertio.co/kr/png-jpg/">jpg convert site</a>)</span>
+            </div>
 
-        <h2><i class="fa fa-download" aria-hidden="true" style="font-size:30px;"></i> Picture Upload</h2>
+            <h2><i class="fa fa-download" aria-hidden="true" style="font-size:30px;"></i> Picture Upload</h2>
 
-        <div class="putfile">
+            <div class="putfile">
 
+                <div class="putfile">
+                    <input
+                        type="file"
+                        class="fileload"
+                        ref="files"
+                        accept="image/*"
+                        @change="imageUpload" />
+                </div>
+
+                <img v-if="previewImg.preview" :src="previewImg.preview" style="min-width:100px; max-width:600px;">
+
+                <div v-if="image">
+                    <img src = "`${this.image}`" />
+                    <p class = "res">{{ this.capText }}</p>
+                </div>
+                <div>
+                    <v-btn class="button button1" v-if="previewImg.preview" @click="pushImage">Image Captioning</v-btn>
+                    <v-btn class="button button1" v-if="capText != ''" @click="viewText" style="margin:1%;">
+                        Example Answer
+                    </v-btn>
+                </div>
+                <p class = "res" v-if="this.showText == true">
+                    {{ this.capText }}
+                </p>
+            </div>
+
+            <h2 class="myvoice"><i class="fa fa-file" aria-hidden="true" style="font-size:30px;"></i> My Voice Recorder</h2>
+            
+            <div class="recorder">
+                <audio-recorder 
+                    upload-url="YOUR_API_URL"
+                    :attempts="3"
+                    :time="2"
+                    :headers="headers"
+                    :before-recording="callback"
+                    :pause-recording="callback"
+                    :after-recording="callback"
+                    :select-record="callback"
+                    :before-upload="callback"
+                    :successful-upload="callback"
+                    :failed-upload="callback"/>
+            </div>
+
+            <h2><i class="fa fa-download" aria-hidden="true" style="font-size:30px;"></i> My Voice RecorderFile Upload</h2>
+            
             <div class="putfile">
                 <input
                     type="file"
                     class="fileload"
-                    ref="files"
-                    accept="image/*"
-                    @change="imageUpload" />
-            </div>
+                    ref="audio"
+                    accept="audio/*"
+                    @change="audioUpload" />
+                <br>
+                <br>
+                <audio class="player" controls ref="player">
+                    <source src="" ref="source">
+                </audio>
+                <br>
+                <v-btn class="button button1" v-if="this.uploadFile" @click="pushFile">Voice To Text</v-btn>
 
-            <img v-if="previewImg.preview" :src="previewImg.preview" style="min-width:100px; max-width:600px;">
-
-            <div v-if="image">
-                <img src = "`${this.image}`" />
-                <p class = "res">{{ this.capText }}</p>
-            </div>
-            <div>
-                <v-btn class="button button1" v-if="previewImg.preview" @click="pushImage">Image Captioning</v-btn>
-                <v-btn class="button button1" v-if="capText != ''" @click="viewText" style="margin:1%;">
-                    Example Answer
+                <v-btn class="button button1" v-if="userVoice != ''" @click="viewText" style="margin:1%;">
+                    Your Vocie Text
                 </v-btn>
+                <p class = "res" v-if="this.showText == true">
+                    {{ this.userVoice }}
+                </p>
             </div>
-            <p class = "res" v-if="this.showText == true">
-                {{ this.capText }}
-            </p>
         </div>
-
-        <h2 class="myvoice"><i class="fa fa-file" aria-hidden="true" style="font-size:30px;"></i> My Voice Recorder</h2>
-        
-        <div class="recorder">
-            <audio-recorder 
-                upload-url="YOUR_API_URL"
-                :attempts="3"
-                :time="2"
-                :headers="headers"
-                :before-recording="callback"
-                :pause-recording="callback"
-                :after-recording="callback"
-                :select-record="callback"
-                :before-upload="callback"
-                :successful-upload="callback"
-                :failed-upload="callback"/>
-        </div>
-
-        <h2><i class="fa fa-download" aria-hidden="true" style="font-size:30px;"></i> My Voice RecorderFile Upload</h2>
-        
-        <div class="putfile">
-            <input
-                type="file"
-                class="fileload"
-                ref="audio"
-                accept="audio/*"
-                @change="audioUpload" />
-            <br>
-            <br>
-            <audio class="player" controls ref="player">
-                <source src="" ref="source">
-            </audio>
-            <br>
-            <v-btn class="button button1" v-if="this.uploadFile" @click="pushFile">Voice To Text</v-btn>
-
-            <v-btn class="button button1" v-if="userVoice != ''" @click="viewText" style="margin:1%;">
-                Your Vocie Text
-            </v-btn>
-            <p class = "res" v-if="this.showText == true">
-                {{ this.userVoice }}
-            </p>
-        </div>
-
+        <Footer/>
     </div>
 </template>
 
 <script>
 import http from '../util/http-common.js'
 import Navbar from "../components/common/Navigation"
+import Footer from "../components/common/footer"
 import '@/assets/css/background.css'
 
 export default {
     components: {
         Navbar,
+        Footer
     },
     data () {
       return {
