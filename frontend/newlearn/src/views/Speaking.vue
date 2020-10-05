@@ -202,9 +202,9 @@ export default {
         font-size: 20px;
     }
     .recorder{
-       border-style:double dashed;
-        margin-left: 25%;
-        margin-right: 25%;
+        max-width: 420px;
+        /* border-style:double dashed; */
+        margin: auto;
     }
     .fileload{
         border-style: solid;
