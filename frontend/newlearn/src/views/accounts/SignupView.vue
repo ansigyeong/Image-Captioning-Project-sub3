@@ -1,7 +1,11 @@
 <template>
   <div class="signUp">
     <div style="text-align: center; vertical-align: middle;">
+<<<<<<< HEAD
       <h1 style="font-size: 100px; color: white;">New Learn</h1>
+=======
+      <a href="/"><h1>New Learn</h1></a>
+>>>>>>> a53190248818bc5915221593ba7a0970f6b141da
     </div>
     <br>
     <br>
@@ -94,6 +98,10 @@ export default {
 </script>
 
 <style scoped>
+  h1{
+    font-size: 100px;
+    color: white;
+  }
   html {
     height: 100%;
   }
@@ -263,5 +271,11 @@ export default {
     100% {
       bottom: 100%;
     }
+  }
+  
+  @media(max-width: 480px){
+   h1{
+     font-size:70px;
+   }
   }
 </style>
