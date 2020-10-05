@@ -1,5 +1,5 @@
 .bg2{
-    background-image: url(../images/Newyork.jpg) !important;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.01), rgba(255, 255, 255, 0.7)),url(../images/Newyork.jpg) !important;
     background-size : cover;
     height: 100%;
     width: 100%;
