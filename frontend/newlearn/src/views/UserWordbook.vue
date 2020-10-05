@@ -78,6 +78,7 @@ export default {
             http.post(`/english/deleteuserword/`, data, config)
             .then(res => {
                 console.log(res)
+                alert('내 단어장에서 삭제하였습니다.')
                 this.$router.go()
             })
             .catch(err => {
@@ -104,5 +105,8 @@ export default {
         h1{
             font-size: 30px;
         }
+    }
+    .theme--light.v-card{
+        background-color: white;
     }
 </style>
