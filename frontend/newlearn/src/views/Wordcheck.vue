@@ -147,4 +147,7 @@ export default {
     .hidden{
         visibility: hidden;
     }
+    .theme--light.v-card{
+        background-color: white;
+    }
 </style>
