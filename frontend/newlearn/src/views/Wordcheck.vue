@@ -121,7 +121,6 @@ export default {
             })
         },
         displayword() {
-            console.log()
             this.visible = !this.visible
         }
     },

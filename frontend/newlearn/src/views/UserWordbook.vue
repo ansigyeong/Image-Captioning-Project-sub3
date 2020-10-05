@@ -76,8 +76,7 @@ export default {
                 }
             }
             http.post(`/english/deleteuserword/`, data, config)
-            .then(res => {
-                console.log(res)
+            .then( () => {
                 alert('내 단어장에서 삭제하였습니다.')
                 this.$router.go()
             })

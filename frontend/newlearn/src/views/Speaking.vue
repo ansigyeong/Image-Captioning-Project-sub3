@@ -133,7 +133,7 @@ export default {
             .put(`/english/speaksound/`, InputData)
             .then((res) => {
                 this.userVoice = res.data
-                console.log(res.data)
+                // console.log(res.data)
             })
             .catch((err) => {
                 console.log(err)
@@ -142,16 +142,14 @@ export default {
         callRandomImage() {
             http.post(`/english/speaking/`)
             .then(res => {
-                console.log(res.data)
+                // console.log(res.data)
                 this.image = "http://localhost:8000" + res.data.serializer[0].image
                 this.capText = res.data.return_text
             })
         },
         checkCaption() {
             http.post(`/english/imagecaption/`)
-            .then(res => {
-                console.log(res.data)
-            })
+            .then()
         },
         imageUpload() {
             this.previewImg = {
@@ -184,7 +182,7 @@ export default {
             http
             .post(`/english/speakSituation/`)
             .then((res) => {
-                console.log(res)
+                // console.log(res)
                 this.userVoice = res.data
             })
         }
