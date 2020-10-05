@@ -132,8 +132,8 @@
 
 <script scoped>
 import http from '@/util/http-common.js'
-import axios from 'axios'
-const SERVER_URL = 'http://localhost:8000'
+// import axios from 'axios'
+// const SERVER_URL = 'http://localhost:8000'
 
 export default {
   name: 'App',
@@ -158,7 +158,7 @@ export default {
                   'Authorization': `Token ${this.$cookies.get('auth-token')}`
               }
           }
-          http.post(SERVER_URL + '/accounts/attendance/', null, config)
+          http.post('/accounts/attendance/', null, config)
             .then()
             .catch(err => {
                 console.log(err)
@@ -166,7 +166,7 @@ export default {
       },
 
       signup(signupData) {
-        axios.post(SERVER_URL + '/rest-auth/signup/', signupData)
+        http.post('/rest-auth/signup/', signupData)
           .then(res => {
             this.setCookie(res.data.key)
             alert('회원가입 성공')
@@ -179,7 +179,7 @@ export default {
 
       login(loginData) {
         
-        axios.post(SERVER_URL + '/rest-auth/login/', loginData)
+        http.post('/rest-auth/login/', loginData)
           .then(res => {
             // console.log(res.data.key)
             // console.log(res.data)
@@ -203,7 +203,7 @@ export default {
           }
         }
 
-        axios.get(SERVER_URL + '/rest-auth/logout/', null, config)
+        http.get('/rest-auth/logout/', null, config)
           // .then(() => {})
           .catch(err => console.log(err.response))
           .finally(() => {
