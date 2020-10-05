@@ -1,5 +1,5 @@
 <template>
-    <div class="bg1">
+    <div class="bg">
         <Navbar/>
         <div style="min-height: 100%;">
             <div class="bin"></div>
