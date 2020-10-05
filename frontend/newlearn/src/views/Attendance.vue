@@ -119,7 +119,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
     .bin{
         height: 70px;
     }
@@ -127,5 +127,11 @@ export default {
         h1{
             font-size: 30px;
         }
+    }
+    .theme--light.v-card{
+        background-color: lightblue;
+    }
+    .v-date-picker-table .v-btn.v-btn--active{
+        color: black;
     }
 </style>
