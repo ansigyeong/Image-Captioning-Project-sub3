@@ -213,6 +213,9 @@ export default {
     }
   }
   @media(max-width: 480px){
+  .first, .second{
+    font-size:18px;
+  }
   .content {
     display: block;
     margin-left: 50px;
