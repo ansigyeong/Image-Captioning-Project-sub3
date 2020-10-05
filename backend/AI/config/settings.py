@@ -101,7 +101,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 STATIC_URL = '/static/'
-STATIC_ROOT = 'var/www/backend'
+STATIC_ROOT = 'static/'
 # Application definition
 AUTH_USER_MODEL = 'accounts.User'
 SITE_ID = 1
