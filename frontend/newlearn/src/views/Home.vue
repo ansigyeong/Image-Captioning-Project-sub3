@@ -1,20 +1,370 @@
 <template>
-  <div class="home">
-    <div style="text-align: center; vertical-align: middle;">
-      <a href="/"><h1 style="font-size: 100px; color: white;">New Learn</h1></a>
+  <div class="bg2">
+    <Navbar></Navbar>
+    <div style="min-height:90%;">
+      <div class="bin"></div>
+
+      <!-- 네온 타이틀 -->
+      <p class="first neon">Develop your English ability</p>
+      <p class="second neon">with</p>
+
+      <!-- 움직이는 타이틀 --> 
+      <div class="content">
+        <div class="content__container">
+          <p class="content__container__text">
+            New
+          </p>
+          <ul class="content__container__list">
+            <li class="content__container__list__item">World !</li>
+            <li class="content__container__list__item">Users !</li>
+            <li class="content__container__list__item">Tech !</li>
+            <li class="content__container__list__item">Learn !</li>
+          </ul>
+        </div>
+      </div>
     </div>
+    <Footer/>
   </div>
 </template>
 
 <script>
 
+import Navbar from "../components/common/Navigation"
+import Footer from "../components/common/footer"
+
+import '@/assets/css/background2.css'
+
 export default {
   name: 'Home',
   components: {
+    Navbar,
+    Footer
   }
 }
 </script>
 
 <style socped>
+  .bin{
+    height: 70px;
+  }
+  .first{
+    font-size: 50px;
+    margin: 60px;
+  }
+  .second{
+    display: inline-block;
+    font-size: 30px;
+    margin-right: 60px;
+    margin-left: 60px;
+  }
+  .neon {
+    color: #fff;
+    text-shadow:
+      0 0 5px #fff,
+      0 0 10px #fff,
+      0 0 20px #fff,
+      0 0 40px #0ff,
+      0 0 80px #0ff,
+      0 0 90px #0ff,
+      0 0 100px #0ff,
+      0 0 150px #0ff;
+  }
+  .content {
+    display: inline-block;
+    position: absolute;
+    /* top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%); */
+    height: 160px;
+    overflow: hidden;
+    font-family: "Lato", sans-serif;
+    font-size: 47px;
+    line-height: 40px;
+    color: #ecf0f1;
+  }
+  .content__container {
+    font-weight: 600;
+    overflow: hidden;
+    height: 40px;
+    padding: 0 40px;
+  }
+  .content__container:before {
+    content: "[";
+    left: 0;
+  }
+  .content__container:after {
+    content: "]";
+    position: absolute;
+    right: 0;
+  }
+  .content__container:after, .content__container:before {
+    position: absolute;
+    top: 0;
+    color: #16a085;
+    font-size: 42px;
+    line-height: 40px;
+    -webkit-animation-name: opacity;
+    -webkit-animation-duration: 2s;
+    -webkit-animation-iteration-count: infinite;
+    animation-name: opacity;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+  }
+  .content__container__text {
+    display: inline;
+    float: left;
+    margin: 0;
+  }
+  .content__container__list {
+    margin-top: 0;
+    padding-left: 110px;
+    text-align: left;
+    list-style: none;
+    -webkit-animation-name: change;
+    -webkit-animation-duration: 10s;
+    -webkit-animation-iteration-count: infinite;
+    animation-name: change;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+  }
+  .content__container__list__item {
+    line-height: 40px;
+    margin: 0;
+  }
 
+  @-webkit-keyframes opacity {
+    0%,
+    100% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+  @-webkit-keyframes change {
+    0%,
+    12.66%,
+    100% {
+      -webkit-transform: translate3d(0, 0, 0);
+              transform: translate3d(0, 0, 0);
+    }
+    16.66%,
+    29.32% {
+      -webkit-transform: translate3d(0, -25%, 0);
+              transform: translate3d(0, -25%, 0);
+    }
+    33.32%,
+    45.98% {
+      -webkit-transform: translate3d(0, -50%, 0);
+              transform: translate3d(0, -50%, 0);
+    }
+    49.98%,
+    62.64% {
+      -webkit-transform: translate3d(0, -75%, 0);
+              transform: translate3d(0, -75%, 0);
+    }
+    66.64%,
+    79.3% {
+      -webkit-transform: translate3d(0, -50%, 0);
+              transform: translate3d(0, -50%, 0);
+    }
+    83.3%,
+    95.96% {
+      -webkit-transform: translate3d(0, -25%, 0);
+              transform: translate3d(0, -25%, 0);
+    }
+  }
+  @keyframes opacity {
+    0%,
+    100% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+  @keyframes change {
+    0%,
+    12.66%,
+    100% {
+      -webkit-transform: translate3d(0, 0, 0);
+              transform: translate3d(0, 0, 0);
+    }
+    16.66%,
+    29.32% {
+      -webkit-transform: translate3d(0, -25%, 0);
+              transform: translate3d(0, -25%, 0);
+    }
+    33.32%,
+    45.98% {
+      -webkit-transform: translate3d(0, -50%, 0);
+              transform: translate3d(0, -50%, 0);
+    }
+    49.98%,
+    62.64% {
+      -webkit-transform: translate3d(0, -75%, 0);
+              transform: translate3d(0, -75%, 0);
+    }
+    66.64%,
+    79.3% {
+      -webkit-transform: translate3d(0, -50%, 0);
+              transform: translate3d(0, -50%, 0);
+    }
+    83.3%,
+    95.96% {
+      -webkit-transform: translate3d(0, -25%, 0);
+              transform: translate3d(0, -25%, 0);
+    }
+  }
+  @media(max-width: 480px){
+  .first, .second{
+    font-size:18px;
+  }
+  .content {
+    display: block;
+    margin-left: 50px;
+    height: 160px;
+    overflow: hidden;
+    font-family: "Lato", sans-serif;
+    font-size: 20px;
+    line-height: 40px;
+    color: #ecf0f1;
+  }
+  .content__container {
+    font-weight: 600;
+    overflow: hidden;
+    height: 40px;
+    padding: 0 40px;
+  }
+  .content__container:before {
+    content: "[";
+    left: 0;
+  }
+  .content__container:after {
+    content: "]";
+    position: absolute;
+    right: 0;
+  }
+  .content__container:after, .content__container:before {
+    position: absolute;
+    top: 0;
+    color: #16a085;
+    font-size: 42px;
+    line-height: 40px;
+    -webkit-animation-name: opacity;
+    -webkit-animation-duration: 2s;
+    -webkit-animation-iteration-count: infinite;
+    animation-name: opacity;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+  }
+  .content__container__text {
+    display: inline;
+    float: left;
+    margin: 0;
+  }
+  .content__container__list {
+    margin-top: 0;
+    padding-left: 110px;
+    text-align: left;
+    list-style: none;
+    -webkit-animation-name: change;
+    -webkit-animation-duration: 10s;
+    -webkit-animation-iteration-count: infinite;
+    animation-name: change;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+  }
+  .content__container__list__item {
+    line-height: 40px;
+    margin: 0;
+  }
+
+  @-webkit-keyframes opacity {
+    0%,
+    100% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+  @-webkit-keyframes change {
+    0%,
+    12.66%,
+    100% {
+      -webkit-transform: translate3d(0, 0, 0);
+              transform: translate3d(0, 0, 0);
+    }
+    16.66%,
+    29.32% {
+      -webkit-transform: translate3d(0, -25%, 0);
+              transform: translate3d(0, -25%, 0);
+    }
+    33.32%,
+    45.98% {
+      -webkit-transform: translate3d(0, -50%, 0);
+              transform: translate3d(0, -50%, 0);
+    }
+    49.98%,
+    62.64% {
+      -webkit-transform: translate3d(0, -75%, 0);
+              transform: translate3d(0, -75%, 0);
+    }
+    66.64%,
+    79.3% {
+      -webkit-transform: translate3d(0, -50%, 0);
+              transform: translate3d(0, -50%, 0);
+    }
+    83.3%,
+    95.96% {
+      -webkit-transform: translate3d(0, -25%, 0);
+              transform: translate3d(0, -25%, 0);
+    }
+  }
+  @keyframes opacity {
+    0%,
+    100% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+  @keyframes change {
+    0%,
+    12.66%,
+    100% {
+      -webkit-transform: translate3d(0, 0, 0);
+              transform: translate3d(0, 0, 0);
+    }
+    16.66%,
+    29.32% {
+      -webkit-transform: translate3d(0, -25%, 0);
+              transform: translate3d(0, -25%, 0);
+    }
+    33.32%,
+    45.98% {
+      -webkit-transform: translate3d(0, -50%, 0);
+              transform: translate3d(0, -50%, 0);
+    }
+    49.98%,
+    62.64% {
+      -webkit-transform: translate3d(0, -75%, 0);
+              transform: translate3d(0, -75%, 0);
+    }
+    66.64%,
+    79.3% {
+      -webkit-transform: translate3d(0, -50%, 0);
+              transform: translate3d(0, -50%, 0);
+    }
+    83.3%,
+    95.96% {
+      -webkit-transform: translate3d(0, -25%, 0);
+              transform: translate3d(0, -25%, 0);
+    }
+  }
+
+  }
 </style>

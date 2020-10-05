@@ -1,54 +1,67 @@
 <template>
-  <div>
-        <h1><i class="fas fa-headphones-alt" style="font-size:50px;"></i> Listening</h1>
+        
+  <div class="bg1">
+        <Navbar></Navbar>
+        <div style="min-height: 100%;">
+            <div class="bin"></div>
+            <h1><i class="fas fa-headphones-alt" style="font-size:50px;"></i> Listening</h1>
 
-        <div class="link">
-            <p><i class="fa fa-exclamation-triangle" aria-hidden="true" style="color:red;"></i>
-            10MB 이하의 wav/mp3/mp4 파일만 사용가능 (<a href="https://online-audio-converter.com/ko/">wav/mp3/mp4 convert site</a>)</p>
+            <div  class="link">
+                <span style="background-color:yellow"><i class="fa fa-exclamation-triangle" aria-hidden="true" style="color:red;"></i>
+                10MB 이하의 wav/mp3/mp4/m4a 파일만 사용가능 (<a href="https://online-audio-converter.com/ko/">wav/mp3/mp4/m4a convert site</a>)</span>
+            </div>
+
+            <div class="putfile">
+                <input
+                    type="file"
+                    class="fileload"
+                    ref="files"
+                    accept="audio/*"
+                    @change="audioUpload" />
+                <br>
+                <br>
+                <audio class="player" controls ref="player">
+                    <source src="" ref="source">
+                </audio>
+                <br>
+                <v-btn class="button button1" v-if="this.uploadFile" @click="pushFile">Voice To Text</v-btn>
+
+                <v-btn class="button button1" v-if="capText != ''" @click="viewText" style="margin:1%;">
+                    Result
+                </v-btn>
+                <p class = "res" v-if="this.showText == true">
+                    {{ this.capText }}
+                </p>
+            </div>
+
+            <div class="mytext">
+                <textarea v-model="message" id="textbox" onkeyup="charcountupdate(this.value)"> Start typing here to see results</textarea>
+                <span id=charcount></span>
+                <br>
+                <v-btn  class="button button1" @click="checkText">Compare My Text</v-btn>
+            </div>
+
+            <div class="compare">
+                <span class = "res" v-for="(word, i) in userText" :class="{ wrong: userText[i] != wrongCheck[i] }" :key="{i}">
+                    {{ word }}
+                </span>
+            </div>
         </div>
-
-        <div class="putfile">
-            <input
-                type="file"
-                class="fileload"
-                ref="files"
-                accept="audio/*"
-                @change="audioUpload" />
-            <br>
-            <br>
-            <audio class="player" controls ref="player">
-                <source src="" ref="source">
-            </audio>
-            <br>
-            <v-btn class="button button1" v-if="this.uploadFile" @click="pushFile">Voice To Text</v-btn>
-
-            <v-btn class="button button1" v-if="capText != ''" @click="viewText" style="margin:1%;">
-                Example answer
-            </v-btn>
-            <p class = "res" v-if="this.showText == true">
-                {{ this.capText }}
-            </p>
-        </div>
-
-        <div class="mytext">
-            <textarea v-model="message" id="textbox" onkeyup="charcountupdate(this.value)"> Start typing here to see results</textarea>
-            <span id=charcount></span>
-            <br>
-            <v-btn  class="button button1" @click="checkText">Compare My Text</v-btn>
-        </div>
-
-        <div class="compare">
-            <span class = "res" v-for="(word, i) in userText" :class="{ wrong: userText[i] != wrongCheck[i] }" :key="{i}">
-                {{ word }}
-            </span>
-        </div>
+    <Footer/>
   </div>
 </template>
 
 <script>
 import http from '../util/http-common.js'
+import Navbar from "../components/common/Navigation"
+import Footer from "../components/common/footer"
+import '@/assets/css/background1.css'
 
 export default {
+    components: {
+        Navbar,
+        Footer
+    },
     data () {
         return {
             uploadFile: '',
@@ -101,7 +114,7 @@ export default {
             }
             http.post(`/english/checktext/`, check)
             .then((res) => {
-                console.log(res.data)
+                // console.log(res.data)
                 this.wrongCheck = res.data.stttext,
                 this.userText = res.data.usertext
             })
@@ -115,9 +128,16 @@ export default {
 
 <style scoped>
     @import url('https://fonts.googleapis.com/css2?family=Secular+One&display=swap');
-    .res{
-         font-family: 'Secular One', sans-serif;
-         font-size: 20px;
+
+    .bin{
+        height: 70px;
+    }
+    .res, .compare{
+        background-color: aliceblue;
+        font-family: 'Secular One', sans-serif;
+        text-align: center;
+        font-size: 20px;
+        margin: 20px;
     }
     .fileload{
         border-style: solid;
@@ -127,7 +147,12 @@ export default {
         font-weight: 700;
         text-align: center;
     }
-    .link, .putfile, .mytext, .compare{
+    .link{
+        font-family: 'Secular One', sans-serif;
+        text-align: center;
+        margin: 20px;
+    }
+    .putfile, .mytext{
         font-family: 'Secular One', sans-serif;
         text-align: center;
         margin: 20px;
@@ -170,4 +195,62 @@ export default {
         color: black; 
         border: 2px solid #4CAF50;
     }
+    
+    @media(max-width: 480px){
+        .res{
+            font-family: 'Secular One', sans-serif;
+            font-size: 10px;
+        }
+        .fileload{
+            border-style: solid;
+            border-width: thin medium thick 5px;
+            padding:10px;
+            font-size: 10px;
+            font-weight: 200;
+            text-align: center;
+        }
+        .link, .putfile, .mytext, .compare{
+            font-family: 'Secular One', sans-serif;
+            text-align: center;
+            margin: 10px;
+        }
+        h1{
+            margin: 20px;
+            font-family: 'Secular One', sans-serif;
+            font-size: 50px ;
+            text-align: center;
+        }
+        .wrong {
+            color: red;
+        }
+        textarea {
+            font-family: 'Secular One', sans-serif;
+            border: 2px;
+            background-color:#008c9e;
+            color: white;
+            border-color: black;
+            width: 300px;
+            height: 100px;
+        }
+        .button {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 16px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-family: 'Secular One', sans-serif;
+            font-size: 10px;
+            margin: 4px 2px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+        }
+
+        .button1 {
+            background-color: white; 
+            color: black; 
+            border: 2px solid #4CAF50;
+        }
+    } 
 </style>

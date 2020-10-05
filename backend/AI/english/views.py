@@ -122,7 +122,7 @@ def sound_upload(request):
     text = listen.sound
     return_text = STT.main(text)
     # print(return_text)
-    print(request.user)
+    # print(request.user)
     # 기능 이용 카운트를 추가
     user = request.user
     today = DateFormat(datetime.now()).format('Y-m-d')
@@ -150,6 +150,15 @@ def checktext(request):
 @api_view(['POST'])
 def addword(request):
     user = request.user
+
+    # 기존에 내 단어장에 있던 단어인지 확인
+    word = Userwordbook.objects.filter(user=user).filter(word=request.data['word'])
+
+    # 있을 경우 추가하지 않고 return
+    if len(word) > 0:
+        return Response('존재함')
+
+    # 없을 경우 내 단어장에 추가하고 return
     newword = Userwordbook()
     newword.user = user
     newword.word = request.data['word']
@@ -161,7 +170,9 @@ def addword(request):
 @api_view(['POST'])
 def deleteword(request):
     user = request.user
-    delword = get_object_or_404(Userwordbook, user=user, word=request.data['word'])
+    # 내 단어장에 있는 단어 중 지울 단어에 해당하는 단어를 가져옴
+    # 만약 중복단어가 있을 경우를 대비해 filter로 가져온 단어 중 [0]번째 단어를 사용
+    delword = Userwordbook.objects.filter(user=user).filter(word=request.data['word'])[0]
     delword.delete()
     return Response('삭제')
 
@@ -189,3 +200,10 @@ def speaksound(request):
 
     # 결과물 전송
     return Response(return_text)
+
+@api_view(['POST'])
+def wordcheck(request):
+    user = request.user
+    words = Userwordbook.objects.filter(user=user).order_by('?')[0:20]
+    serializer = UserwordbookSerializer(words, many=True)
+    return Response(serializer.data)

@@ -1,36 +1,52 @@
 <template>
-  <div class="container">
-    <div style="text-align: center;"><h1>🔉 Notice 🔉</h1></div>
-    <br>
-    <br>
+  <div class="bg1">
+    <Navbar/>
+    <div style="min-height: 100%;">
+      <div class="bin"></div>
 
-    <!-- title & etc -->
-    <div class="title">
-      <h1>{{ this.notice.title }}</h1>
-    </div>
-    <div style="text-align: right;">
-      <p>{{ this.notice.created_at }}</p>
-    </div>
-    <div style="text-align: right;">
-      <v-btn @click="goEdit">EDIT</v-btn>
-      <v-btn @click="goDelete">DELETE</v-btn>
-    </div>
+      <!-- <div style="text-align: center;"><h1>🔉 Notice 🔉</h1></div>
+      <br>
+      <br> -->
+      <div class="container">
+        <div class="content-back">
+          <!-- title & etc -->
+          <div class="title">
+            <h1>{{ this.notice.title }}</h1>
+          </div>
+          <!-- <div style="text-align: right;">
+          </div> -->
+          <div style="text-align: right;">
+            <v-btn icon style="margin-right: 50px;">{{ this.notice.created_at | moment('YYYY-MM-DD') }}</v-btn>
+            <v-btn icon @click="goEdit" style="margin-right: 50px;"><v-icon left>mdi-pencil</v-icon>EDIT</v-btn>
+            <v-btn icon @click="goDelete" style="margin-right: 50px;"><v-icon left>mdi-cancel</v-icon>DELETE</v-btn>
+          </div>
 
-    <hr>
+          <hr>
 
-    <!-- content -->
-    <div v-html="this.notice.content" style="margin:20px" class="contentbox"></div>
-    <!-- <div class="content">
-      <h3>{{ this.suggestion.content }}</h3>
-    </div> -->
+          <!-- content -->
+          <h3><div v-html="this.notice.content" style="margin:20px" class="contentbox"></div></h3>
+          <!-- <div class="content">
+            <h3>{{ this.suggestion.content }}</h3>
+          </div> -->
+        </div>
+      </div>
+    </div>
+    <Footer/>
   </div>
 </template>
 
 <script>
 import http from '../util/http-common.js'
+import Navbar from "../components/common/Navigation"
+import Footer from "../components/common/footer"
+import '@/assets/css/background.css'
 
 export default {
   name: 'noticeDetail',
+  components: {
+        Navbar,
+        Footer,
+  },
   data() {
     return {
       notice: [],
@@ -60,8 +76,7 @@ export default {
         }
       }
       http.delete(`/community/notice/` + this.notice_pk + `/delete/`, config)
-      .then((res) => {
-        console.log(res)
+      .then(() => {
         alert('성공적으로 삭제되었습니다.')
         this.$router.go(-1)
         // this.$router.push({ name: 'vocList' })
@@ -81,6 +96,14 @@ export default {
 </script>
 
 <style scoped>
+  .bin{
+    height: 70px;
+  }
+  .content-back {
+    background-color: rgb(255, 255, 255, 0.9);
+    border-radius: 1rem;
+    min-height: 300px;
+  }
   .title {
     margin: 20px;
   }
@@ -89,5 +112,10 @@ export default {
   }
   .v-btn {
     margin: 5px;
+  }  
+  @media(max-width: 480px){
+    h1{
+        font-size: 30px;
+    }
   }
 </style>

@@ -1,139 +1,17 @@
 <template>
-  <v-app id="app">
-
-    <!-- Header & Nav 시작 -->
-    <div class="HeaderNav">
-        <div style="background: #536976; -webkit-linear-gradient(to right, #292E49, #536976); linear-gradient(to right, #292E49, #536976); height:50px;">
-            <img src="@/assets/nl.png" @click="goHome" style="height: 50px;">
-            <div style="float:left; margin-left:10px; margin-top:8px;">
-                <div @click.stop="drawer = !drawer" style="cursor:pointer;">
-                    <i class="fas fa-bars fa-2x"></i>
-                </div>
-            </div>
-            <div style="float:right; margin-right:10px; margin-top:8px;">
-                <v-menu bottom transition="slide-y-transition">
-                    <template v-slot:activator="{ on, attrs }">
-                        <div v-bind="attrs" v-on="on">
-                            <i class="fas fa-user fa-2x"></i>
-                        </div>
-                    </template>
-                    
-                    <v-list v-if="!isLoggedIn">
-                      <v-list-item @click="goSignup" style="margin-left:20px;">
-                          <v-list-item-content>
-                              <v-list-item-title>Sign Up</v-list-item-title>
-                          </v-list-item-content>
-                      </v-list-item>
-                      <v-list-item @click="goSignin" style="margin-left:20px;">
-                          <v-list-item-content>
-                              <v-list-item-title>Sign In</v-list-item-title>
-                          </v-list-item-content>
-                      </v-list-item>
-                    </v-list>
-
-                    <v-list v-if="isLoggedIn">
-                        <v-list-item @click.stop="dropDrawer = !dropDrawer">
-                            <v-list-item-content>
-                                <v-list-item-title>My Page</v-list-item-title>
-                            </v-list-item-content>
-                        </v-list-item>
-                        <v-list v-if="dropDrawer">
-                            <v-list-item @click="goMyWordbook" style="margin-left:20px;">
-                                <v-list-item-content>
-                                    <v-list-item-title>My Wordbook</v-list-item-title>
-                                </v-list-item-content>
-                            </v-list-item>
-                            <v-list-item @click="goAttendance" style="margin-left:20px;">
-                                <v-list-item-content>
-                                    <v-list-item-title>Attendance</v-list-item-title>
-                                </v-list-item-content>
-                            </v-list-item>
-                            <v-list-item @click="goMyinfo" style="margin-left:20px;">
-                                <v-list-item-content>
-                                    <v-list-item-title>My Information</v-list-item-title>
-                                </v-list-item-content>
-                            </v-list-item>
-                            <v-list-item @click="goPointList" style="margin-left:20px;">
-                                <v-list-item-content>
-                                    <v-list-item-title>Points</v-list-item-title>
-                                </v-list-item-content>
-                            </v-list-item>
-                            <v-list-item @click="goVocList" style="margin-left:20px;">
-                                <v-list-item-content>
-                                    <v-list-item-title>Voice of Customer</v-list-item-title>
-                                </v-list-item-content>
-                            </v-list-item>
-                        </v-list>
-                        <v-divider></v-divider>
-                        <v-list-item to="/accounts/logout" @click.native="logout">
-                            <v-list-item-content>
-                                <v-list-item-title>Logout</v-list-item-title>
-                            </v-list-item-content>
-                        </v-list-item>
-                    </v-list>
-                    </v-menu>
-            </div>
-        </div>
-
-        <!-- 사이드바 항목은 목업 내용 그대로 넣었음 -->
-        <!-- 간격, 크기 등 조절해야 함 -->
-        <v-navigation-drawer v-model="drawer" absolute temporary>
-            <v-list-item @click="goListening" style="margin-top:100px;">
-                <v-list-item-icon>
-                    <i class="fas fa-headphones-alt"></i>
-                </v-list-item-icon>
-                <v-list-item-content>
-                    <v-list-item-title>Listening</v-list-item-title>
-                </v-list-item-content>
-            </v-list-item>
-            <v-list-item @click="goSpeaking">
-                <v-list-item-icon>
-                    <i class="fas fa-volume-up"></i>
-                </v-list-item-icon>
-                <v-list-item-content>
-                    <v-list-item-title>Speaking</v-list-item-title>
-                </v-list-item-content>
-            </v-list-item>
-            <v-list-item @click="goWordbook">
-                <v-list-item-icon>
-                    <i class="fas fa-atlas"></i>
-                </v-list-item-icon>
-                <v-list-item-content>
-                    <v-list-item-title>Wordbook</v-list-item-title>
-                </v-list-item-content>
-            </v-list-item>
-            <v-divider></v-divider>
-            <v-list-item @click="goNotice">
-                <v-list-item-icon>
-                    <i class="fas fa-bullhorn"></i>
-                </v-list-item-icon>
-                <v-list-item-content>
-                    <v-list-item-title>Notice</v-list-item-title>
-                </v-list-item-content>
-            </v-list-item>
-        </v-navigation-drawer>
-    </div>
-    <!-- Header & Nav 끝 -->
-
-    <!-- <div id="nav">
-      <router-link to="/">New Learn</router-link> |
-      <router-link v-if="!isLoggedIn" :to="{ name: 'Login' }">Login</router-link> 
-      <router-link v-if="!isLoggedIn" :to="{ name: 'Signup' }">Signup</router-link>
-      <router-link v-if="isLoggedIn" to="/accounts/logout" @click.native="logout" >Logout</router-link>
-      <div>
-        {{ errorMessages }}
-      </div>
-    </div> -->
-
-    <router-view @submit-login-data="login" @submit-signup-data="signup"/>
-
-  </v-app>
+<div data-app="true" class="vue-tempalte">
+  <div class = "App">
+    <!-- <div class="vertical-center"> -->
+      <!-- <div class="inner-block"> -->
+        <router-view :key="$route.fullPath" ></router-view>
+      <!-- </div> -->
+    <!-- </div> -->
+  </div>
+</div>
 </template>
 
 <script scoped>
 import http from '@/util/http-common.js'
-// import axios from 'axios'
-// const SERVER_URL = 'http://localhost:8000'
 
 export default {
   name: 'App',
@@ -261,19 +139,9 @@ export default {
       // }
     },
   }
-</script>
 
 
-<style scoped>
-  html #app {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    min-height: 800px;
-    background-size: 100% 100%;
-    background: #536976;
-    background: -webkit-linear-gradient(to right, #292E49, #536976);
-    background: linear-gradient(to right, #292E49, #536976); 
-  }
-</style>
+
+
+
+

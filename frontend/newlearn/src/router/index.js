@@ -12,8 +12,6 @@ import Attendance from '../views/Attendance.vue'
 import vocList from '../views/vocList.vue'
 import createVoc from '../views/createVoc.vue'
 import vocDetail from '../views/vocDetail.vue'
-import createVocAnswer from '../views/createVocAnswer.vue'
-import vocAnswerDetail from '../views/vocAnswerDetail.vue'
 import editVoc from '../views/editVoc.vue'
 
 import noticeList from '../views/noticeList.vue'
@@ -26,13 +24,15 @@ import Speaking from '../views/Speaking.vue'
 import Listening from '../views/Listening.vue'
 import UserWordbook from '../views/UserWordbook.vue'
 
+import WordCheck from '../views/Wordcheck.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    name: 'Login',
+    component: LoginView,
   },
   {
     path: '/accounts/signup',
@@ -40,9 +40,9 @@ const routes = [
     component: SignupView,
   },
   {
-    path: '/accounts/login',
-    name: 'Login',
-    component: LoginView,
+    path: '/home',
+    name: 'Home',
+    component: Home,
   },
   {
     path: '/mypage/myinfo',
@@ -78,16 +78,6 @@ const routes = [
     path: '/mypage/editvoc/:suggestion_pk',
     name: 'editVoc',
     component: editVoc,
-  },
-  {
-    path: '/mypage/createvocanswer',
-    name: 'createVocAnswer',
-    component: createVocAnswer,
-  },
-  {
-    path: '/mypage/vocAnswerDetail',
-    name: 'vocAnswerDetail',
-    component: vocAnswerDetail,
   },
   {
     path: '/notice',
@@ -129,6 +119,11 @@ const routes = [
     name: 'UserWordbook',
     component: UserWordbook,
   },
+  {
+    path: '/english/wordcheck',
+    name: 'WordCheck',
+    component: WordCheck,
+  },
 ]
 
 const router = new VueRouter({
@@ -138,7 +133,7 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  const publicPages = ['Login', 'Signup', 'Home', 'List', 'Pointlist', 'Attendance', 'Wordbook', 'Speaking', 'Listening', 'UserWordbook']  // Login 안해도 됨
+  const publicPages = ['Login', 'Signup', 'Home', 'List', 'Pointlist', 'Attendance', 'Wordbook', 'Speaking', 'Listening', 'UserWordbook', 'WordCheck']  // Login 안해도 됨
   const authPages = ['Login', 'Signup']  // Login 되어있으면 안됨
   
   const authRequired = !publicPages.includes(to.name)  // 로그인 해야 함
@@ -146,7 +141,7 @@ router.beforeEach((to, from, next) => {
   const isLoggedIn = !!Vue.$cookies.isKey('auth-token')
 
   if(unauthRequired && isLoggedIn) {
-    next('/')
+    next({ name: 'Home'})
   }
   authRequired && !isLoggedIn ? next({ name: 'Login'}) : next()
 })
