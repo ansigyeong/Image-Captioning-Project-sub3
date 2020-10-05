@@ -112,8 +112,7 @@ export default {
         }
       }
       http.delete(`/community/suggestion/` + this.suggestion_pk + `/delete/`, config)
-      .then((res) => {
-        console.log(res)
+      .then(() => {
         alert('성공적으로 삭제되었습니다.')
         this.$router.go(-1)
         // this.$router.push({ name: 'vocList' })
@@ -136,8 +135,7 @@ export default {
         }
       }
       http.post(`/community/suggestion/` + this.suggestion_pk + `/commentcreate/`, this.commentData, config)
-        .then(res => {
-          console.log(res.data)
+        .then(() => {
           alert('성공적으로 작성되었습니다.')
           this.$router.go() // 현재 페이지로 새로고침
         })
@@ -151,8 +149,7 @@ export default {
         }
       }
       http.post(`/community/suggestion/` + this.suggestion_pk + `/` + commentId + `/commentdelete/`, config)
-      .then((res) => {
-        console.log(res)
+      .then(() => {
         alert('성공적으로 삭제되었습니다.')
         this.$router.go()
       })
