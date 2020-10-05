@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="signUp">
     <div style="text-align: center; vertical-align: middle;">
       <a href="/"><h1 style="font-size: 100px; color: white;">New Learn</h1></a>
     </div>
@@ -8,8 +8,7 @@
     <br>
     <div class="signup-box">
       <h2>Signup</h2>
-      <form
-      onsubmit="return false;">
+      <form onsubmit="return false;">
         <div class="user-box">
           <input v-model="signupData.username" id="username" type="text">
           <label for="username"><p style="color: white;">ID</p></label>
@@ -27,7 +26,7 @@
           <label for="password2"><p style="color: white;">Repeat Password</p></label>
         </div>
         <div style="text-align: center;">
-          <button @click="signup">
+          <button @click="signup" style="color: white;">
             <span></span>
             <span></span>
             <span></span>
@@ -38,25 +37,13 @@
       </form>
     </div>
   </div>
-    <!-- <div>
-        <label for="username">username: </label>
-        <input v-model="signupData.username" id="username" type="text">
-    </div>
-    <div>
-        <label for="password1">password: </label>
-        <input v-model="signupData.password1" id="password1" type="password">
-    </div>
-    <div>
-        <label for="password2">password: </label>
-        <input v-model="signupData.password2" id="password2" type="password">
-    </div>
-    <div>
-        <button @click="signup">Signup</button>
-    </div>
-  </div> -->
+
 </template>
 
 <script>
+import http from '@/util/http-common.js'
+import '@/assets/css/main.css'
+
 export default {
     name: 'SignupView',
     data() {
@@ -70,9 +57,38 @@ export default {
         }
     },
     methods: {
-        signup() {
-            this.$emit('submit-signup-data', this.signupData)
-        }
+     setCookie(token) {
+        this.$cookies.set('auth-token', token)
+        this.isLoggedIn = true
+      },
+
+       createattendance() {
+          const config = {
+              headers: {
+                  'Authorization': `Token ${this.$cookies.get('auth-token')}`
+              }
+          }
+          
+          http.post('/accounts/attendance/', null, config)
+            .then()
+            .catch(err => {
+                console.log(err)
+            })
+      },
+
+     signup() {
+        http.post('/rest-auth/signup/', this.signupData)
+          .then(res => {
+            this.setCookie(res.data.key)
+            this.createattendance()
+            alert('회원가입 성공')
+            this.$router.push({ name: 'Home' })
+          })
+          .catch(err => {
+          alert('회원가입 실패')
+          this.errorMessages = err.response.data})
+      },
+
     }
 }
 </script>
@@ -81,6 +97,7 @@ export default {
   html {
     height: 100%;
   }
+
   body {
     margin: 0;
     padding: 0;

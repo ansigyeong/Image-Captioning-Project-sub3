@@ -1,31 +1,16 @@
 <template>
   <v-app>
-    <div class="container">
+    <div class="bg1">
+      <Navbar/>
+      <div style="min-height: 100%;">
+      <div class="bin"></div>
+
       <!-- 로고 -->
       <div style="text-align:center;"><h1>🏡 My Information 🏡</h1></div>
       <br>
       <br>
 
       <!-- 1. 프로필 카드 -->
-      <v-card class="mx-auto" max-width="434" tile>
-        <v-img height="100%" src="@/assets/profile.jpg">
-          <v-row align="end" class="fill-height">
-            <v-col align-self="start" class="pa-0" cols="12">
-              <!-- <v-avatar class="profile" color="grey" size="164" tile>
-                <v-img src="@/assets/profile.jpg"></v-img>
-              </v-avatar> -->
-            </v-col>
-            <v-col class="py-0">
-              <v-list-item color="rgba(0, 0, 0, .4)" dark>
-                <v-list-item-content>
-                  <!-- <v-list-item-title class="title">{{ }}</v-list-item-title> -->
-                  <v-list-item-subtitle>Network Engineer</v-list-item-subtitle>
-                </v-list-item-content>
-              </v-list-item>
-            </v-col>
-          </v-row>
-        </v-img>
-      </v-card>
 
       <br>
       <br>
@@ -63,43 +48,45 @@
         <!-- </v-col> -->
 
         <!-- <v-col cols="12" sm="6"> -->
-          <v-text-field
-            :append-icon="show4 ? 'mdi-eye' : 'mdi-eye-off'"
-            v-model="password"
-            :rules="[rules.required, rules.min]"
-            :type="show4 ? 'text' : 'password'"
-            name="input-10-2"
-            label="Error"
-            hint="At least 8 characters"
-            :value="this.password"
-            error
-            @click:append="show4 = !show4"
-          ></v-text-field>
-        <!-- </v-col> -->
+            <v-text-field
+              :append-icon="show4 ? 'mdi-eye' : 'mdi-eye-off'"
+              v-model="password"
+              :rules="[rules.required, rules.min]"
+              :type="show4 ? 'text' : 'password'"
+              name="input-10-2"
+              label="Error"
+              hint="At least 8 characters"
+              :value="this.password"
+              error
+              @click:append="show4 = !show4"
+            ></v-text-field>
+          <!-- </v-col> -->
 
-        <!-- 비밀번호 확인 -->
-        <!-- <v-col cols="12" sm="6"> -->
-          <v-text-field
-            :append-icon="show4 ? 'mdi-eye' : 'mdi-eye-off'"
-            v-model="repeatPassword"
-            :rules="confirmPasswordRules.concat(passwordConfirmationRule)"
-            :type="show4 ? 'text' : 'password'"
-            name="input-10-2"
-            label="Error"
-            hint="At least 8 characters"
-            :value="this.repeatPassword"
-            error
-            @click:append="show4 = !show4"
-          ></v-text-field>
-        <!-- </v-col> -->
+          <!-- 비밀번호 확인 -->
+          <!-- <v-col cols="12" sm="6"> -->
+            <v-text-field
+              :append-icon="show4 ? 'mdi-eye' : 'mdi-eye-off'"
+              v-model="repeatPassword"
+              :rules="confirmPasswordRules.concat(passwordConfirmationRule)"
+              :type="show4 ? 'text' : 'password'"
+              name="input-10-2"
+              label="Error"
+              hint="At least 8 characters"
+              :value="this.repeatPassword"
+              error
+              @click:append="show4 = !show4"
+            ></v-text-field>
+          <!-- </v-col> -->
 
-        <br>
-        <br>
-        <div class="button">
-          <v-btn class="mr-4" @click="submit">Save Profile</v-btn>
-          <v-btn @click="clear">Delete Account</v-btn>
-        </div>
-      </form>
+          <br>
+          <br>
+          <div class="button">
+            <v-btn @click="submit">Save Profile</v-btn>
+            <v-btn @click="clear">Delete Account</v-btn>
+          </div>
+        </form>
+      </div>
+      <Footer/>
     </div>
   </v-app>
 </template>
@@ -108,10 +95,15 @@
   import http from '../../util/http-common.js'
   import { validationMixin } from 'vuelidate'
   import { required, maxLength } from 'vuelidate/lib/validators'
+  import Navbar from "../../components/common/Navigation"
+  import Footer from "../../components/common/footer"
+  import '@/assets/css/background1.css'
 
   export default {
     name: 'Myinfo',
     components: {
+      Navbar,
+      Footer
     },
     data() {
       return {
@@ -210,6 +202,9 @@
   /* form {
     max-width: 50%;
   } */
+  .bin{
+        height: 70px;
+    }
   .user_info {
     max-width: 50%;
     margin: auto;
@@ -222,4 +217,23 @@
     text-align: center !important;
     justify-content: center !important;
   }  
+  @media(max-width: 480px){
+        h1{
+          font-size: 30px;
+        }
+        .bin{
+          height: 70px;
+        }
+        .user_info {
+          max-width: 90%;
+          margin: auto;
+        }
+        .v-application .error {
+          background-color: rgb(0, 0, 0, 0) !important;
+          border-color: rgb(0, 0, 0, 0) !important;
+        }
+        .button {
+          font-size: 15px;
+        }  
+    }
 </style>
