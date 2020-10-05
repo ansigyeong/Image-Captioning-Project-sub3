@@ -73,10 +73,7 @@ export default {
         }
         // 게시글 생성은 Header: Token / Body: { title: , content: }
         http.post('/community/notice/create/', this.noticeData, config)
-          .then(res => { 
-            console.log(res.data) 
-            this.$router.push({ name: 'noticeList' })
-          })
+          .then(this.$router.push({ name: 'noticeList' }))
           .catch(err => console.log(err.response.data))
       },
     },
