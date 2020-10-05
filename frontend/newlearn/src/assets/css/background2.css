@@ -1,0 +1,6 @@
+.bg2{
+    background-image: url(../images/Newyork.jpg) !important;
+    background-size : cover;
+    height: 100%;
+    width: 100%;
+}
