@@ -12,6 +12,8 @@ class Suggestion(models.Model):
     title = models.TextField(max_length=100)
     content = models.TextField()
     finish = models.BooleanField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
 
 class Comment(models.Model):
     content = models.TextField()

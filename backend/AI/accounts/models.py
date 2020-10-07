@@ -17,5 +17,5 @@ class DateCount(models.Model):
     # datetimefield가 아니라 datefield를 사용
     # '날짜'만 비교할 것이기 때문!!!
     image_speak_count = models.IntegerField(default='0')
-    text_speak_count = models.IntegerField(default='0')
+    vocabulary_count = models.IntegerField(default='0')
     listening_count = models.IntegerField(default='0')
