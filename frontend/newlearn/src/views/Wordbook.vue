@@ -1,36 +1,108 @@
 <template>
-    <div>
-        <h1 style="text-align:center;">단어장</h1>
-        <div style="text-align:center;">
-            <v-btn @click="callToeicVocabulary" style="margin:1%;">
-                토익 단어 가져오기
+  <div class="bg" >
+    <Navbar/>
+    <div style="min-height: 100%;">
+      <div class="bin"></div>
+      
+      <h1 style="text-align:center;">📑 Word of the Day 📑</h1> 
+      <br>
+
+      <!-- section1 분류 -->
+      <div class="container" style="text-align: right; margin-right: 60px;">
+        <v-menu
+          transition="scale-transition"
+          bottom
+          right
+        >
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn
+              dark
+              v-bind="attrs"
+              v-on="on"
+            >
+              단어 분류
             </v-btn>
-            <v-btn @click="callOpicVocabulary" style="margin:1%;">
-                오픽 단어 가져오기
-            </v-btn>
-            <v-btn @click="callSATVocabulary" style="margin:1%;">
-                수능 단어 가져오기
-            </v-btn>
-        </div>
-        <br>
-        <div v-if="words">
-            <h3 style="text-align:center;">
-                {{ $moment(today).format('YY년 MM월 DD일') }}의 단어
-            </h3>
-            <br>
-            <li v-for="(word) in words" :key="word.pid" style="margin-left:20%;">
-                {{ word.word }} : {{ word.mean }}
-            </li>
-        </div>
+          </template>
+
+          <v-list>
+            <v-list-item>
+            <!-- <v-list-item
+              v-for="(item, i) in items"
+              :key="i"> -->
+              <!-- <v-list-item-title>{{ item.title }}</v-list-item-title> -->
+              <v-list-item-title @click="callToeicVocabulary">TOEIC</v-list-item-title>
+            </v-list-item>
+            <v-list-item>
+              <v-list-item-title @click="callToeicVocabulary">OPIc</v-list-item-title>
+            </v-list-item>
+            <v-list-item>
+              <v-list-item-title @click="callSATVocabulary">SAT</v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
+      </div>
+      <br>
+
+      <!-- section2 단어 카드-->
+      <div v-if="words" style="text-align: center;">
+        <!-- <h3 style="text-align:center;">
+            {{ $moment(today).format('YYYY년 MM월 DD일') }}의 단어
+        </h3>
+        <br> -->
+        
+        <v-card
+          width="350"
+          height="200"
+          v-for="(word) in words" 
+          :key="word.pid"
+          style="margin-bottom: 20px; margin-right: 20px; display: inline-block; vertical-align: middle;"
+        >
+          <v-card-text style="vertical-align: middle;">
+            <!-- <div>Word of the Day</div> -->
+            <p class="word">
+              {{ word.word }}
+            </p>
+            <p>
+                {{ word.phonetic_symbols }}
+            </p>
+            <div class="text--primary">
+              {{ word.mean }}<br>
+              <!-- 예시 -->
+            </div>
+          </v-card-text>
+          
+          <v-btn
+            text
+            color="deep-purple accent-4"
+            style="text-align: center;"
+            @click="addword(word)"
+          >
+            + 내 단어장에 추가
+          </v-btn>
+        </v-card>
+
+        <!-- original -->
+        <!-- <li v-for="(word) in words" :key="word.pid" style="margin-left:20%;">
+            {{ word.word }} : {{ word.mean }}
+        </li> -->
+
+      </div>
     </div>
+    <Footer/>
+  </div>
 </template>
 
 <script>
-import axios from "axios"
-
-const BACK_URL = 'http://127.0.0.1:8000'
+import http from '../util/http-common.js'
+import Navbar from "../components/common/Navigation"
+import Footer from "../components/common/footer"
+import '@/assets/css/background.css'
 
 export default {
+    components: {
+      Navbar,
+      Footer
+    },
     data () {
       return {
         words: JSON.parse(localStorage.getItem("words")),
@@ -44,8 +116,14 @@ export default {
     ,
     methods: {
         callVocabulary(choice) {
-            axios.post(`${BACK_URL}/english/vocabulary/`, choice)
+            const config = {
+                headers: {
+                    'Authorization': `Token ${this.$cookies.get('auth-token')}`
+                }
+            }
+            http.post(`/english/vocabulary/`, choice, config)
             .then(res => {
+                // console.log(res)
                 this.words = res.data.vocabulary
                 localStorage.setItem("words", JSON.stringify(this.words))
                 this.today = res.data.today
@@ -64,10 +142,51 @@ export default {
             this.choice = {'korean_SAT': true}
             this.callVocabulary(this.choice)
         },
+        addword(thisword) {
+            const data = {
+                "word": thisword.word,
+                "phonetic_symbols": thisword.phonetic_symbols,
+                "mean": thisword.mean
+            }
+            const config = {
+                headers: {
+                    Authorization: `Token ${this.$cookies.get('auth-token')}`
+                }
+            }
+            http.post(`/english/adduserword/`, data, config)
+            .then(res => {
+                // console.log(res)
+                if(res.data == '존재함') {
+                  alert('이미 단어장에 추가한 단어입니다.')
+                } else{
+                  alert('내 단어장에 추가되었습니다.')
+                }
+            })
+            .catch(err => {
+                console.log(err)
+            })
+        },
+
     }
 }
 </script>
 
-<style>
-
+<style scoped>
+  .word{
+    font-size: 30px;
+  }
+    .bin{
+        height: 70px;
+    }
+    @media(max-width: 480px){
+        h1{
+            font-size: 30px;
+        }
+        .container {
+          margin-right: 40px;
+        }
+    }
+    .theme--light.v-card{
+        background-color: white;
+    }
 </style>

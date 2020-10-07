@@ -1,31 +1,21 @@
 <template>
-  <v-app id="app">
-    <Header/>
-    <main>
-      <router-view />
-    </main>
-  </v-app>
+<div data-app="true" class="vue-tempalte">
+  <div class = "App">
+    <!-- <div class="vertical-center"> -->
+      <!-- <div class="inner-block"> -->
+        <router-view :key="$route.fullPath" ></router-view>
+      <!-- </div> -->
+    <!-- </div> -->
+  </div>
+</div>
 </template>
 
-<script scoped>
-
-import { mapGetters } from 'vuex'
-import Header from './components/Header.vue'
+<script >
 
 export default {
   name: 'App',
-  computed: {
-    ...mapGetters(['isLoggedIn'])
-  },
-  components : {
-    Header,
-  },
-  methods: {
-  },
-  
-}
+};
 </script>
 
-<style scoped>
 
-</style>
+

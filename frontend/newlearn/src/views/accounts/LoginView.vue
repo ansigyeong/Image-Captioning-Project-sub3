@@ -1,291 +1,299 @@
 <template>
-  <!-- Login 1 -->
-  <!-- <div>
-    <h1>Login</h1>
-    <div>
-      <label for="username">username:</label>
-      <input v-model="loginData.username" id="username" type="text" />
-    </div>
-    <div>
-      <label for="password">password:</label>
-      <input v-model="loginData.password" id="password" type="password" />
-    </div>
-    <div>
-      <button @click="login(loginData)">Login</button>
-    </div>
-  </div> -->
-
-  <!-- Login 2 -->
-  <body class="align">
-
-    <div class="grid">
-
-      <form action="http://127.0.0.1:8000/" method="POST" class="form login">
-
-        <div class="form__field">
-          <label for="username"><svg class="icon">
-              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#user"></use>
-            </svg><span class="hidden">Username</span></label>
-          <input v-model="loginData.username" id="username" type="text"  name="username" class="form__input" placeholder="Username" required>
+    <div class="login">
+       
+       
+        <div style="text-align: center; vertical-align: middle;">
+            <a href="/"> <h1> New Learn </h1></a>
         </div>
 
-        <div class="form__field">
-          <label for="password"><svg class="icon">
-              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#lock"></use>
-            </svg><span class="hidden">Password</span></label>
-          <input v-model="loginData.password" id="password" type="password" name="password" class="form__input" placeholder="Password" required>
+         <br>
+         <br>
+         <br>
+
+        <div class="signup-box">
+        <h2>Login</h2> 
+        <form onsubmit="return false;">
+ 
+  
+          <div class = "user-box">
+            <input v-model="loginData.username" id="username" type="text"/>
+            <label for="username"><p style="color: white;">id</p></label>
+          </div>
+      
+          <div class="user-box">
+            <input v-model="loginData.password" id="password" type="password"/>
+            <label for="password"><p style="color: white;">password</p></label>
+          </div>
+      
+          <button @click="login()" class="btn btn-dark btn-lg btn-block">Log in</button>
+    
+          <span class="forgot-password" style="float:left;">아직 회원이 아니신가요?</span>
+
+          <span class="btn-signup"><router-link to="/accounts/signup" class="btn--text">가입하기</router-link></span>
+        
+          
+          
+   <!-- <div class="add-option mt-4">
+        <div class="text">
+          <p>혹시</p>
+          <div class="bar"></div>
         </div>
-
-        <div class="form__field">
-          <input type="submit" @click="login(loginData)" value="Sign In">
+        <div class="wrap">
+          <p>비밀번호를 잊으셨나요?</p>
+          <router-link to="/find/password" class="btn--text" style="float-right:true;">비밀번호 찾기</router-link>
         </div>
-      </form>
+        <div class="wrap">
+          <p>아직 회원이 아니신가요?</p>
+          <router-link to="/accounts/signup" class="btn--text">가입하기</router-link>
+        </div>
+   </div>  -->
 
-      <p class="text--center">Not a member? <a href="#">Sign up now</a> <svg class="icon">
-          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="assets/images/icons.svg#arrow-right"></use>
-        </svg></p>
-
-    </div>
-
-    <svg xmlns="http://www.w3.org/2000/svg" class="icons">
-      <symbol id="arrow-right" viewBox="0 0 1792 1792">
-        <path d="M1600 960q0 54-37 91l-651 651q-39 37-91 37-51 0-90-37l-75-75q-38-38-38-91t38-91l293-293H245q-52 0-84.5-37.5T128 1024V896q0-53 32.5-90.5T245 768h704L656 474q-38-36-38-90t38-90l75-75q38-38 90-38 53 0 91 38l651 651q37 35 37 90z" />
-      </symbol>
-      <symbol id="lock" viewBox="0 0 1792 1792">
-        <path d="M640 768h512V576q0-106-75-181t-181-75-181 75-75 181v192zm832 96v576q0 40-28 68t-68 28H416q-40 0-68-28t-28-68V864q0-40 28-68t68-28h32V576q0-184 132-316t316-132 316 132 132 316v192h32q40 0 68 28t28 68z" />
-      </symbol>
-      <symbol id="user" viewBox="0 0 1792 1792">
-        <path d="M1600 1405q0 120-73 189.5t-194 69.5H459q-121 0-194-69.5T192 1405q0-53 3.5-103.5t14-109T236 1084t43-97.5 62-81 85.5-53.5T538 832q9 0 42 21.5t74.5 48 108 48T896 971t133.5-21.5 108-48 74.5-48 42-21.5q61 0 111.5 20t85.5 53.5 62 81 43 97.5 26.5 108.5 14 109 3.5 103.5zm-320-893q0 159-112.5 271.5T896 896 624.5 783.5 512 512t112.5-271.5T896 128t271.5 112.5T1280 512z" />
-      </symbol>
-    </svg>
-  </body>
+                  </form>  
+              </div>
+            </div>
 </template>
 
+
 <script>
-import { mapActions } from 'vuex'
+
+import http from '../../util/http-common.js'
+// import Logo from "../../components/user/Logo.vue";
+import '@/assets/css/main.css'
 
 export default {
-  name: "LoginView",
-  data() {
-    return {
-      loginData: {
-        username: null,
-        password: null,
-      }
+    name: 'LoginView',
+
+    // components:{
+    //   Logo,
+    // },
+
+    data() {
+        return {
+            loginData: {
+                username: null,
+                password: null,
+            }
+        }
+    },
+    methods: {
+      setCookie(token) {
+        this.$cookies.set('auth-token', token)
+        this.isLoggedIn = true
+      },
+      createattendance() {
+          const config = {
+              headers: {
+                  'Authorization': `Token ${this.$cookies.get('auth-token')}`
+              }
+          }
+          
+          http.post('/accounts/attendance/', null, config)
+            .then()
+            .catch(err => {
+                console.log(err)
+            })
+      },
+
+      login() {
+        http.post('/rest-auth/login/', this.loginData)
+          .then(res => {
+            // console.log(res.data.key)
+            // console.log(res.data)
+          
+            this.setCookie(res.data.key)
+            this.createattendance()
+            alert('로그인 성공')
+            this.$router.push({ name: 'Home' })
+          })
+          .catch(err => {
+            alert('로그인 실패')
+            console.log(err)
+          })
+      },
     }
-  },
-  methods: {
-    ...mapActions(['login'])
-  }
-};
+}
 </script>
 
 <style scoped>
-  /* config.css */
-
-  /* helpers/align.css */
-
-  .align {
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
+  h1{
+    font-size: 100px;
+    color: white;
   }
-
-  /* helpers/grid.css */
-
-  .grid {
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 320px;
-    max-width: 20rem;
-    width: 90%;
-  }
-
-  /* helpers/hidden.css */
-
-  .hidden {
-    border: 0;
-    clip: rect(0 0 0 0);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    width: 1px;
-  }
-
-  /* helpers/icon.css */
-
-  .icons {
-    display: none;
-  }
-
-  .icon {
-    display: inline-block;
-    fill: #606468;
-    font-size: 16px;
-    font-size: 1rem;
-    height: 1em;
-    vertical-align: middle;
-    width: 1em;
-  }
-
-  /* layout/base.css */
-
-  * {
-    -webkit-box-sizing: inherit;
-            box-sizing: inherit;
-  }
-
   html {
-    -webkit-box-sizing: border-box;
-            box-sizing: border-box;
-    font-size: 100%;
     height: 100%;
   }
 
   body {
-    /* background-color: #2c3338; */
-    /* background-image: url('Newyork.jpg'); */
-    /* background-size: 100%; */
-    color: #606468;
-    font-family: 'Open Sans', sans-serif;
-    font-size: 14px;
-    font-size: 0.875rem;
-    font-weight: 400;
-    height: 100%;
-    line-height: 1.5;
     margin: 0;
-    min-height: 100vh;
-  }
-
-  /* modules/anchor.css */
-
-  a {
-    color: #eee;
-    outline: 0;
-    text-decoration: none;
-  }
-
-  a:focus,
-  a:hover {
-    text-decoration: underline;
-  }
-
-  /* modules/form.css */
-
-  input {
-    background-image: none;
-    border: 0;
-    color: inherit;
-    font: inherit;
-    margin: 0;
-    outline: 0;
     padding: 0;
-    -webkit-transition: background-color 0.3s;
-    transition: background-color 0.3s;
+    font-family: sans-serif;
+    background: linear-gradient(#141e30, #243b55);
   }
 
-  input[type='submit'] {
-    cursor: pointer;
+  .signup-box {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    width: 400px;
+    padding: 40px;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.5);
+    box-sizing: border-box;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+    border-radius: 10px;
   }
 
-  .form {
-    margin: -14px;
-    margin: -0.875rem;
-  }
-
-  .form input[type='password'],
-  .form input[type='text'],
-  .form input[type='submit'] {
-    width: 100%;
-  }
-
-  .form__field {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    margin: 14px;
-    margin: 0.875rem;
-  }
-
-  .form__input {
-    -webkit-box-flex: 1;
-        -ms-flex: 1;
-            flex: 1;
-  }
-
-  /* modules/login.css */
-
-  .login {
-    color: #eee;
-  }
-
-  .login label,
-  .login input[type='text'],
-  .login input[type='password'],
-  .login input[type='submit'] {
-    border-radius: 0.25rem;
-    padding: 16px;
-    padding: 1rem;
-  }
-
-  .login label {
-    background-color: #363b41;
-    border-bottom-right-radius: 0;
-    border-top-right-radius: 0;
-    padding-left: 20px;
-    padding-left: 1.25rem;
-    padding-right: 20px;
-    padding-right: 1.25rem;
-  }
-
-  .login input[type='password'],
-  .login input[type='text'] {
-    background-color: #3b4148;
-    border-bottom-left-radius: 0;
-    border-top-left-radius: 0;
-  }
-
-  .login input[type='password']:focus,
-  .login input[type='password']:hover,
-  .login input[type='text']:focus,
-  .login input[type='text']:hover {
-    background-color: #434a52;
-  }
-
-  .login input[type='submit'] {
-    background-color: #3d8fc5;
-    color: #eee;
-    font-weight: 700;
-    text-transform: uppercase;
-  }
-
-  .login input[type='submit']:focus,
-  .login input[type='submit']:hover {
-    background-color: #073a5c;
-  }
-
-  /* modules/text.css */
-
-  p {
-    margin-bottom: 24px;
-    margin-bottom: 1.5rem;
-    margin-top: 24px;
-    margin-top: 1.5rem;
-  }
-
-  .text--center {
+  .signup-box h2 {
+    margin: 0 0 30px;
+    padding: 0;
+    color: #fff;
     text-align: center;
+  }
+
+  .signup-box .user-box {
+    position: relative;
+  }
+
+  .signup-box .user-box input {
+    width: 100%;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #fff;
+    margin-bottom: 30px;
+    border: none;
+    border-bottom: 1px solid #fff;
+    outline: none;
+    background: transparent;
+  }
+  .signup-box .user-box label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #fff;
+    pointer-events: none;
+    transition: 0.5s;
+  }
+
+  .signup-box .user-box input:focus ~ label,
+  .signup-box .user-box input:valid ~ label {
+    top: -30px;
+    left: 0;
+    color: #000;
+    font-size: 12px;
+  }
+
+  .signup-box form a {
+    position: relative;
+    display: inline-block;
+    padding: 10px 20px;
+    color: #03e9f4;
+    font-size: 16px;
+    text-decoration: none;
+    text-transform: uppercase;
+    overflow: hidden;
+    transition: 0.5s;
+    margin-left: 45px;
+    margin-top: 7px;
+    letter-spacing: 4px;
+  }
+
+  .signup-box a:hover {
+    background: #03e9f4;
+    color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #03e9f4, 0 0 25px #03e9f4, 0 0 50px #03e9f4,
+      0 0 100px #03e9f4;
+  }
+
+  .signup-box a span {
+    position: absolute;
+    display: block;
+  }
+
+  .signup-box a span:nth-child(1) {
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #03e9f4);
+    animation: btn-anim1 1s linear infinite;
+  }
+
+  @keyframes btn-anim1 {
+    0% {
+      left: -100%;
+    }
+    50%,
+    100% {
+      left: 100%;
+    }
+  }
+
+  .signup-box a span:nth-child(2) {
+    top: -100%;
+    right: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(180deg, transparent, #03e9f4);
+    animation: btn-anim2 1s linear infinite;
+    animation-delay: 0.25s;
+  }
+
+  @keyframes btn-anim2 {
+    0% {
+      top: -100%;
+    }
+    50%,
+    100% {
+      top: 100%;
+    }
+  }
+
+  .signup-box a span:nth-child(3) {
+    bottom: 0;
+    right: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(270deg, transparent, #03e9f4);
+    animation: btn-anim3 1s linear infinite;
+    animation-delay: 0.5s;
+  }
+
+  @keyframes btn-anim3 {
+    0% {
+      right: -100%;
+    }
+    50%,
+    100% {
+      right: 100%;
+    }
+  }
+
+  .signup-box a span:nth-child(4) {
+    bottom: -100%;
+    left: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(360deg, transparent, #03e9f4);
+    animation: btn-anim4 1s linear infinite;
+    animation-delay: 0.75s;
+  }
+
+  @keyframes btn-anim4 {
+    0% {
+      bottom: -100%;
+    }
+    50%,
+    100% {
+      bottom: 100%;
+    }
+  }
+
+  @media(max-width: 480px){
+   h1{
+     font-size:70px;
+   }
   }
 </style>
